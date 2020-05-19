@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>network_d3 &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="network_vis" href="network_vis.html" />
+    <link rel="prev" title="Network plots" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../package.html">Unified Plotting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../plotly/index.html">Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../matplotlib/index.html">Matplotlib</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">JavaScript</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../plots_nd/index.html">n-D plots</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Network plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plots_external/index.html">external plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../figure.html">Figure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unified_arguments.html">Unified argument values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">API documentation</a> &raquo;</li>
+        
+          <li><a href="../../package.html">Unified Plotting</a> &raquo;</li>
+        
+          <li><a href="../index.html">JavaScript</a> &raquo;</li>
+        
+          <li><a href="index.html">Network plots</a> &raquo;</li>
+        
+      <li>network_d3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/rst/api/javascript/plots_network/network_d3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="network-d3">
+<h1>network_d3<a class="headerlink" href="#network-d3" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="unified_plotting.javascript._plots_network.network_d3">
+<code class="descname">network_d3</code><span class="sig-paren">(</span><em>data</em>, <em>network_height=450</em>, <em>details_height=100</em>, <em>show_details=False</em>, <em>show_details_toggle_button=True</em>, <em>show_menu=True</em>, <em>show_menu_toggle_button=True</em>, <em>show_node=True</em>, <em>node_size_factor=1.0</em>, <em>node_size_data_source='size'</em>, <em>use_node_size_normalization=False</em>, <em>node_size_normalization_min=5.0</em>, <em>node_size_normalization_max=75.0</em>, <em>node_drag_fix=False</em>, <em>node_hover_neighborhood=False</em>, <em>node_hover_tooltip=True</em>, <em>show_node_image=True</em>, <em>node_image_size_factor=1.0</em>, <em>show_node_label=True</em>, <em>show_node_label_border=True</em>, <em>node_label_data_source='id'</em>, <em>node_label_size_factor=1.0</em>, <em>node_label_rotation=0.0</em>, <em>node_label_font='Arial'</em>, <em>show_edge=True</em>, <em>edge_size_factor=1.0</em>, <em>edge_size_data_source='size'</em>, <em>use_edge_size_normalization=False</em>, <em>edge_size_normalization_min=0.2</em>, <em>edge_size_normalization_max=5.0</em>, <em>edge_curvature=0.3</em>, <em>edge_hover_tooltip=True</em>, <em>show_edge_label=False</em>, <em>show_edge_label_border=True</em>, <em>edge_label_data_source='id'</em>, <em>edge_label_size_factor=1.0</em>, <em>edge_label_rotation=0.0</em>, <em>edge_label_font='Arial'</em>, <em>zoom_factor=0.75</em>, <em>large_network_threshold=500</em>, <em>layout_algorithm_active=True</em>, <em>use_many_body_force=True</em>, <em>many_body_force_strength=-70.0</em>, <em>many_body_force_theta=0.9</em>, <em>use_many_body_force_min_distance=False</em>, <em>many_body_force_min_distance=10.0</em>, <em>use_many_body_force_max_distance=False</em>, <em>many_body_force_max_distance=1000.0</em>, <em>use_links_force=True</em>, <em>links_force_distance=50.0</em>, <em>links_force_strength=0.5</em>, <em>use_collision_force=False</em>, <em>collision_force_radius=25.0</em>, <em>collision_force_strength=0.7</em>, <em>use_x_positioning_force=False</em>, <em>x_positioning_force_strength=0.2</em>, <em>use_y_positioning_force=False</em>, <em>y_positioning_force_strength=0.2</em>, <em>use_centering_force=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/unified_plotting/javascript/_plots_network.html#network_d3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.javascript._plots_network.network_d3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an interactive network plot from JSON graph format (JGF) data with d3.v5.js.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>str, dict or graph object</em>) – Graph data in <a class="reference internal" href="../../../format_specifications.html#jgf-format"><span class="std std-ref">JSON graph format (JGF)</span></a> as JSON string (<em>str</em>),
+JSON object (<em>dict</em>),
+<a class="reference internal" href="../../../format_specifications.html#supported-graph-libraries"><span class="std std-ref">graph object of a supported graph library</span></a>,
+or a list of multiple graphs, each defined in any of the previous ways.
+If the provided data contains multiple graphs, only the first one is shown on load,
+while the other ones can be chosen in the data selection menu in order to be displayed.</li>
+<li><strong>network_height</strong> (<em>int</em>) – Height of the network container in pixels (px).</li>
+<li><strong>details_height</strong> (<em>int</em>) – Height of the details container in pixels (px).</li>
+<li><strong>show_details</strong> (<em>bool</em>) – If True, the details container is shown on load, otherwise hidden.</li>
+<li><strong>show_details_toggle_button</strong> (<em>bool</em>) – If True, a button is shown that allows to toggle the visibility of the details container.</li>
+<li><strong>show_menu</strong> (<em>bool</em>) – If True, the menu container is shown on load, otherwise hidden.</li>
+<li><strong>show_menu_toggle_button</strong> (<em>bool</em>) – If True, a button is shown that allows to toggle the visibility of the menu container.</li>
+<li><strong>show_node</strong> (<em>bool</em>) – If True, nodes are shown on load, otherwise hidden.</li>
+<li><strong>node_size_factor</strong> (<em>float</em>) – A scaling factor that modifies node size.</li>
+<li><strong>node_size_data_source</strong> (<em>str</em>) – Name of the numerical node property that is used as source for node size on load.</li>
+<li><strong>use_node_size_normalization</strong> (<em>bool</em>) – If True, node sizes are normalized to lie in an interval between a
+chosen min and max value.</li>
+<li><strong>node_size_normalization_min</strong> (<em>float</em>) – Minimum value for node size if node size normalization is active.</li>
+<li><strong>node_size_normalization_max</strong> (<em>float</em>) – Maximum value for node size if node size normalization is active.</li>
+<li><strong>node_drag_fix</strong> (<em>bool</em>) – If True, the position of a node becomes fixed after dragging it, i.e. the
+layout algorithm does not change its position but the user can drag it again.</li>
+<li><strong>node_hover_neighborhood</strong> (<em>bool</em>) – If True, hovering a node leads to highlighting its neighborhood which consists of
+all incident edges and adjacent nodes.</li>
+<li><strong>node_hover_tooltip</strong> (<em>bool</em>) – If True, hovering a node leads to popping up a tooltip if the hover property in the
+metadata of this node contains a non-empty string or HTML text.</li>
+<li><strong>show_node_image</strong> (<em>bool</em>) – If True, node images are shown on load for all nodes whose image property in the metadata
+contains a valid image URL from which an image can be fetched.</li>
+<li><strong>node_image_size_factor</strong> (<em>float</em>) – A scaling factor that modifies node image size.</li>
+<li><strong>show_node_label</strong> (<em>bool</em>) – If True, node labels are shown on load, otherwise hidden.</li>
+<li><strong>show_node_label_border</strong> (<em>bool</em>) – If True, node labels have a small border in the color of the background to better
+separate the text from other visual elements like edges or nodes.</li>
+<li><strong>node_label_data_source</strong> (<em>str</em>) – Name of the node property that is used as source for node label text on load.</li>
+<li><strong>node_label_size_factor</strong> (<em>float</em>) – A scaling factor that modifies node label size.</li>
+<li><strong>node_label_rotation</strong> (<em>float</em>) – An angle that modifies node label orientation.</li>
+<li><strong>node_label_font</strong> (<em>str</em>) – Name of the font that is used for node labels.</li>
+<li><strong>show_edge</strong> (<em>bool</em>) – If True, edges are shown on load, otherwise hidden.</li>
+<li><strong>edge_size_factor</strong> (<em>float</em>) – A scaling factor that modifies edge size (=edge width).</li>
+<li><strong>edge_size_data_source</strong> (<em>str</em>) – Name of the edge property that is used as source for edge size on load.</li>
+<li><strong>use_edge_size_normalization</strong> (<em>bool</em>) – If True, edge sizes are normalized to lie in an interval between a
+chosen min and max value.</li>
+<li><strong>edge_size_normalization_min</strong> (<em>float</em>) – Minimum value for edge size if node size normalization is active.</li>
+<li><strong>edge_size_normalization_max</strong> (<em>float</em>) – Maximum value for edge size if node size normalization is active.</li>
+<li><strong>edge_curvature</strong> (<em>float</em>) – A factor that modifies edge curvature, where 0.0 means straight lines.</li>
+<li><strong>edge_hover_tooltip</strong> (<em>bool</em>) – If True, hovering an edge leads to popping up a tooltip if the hover property in the
+metadata of this edge contains a non-empty string or HTML text.</li>
+<li><strong>show_edge_label</strong> (<em>bool</em>) – If True, edge labels are shown on load, otherwise hidden.</li>
+<li><strong>show_edge_label_border</strong> (<em>bool</em>) – If True, edge labels have a small border in the color of the background to better
+separate the text from other visual elements like edges or nodes.</li>
+<li><strong>edge_label_data_source</strong> (<em>str</em>) – Name of the edge property that is used as source for edge label text on load.</li>
+<li><strong>edge_label_size_factor</strong> (<em>float</em>) – A scaling factor that modifies edge label size.</li>
+<li><strong>edge_label_rotation</strong> (<em>float</em>) – An angle that modifies edge label orientation.</li>
+<li><strong>edge_label_font</strong> (<em>str</em>) – Name of the font that is used for edge labels.</li>
+<li><strong>zoom_factor</strong> (<em>float</em>) – Factor that modifies how close the camera is to the drawing area on load.</li>
+<li><strong>large_network_threshold</strong> (<em>int</em>) – Number that determines from when on a network is considered to be large, which
+means that before visualizing it an initial layout is calculated without moving anything.</li>
+<li><strong>layout_algorithm_active</strong> (<em>bool</em>) – If True, the layout algorithm is active on load and leads to movement, otherwise inactive.</li>
+<li><strong>use_many_body_force</strong> (<em>bool</em>) – If True, many body force is active in the layout algorithm.
+This force acts between any pair of nodes but can be restricted to only act on nodes
+within a certain distance.</li>
+<li><strong>many_body_force_strength</strong> (<em>float</em>) – Number that determines the strength of the force. It can be positive to cause attraction
+or negative (usual case) to cause repulsion between nodes.</li>
+<li><strong>many_body_force_theta</strong> (<em>float</em>) – Number that determines the accuracy of the Barnes–Hut approximation of the
+many-body simulation where nodes are grouped instead of treated individually
+to improve performance.</li>
+<li><strong>use_many_body_force_min_distance</strong> (<em>bool</em>) – If True, a minimum distance between nodes is used in the many-body force calculation.
+This effectively leads to an upper bound on the strength of the force between any two
+nodes and avoids instability.</li>
+<li><strong>many_body_force_min_distance</strong> (<em>float</em>) – Number that determines the minimum distance between nodes over which the many-body force
+is active.</li>
+<li><strong>use_many_body_force_max_distance</strong> (<em>bool</em>) – If True, a maximum distance between nodes is used in the many-body force calculation.
+This can improve performance but results in a more localized layout.</li>
+<li><strong>many_body_force_max_distance</strong> (<em>float</em>) – Number that determines the maximum distance between nodes over which the many-body force
+is active.</li>
+<li><strong>use_links_force</strong> (<em>bool</em>) – If True, link force is active in the layout algorithm.
+This force acts between pairs of nodes that are connected by an edge. It pushes them
+together or apart in order to come close to a certain distance between connected nodes.</li>
+<li><strong>links_force_distance</strong> (<em>float</em>) – Number that determines the preferred distance between connected nodes.</li>
+<li><strong>links_force_strength</strong> (<em>float</em>) – Number that determines the strength of the links force.</li>
+<li><strong>use_collision_force</strong> (<em>bool</em>) – If True, collision force is active in the layout algorithm.
+This force treats nodes as circles instead of points and acts on pairs of nodes that
+overlap in order to push them apart.</li>
+<li><strong>collision_force_radius</strong> (<em>float</em>) – Number that determines the radius of the circle around each node.</li>
+<li><strong>collision_force_strength</strong> (<em>float</em>) – Number that determines the strength of the force.</li>
+<li><strong>use_x_positioning_force</strong> (<em>bool</em>) – If True, x-positioning force is active in the layout algorithm.
+This force modifies the x position of each node towards 0.0, effectively pushing them
+towards the y-axis.</li>
+<li><strong>x_positioning_force_strength</strong> (<em>float</em>) – Number that indicates the strength of the force.</li>
+<li><strong>use_y_positioning_force</strong> (<em>bool</em>) – This force modifies the y position of each node towards 0.0, effectively pushing them
+towards the x-axis.</li>
+<li><strong>y_positioning_force_strength</strong> (<em>float</em>) – Number that indicates the strength of the force.</li>
+<li><strong>use_centering_force</strong> (<em>bool</em>) – This force attracts each node towards the center of the coordinate system at (0, 0)
+to keep the graph in the display area. It may lead to unexpected repulsion effects
+if all nodes are fixed and then a single one is released by dragging it.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <a class="reference internal" href="../figure.html#js-figure"><span class="std std-ref">Figure</span></a> object that can be used for displaying or exporting the plot.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://d3js.org">https://d3js.org</a></li>
+<li><a class="reference external" href="https://github.com/d3/d3-force">https://github.com/d3/d3-force</a></li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="network_vis.html" class="btn btn-neutral float-right" title="network_vis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Network plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

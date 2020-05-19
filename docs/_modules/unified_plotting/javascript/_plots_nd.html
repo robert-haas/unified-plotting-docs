@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.javascript._plots_nd &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.javascript._plots_nd</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.javascript._plots_nd</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;JavaScript plots for n-dimensional vector data.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span> <span class="k">as</span> <span class="n">_Iterable</span>
+
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">colormaps</span> <span class="k">as</span> <span class="n">_colormaps</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_preprocessing</span> <span class="k">as</span> <span class="n">_shared_preprocessing</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_data_structures</span><span class="p">,</span> <span class="n">_template_system</span>
+
+
+<div class="viewcode-block" id="parallel_coordinates_table"><a class="viewcode-back" href="../../../rst/api/javascript/plots_nd/parallel_coordinates_table.html#unified_plotting.javascript._plots_nd.parallel_coordinates_table">[docs]</a><span class="k">def</span> <span class="nf">parallel_coordinates_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">column_html</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">column_hidden</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">column_shown</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">parallel_coordinates_height</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+                               <span class="n">parallel_coordinates_width_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                               <span class="n">table_height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                               <span class="n">show_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_menu_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">line_width</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">smoothness</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">colormap</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span> <span class="n">colormap_reversed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">axis_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">tick_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                               <span class="n">title_font</span><span class="o">=</span><span class="s2">&quot;sans&quot;</span><span class="p">,</span> <span class="n">title_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">title_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                               <span class="n">label_font</span><span class="o">=</span><span class="s2">&quot;sans&quot;</span><span class="p">,</span> <span class="n">label_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                               <span class="n">table_cell_width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">table_cell_height</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a parallel coordinate plot with d3.parcoords.js and linked table with slick.grid.js.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list of lists, pandas DataFrame, or filepath of a CSV file</span>
+<span class="sd">        A list of lists. Each list needs to have the same number of items. Each item can be a</span>
+<span class="sd">        number or a string.</span>
+<span class="sd">        If a list contains only numerical values and a non-finite item (NaN, +Inf, -Inf)</span>
+<span class="sd">        is detected, the position of the entry will be removed from each list automatically</span>
+<span class="sd">        and a warning will be shown.</span>
+<span class="sd">    name : list</span>
+<span class="sd">        Name(s) of the visualized data series. Used in the axis description of the parallel</span>
+<span class="sd">        coordinates plot and headers of the table.</span>
+<span class="sd">    column_html : list of str</span>
+<span class="sd">        Name(s) of columns that shall be treated as HTML text in the table. This can e.g.</span>
+<span class="sd">        be used to display images from some image URL in table cells.</span>
+<span class="sd">    column_hidden : list of str</span>
+<span class="sd">        Name(s) of columns that shall be hidden in the parallel coordinates plot, while all</span>
+<span class="sd">        columns are shown in the table. This enables a negative selection useful when</span>
+<span class="sd">        only a few of a lot of columns shall be hidden.</span>
+<span class="sd">    column_shown : list of str</span>
+<span class="sd">        Name(s) of columns that shall be shown in the parallel coordinates plot, while all</span>
+<span class="sd">        columns are shown in the table. This enables a positive selection useful when</span>
+<span class="sd">        only a few of a lot of columns shall be shown.</span>
+<span class="sd">    parallel_coordinates_height : float</span>
+<span class="sd">        Height of the parallel coordinates container in pixels (px).</span>
+<span class="sd">    parallel_coordinates_width_factor : float</span>
+<span class="sd">        Relative width of the parallel coordinates plot. For example, 2.0 means that the plot</span>
+<span class="sd">        takes up 200% of the container width and a horizonta scroll bar appears.</span>
+<span class="sd">    table_height : float</span>
+<span class="sd">        Height of the table container in pixels (px).</span>
+<span class="sd">    show_menu : bool</span>
+<span class="sd">        If True, the menu container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_menu_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the menu container.</span>
+<span class="sd">    line_width : float</span>
+<span class="sd">        Width of each line in the parallel coordinates plot in pixels (px).</span>
+<span class="sd">    opacity : float</span>
+<span class="sd">        Opacity of each line in the parallel coordinates plot.</span>
+<span class="sd">    smoothness : float</span>
+<span class="sd">        Smoothness value of each line in the parallel coordinates plot.</span>
+<span class="sd">    color : str</span>
+<span class="sd">        Name of the column that is used as data source for coloring lines in the parallel</span>
+<span class="sd">        coordinate plot. It needs to be a shown column.</span>
+<span class="sd">    colormap : str</span>
+<span class="sd">        Name of the colormap that shall be used to convert numerical values into colors</span>
+<span class="sd">        in the parallel coordinates plot.</span>
+<span class="sd">        Possible values: A d3.js colormap: &#39;Blues&#39;, &#39;Greens&#39;, &#39;Greys&#39;, &#39;Oranges&#39;, &#39;Purples&#39;,</span>
+<span class="sd">        &#39;Reds&#39;, &#39;Turbo&#39;, &#39;Viridis&#39;, &#39;Inferno&#39;, &#39;Magma&#39;, &#39;Plasma&#39;, &#39;Cividis&#39;, &#39;Warm&#39;, &#39;Cool&#39;,</span>
+<span class="sd">        &#39;Cubehelix&#39;, &#39;BuGn&#39;, &#39;BuPu&#39;, &#39;GnBu&#39;, &#39;OrRd&#39;, &#39;PuBuGn&#39;, &#39;PuBu&#39;, &#39;PuRd&#39;, &#39;RdPu&#39;, &#39;YlGnBu&#39;,</span>
+<span class="sd">        &#39;YlGn&#39;, &#39;YlOrBr&#39;, &#39;YlOrRd&#39;, &#39;BrBG&#39;, &#39;PRGn&#39;, &#39;PiYG&#39;, &#39;PuOr&#39;, &#39;RdBu&#39;, &#39;RdGy&#39;, &#39;RdYlBu&#39;,</span>
+<span class="sd">        &#39;RdYlGn&#39;, &#39;Spectral&#39;, &#39;Rainbow&#39;, &#39;Sinebow&#39;</span>
+<span class="sd">    colormap_reversed : bool</span>
+<span class="sd">        If True, the colormap is reversed.</span>
+<span class="sd">    background_color : str</span>
+<span class="sd">        Color of the background.</span>
+<span class="sd">    axis_color : str</span>
+<span class="sd">        Color of the axes.</span>
+<span class="sd">    tick_color : str</span>
+<span class="sd">        Color of the ticks.</span>
+<span class="sd">    title_font : str</span>
+<span class="sd">        Font of the axis titles.</span>
+<span class="sd">    title_size : float</span>
+<span class="sd">        Size of the axis titles.</span>
+<span class="sd">    title_color : str</span>
+<span class="sd">        Color of the axis titles.</span>
+<span class="sd">    label_font : str</span>
+<span class="sd">        Font of the axis labels.</span>
+<span class="sd">    label_size : float</span>
+<span class="sd">        Size of the axis labels.</span>
+<span class="sd">    label_color : str</span>
+<span class="sd">        Color of the axis labels.</span>
+<span class="sd">    table_cell_width : float</span>
+<span class="sd">        Width of a cell in the table in pixels (px).</span>
+<span class="sd">    table_cell_height : float</span>
+<span class="sd">        Height of a cell in the table in pixels (px).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://github.com/BigFatDog/parcoords-es</span>
+<span class="sd">    - https://slickgrid.net</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_nd</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">remove_non_numerical_vectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Further argument processing</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">_parse_names_for_table</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_names</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_convert_data_for_table</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">column_full</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="n">column_html</span> <span class="o">=</span> <span class="n">_check_column</span><span class="p">(</span><span class="n">column_html</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">allowed</span><span class="o">=</span><span class="n">column_full</span><span class="p">)</span>
+    <span class="n">column_hidden</span> <span class="o">=</span> <span class="n">_check_column</span><span class="p">(</span><span class="n">column_hidden</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">allowed</span><span class="o">=</span><span class="n">column_full</span><span class="p">)</span>
+    <span class="n">column_shown</span> <span class="o">=</span> <span class="n">_check_column</span><span class="p">(</span><span class="n">column_shown</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">allowed</span><span class="o">=</span><span class="n">column_full</span><span class="p">)</span>
+    <span class="n">column_finally_shown</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">column_shown</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_hidden</span><span class="p">]</span>
+    <span class="n">column_finally_hidden</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">column_full</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_finally_shown</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">column_finally_hidden</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;The number of columns selected to be shown in the parallel &#39;</span>
+                   <span class="s1">&#39;coordinates plot is zero, which can not be done.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">column_finally_shown</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_shown</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Value &quot;</span><span class="si">{}</span><span class="s1">&quot; for color is invalid. Possible values: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">color</span><span class="p">,</span> <span class="n">column_shown</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colormap</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">colormap</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_colormaps</span><span class="o">.</span><span class="n">D3_BUILTIN_COLORMAPS</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;Value &quot;</span><span class="si">{}</span><span class="s1">&quot; for colormap is invalid. Possible values (d3 colormaps): &#39;</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">colormap</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">_colormaps</span><span class="o">.</span><span class="n">D3_BUILTIN_COLORMAPS</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">_colormaps</span><span class="o">.</span><span class="n">D3_BUILTIN_COLORMAPS</span><span class="p">[</span><span class="n">colormap</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/pc_table_parcoords_slickgrid.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;DEFINE_D3_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/d3-color/d3-color.v1.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_D3_INTERPOLATE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/d3-interpolate/d3-interpolate.v1.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_D3_SCALE_CHROMATIC&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/d3-scale-chromatic/d3-scale-chromatic.v1.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_PARCOORDS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/parcoords/parcoords.standalone.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_JQUERY&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/jquery/jquery.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_SLICKGRID&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/slickgrid/slickgrid.combined.def.js&#39;</span><span class="p">),</span>
+
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_NAME&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_HTML&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">column_html</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_HIDDEN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">column_finally_hidden</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_SHOWN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">column_finally_shown</span><span class="p">),</span>
+
+        <span class="s1">&#39;PC_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">parallel_coordinates_height</span><span class="p">),</span>
+        <span class="s1">&#39;PC_WIDTH_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">parallel_coordinates_width_factor</span><span class="p">),</span>
+        <span class="s1">&#39;TABLE_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_height</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu_toggle_button</span><span class="p">),</span>
+
+        <span class="s1">&#39;LINE_WIDTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">line_width</span><span class="p">),</span>
+        <span class="s1">&#39;OPACITY&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">opacity</span><span class="p">),</span>
+        <span class="s1">&#39;SMOOTHNESS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">smoothness</span><span class="p">),</span>
+        <span class="s1">&#39;COLOR_COLUMN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">color</span><span class="p">),</span>
+        <span class="s1">&#39;COLORMAP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">colormap</span><span class="p">),</span>
+        <span class="s1">&#39;COLORMAP_REVERSED&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">colormap_reversed</span><span class="p">),</span>
+        <span class="s1">&#39;BACKGROUND_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">background_color</span><span class="p">),</span>
+        <span class="s1">&#39;AXIS_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">axis_color</span><span class="p">),</span>
+        <span class="s1">&#39;TICK_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">tick_color</span><span class="p">),</span>
+        <span class="s1">&#39;TITLE_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">title_font</span><span class="p">),</span>
+        <span class="s1">&#39;TITLE_SIZE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">title_size</span><span class="p">),</span>
+        <span class="s1">&#39;TITLE_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">title_color</span><span class="p">),</span>
+        <span class="s1">&#39;LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">label_font</span><span class="p">),</span>
+        <span class="s1">&#39;LABEL_SIZE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">label_size</span><span class="p">),</span>
+        <span class="s1">&#39;LABEL_COLOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">label_color</span><span class="p">),</span>
+
+        <span class="s1">&#39;TABLE_CELL_WIDTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_cell_width</span><span class="p">),</span>
+        <span class="s1">&#39;TABLE_CELL_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_cell_height</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="table"><a class="viewcode-back" href="../../../rst/api/javascript/plots_nd/table.html#unified_plotting.javascript._plots_nd.table">[docs]</a><span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">column_html</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+          <span class="n">table_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">table_cell_width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">table_cell_height</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
+          <span class="n">show_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_menu_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an interactive table with slick.grid.js.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list of lists, pandas DataFrame, or filepath of a CSV file</span>
+<span class="sd">        A list of lists. Each list needs to have the same number of items. Each item can be a</span>
+<span class="sd">        number or a string.</span>
+<span class="sd">        If a list contains only numerical values and a non-finite item (NaN, +Inf, -Inf)</span>
+<span class="sd">        is detected, the position of the entry will be removed from each list automatically</span>
+<span class="sd">        and a warning will be shown.</span>
+<span class="sd">    name : list</span>
+<span class="sd">        Name(s) of the visualized data series. Used in the axis description of the parallel</span>
+<span class="sd">        coordinates plot and headers of the table.</span>
+<span class="sd">    column_html : list of str</span>
+<span class="sd">        Name(s) of columns that shall be treated as HTML text in the table. This can e.g.</span>
+<span class="sd">        be used to display images from some image URL in table cells.</span>
+<span class="sd">    table_height : float</span>
+<span class="sd">        Height of the table container in pixels (px).</span>
+<span class="sd">    table_cell_width : float</span>
+<span class="sd">        Width of a cell in the table in pixels (px).</span>
+<span class="sd">    table_cell_height : float</span>
+<span class="sd">        Height of a cell in the table in pixels (px).</span>
+<span class="sd">    show_menu : bool</span>
+<span class="sd">        If True, the menu container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_menu_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the menu container.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://slickgrid.net</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_nd</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">remove_non_numerical_vectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Further argument processing</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">_parse_names_for_table</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_names</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_convert_data_for_table</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">column_full</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="n">column_html</span> <span class="o">=</span> <span class="n">_check_column</span><span class="p">(</span><span class="n">column_html</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">allowed</span><span class="o">=</span><span class="n">column_full</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/table_slickgrid.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;DEFINE_JQUERY&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/jquery/jquery.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_SLICKGRID&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/slickgrid/slickgrid.combined.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_NAME&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+        <span class="s1">&#39;COLUMN_HTML&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">column_html</span><span class="p">),</span>
+        <span class="s1">&#39;TABLE_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_height</span><span class="p">),</span>
+        <span class="s1">&#39;TABLE_CELL_WIDTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_cell_width</span><span class="p">),</span>
+        <span class="s1">&#39;TABLE_CELL_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">table_cell_height</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu_toggle_button</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_names_for_table</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">num_names</span><span class="p">):</span>
+    <span class="n">used_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">forbidden_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_names</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Column </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">forbidden_names</span> <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">used_names</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">used_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">used_names</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_data_for_table</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+    <span class="n">num_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rows</span><span class="p">):</span>
+        <span class="n">row_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">row_id</span><span class="p">,</span>
+            <span class="s1">&#39;checkbox&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">col_id</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+            <span class="n">row_dict</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col_id</span><span class="p">][</span><span class="n">row_id</span><span class="p">]</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+
+
+<span class="k">def</span> <span class="nf">_check_column</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">allowed</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">column_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">column_list</span> <span class="o">=</span> <span class="n">default</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span> <span class="n">_Iterable</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">column_list</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">column_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Given column &quot;</span><span class="si">{}</span><span class="s1">&quot; is not part of known columns: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">allowed</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">column_list</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

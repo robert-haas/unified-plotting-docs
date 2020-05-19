@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Unified Plotting &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Package references" href="rst/package_references.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#">
+          
+
+          
+            
+            <img src="_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Unified Plotting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="unified-plotting">
+<h1>Unified Plotting<a class="headerlink" href="#unified-plotting" title="Permalink to this headline">¶</a></h1>
+<p>Welcome! You’ve found the documentation of the Python 3 package <a class="reference external" href="https://pypi.org/project/unified_plotting">unified-plotting</a>.</p>
+<p><a class="reference external" href="https://en.wiktionary.org/wiki/tl;dr">TL;DR</a> - Let’s start right away with a small code example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">unified_plotting</span> <span class="k">as</span> <span class="nn">up</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">up</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">show_line</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">export_png</span><span class="p">(</span><span class="s1">&#39;fibonacci.png&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">up</span><span class="o">.</span><span class="n">plotly</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">show_interpolation_rbf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">export_html</span><span class="p">(</span><span class="s1">&#39;interpolation.html&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">up</span><span class="o">.</span><span class="n">javascript</span><span class="o">.</span><span class="n">network_d3</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">les_miserables_graph</span><span class="p">())</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">export_html</span><span class="p">(</span><span class="s1">&#39;les_miserables.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p style="margin-bottom:0.5ex;">
+  Output:
+</p>
+<p style="margin-left:1em;margin-bottom:1em">
+  <a class="reference download internal" href="_static/media/fibonacci.png"><code class="xref download docutils literal notranslate"><span class="pre">fibonacci.png</span></code></a>
+  &larr; static scatter plot
+  <br>
+  <a class="reference download internal" href="_static/media/interpolation.html"><code class="xref download docutils literal notranslate"><span class="pre">interpolation.html</span></code></a>
+  &larr; interactive 3D scatter plot
+  <br>
+  <a class="reference download internal" href="_static/media/les_miserables.html"><code class="xref download docutils literal notranslate"><span class="pre">les_miserables.html</span></code></a>
+  &larr; interactive network visualization
+</p><p>Alternatives to such file output: 1) Displaying in browser 2) Embedding in notebook 3) Text representation</p>
+<div class="section" id="what-is-this-package">
+<h2>What is this package?<a class="headerlink" href="#what-is-this-package" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://pypi.org/project/unified_plotting">unified-plotting</a> is an open-source software package for quick and easy plotting in Python 3. It provides a simple, unified interface to access Matplotlib, Plotly, d3.js and other data visualization libraries. The main goal is to reduce the complexity of generating various plots of two common types of data:</p>
+<ol class="arabic simple">
+<li><strong>Tabular data</strong> (a.k.a. <strong>vector data</strong>, <strong>array data</strong>)</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Meaning: Some lists with same length, which could be arranged as a table with numbers or strings as entries.</li>
+<li>Examples<ul>
+<li>Quickstart: <a class="reference internal" href="code/examples/quickstart/vector_data.html"><span class="doc">Plotting vector data</span></a></li>
+<li>Archetypical: <a class="reference internal" href="code/examples/gallery/computer_science/machine_learning_datasets.html"><span class="doc">Machine learning datasets</span></a></li>
+<li>Libraries: <a class="reference internal" href="code/examples/plot_overview/matplotlib.html"><span class="doc">Plots with Matplotlib</span></a>, <a class="reference internal" href="code/examples/plot_overview/plotly.html"><span class="doc">Plots with Plotly</span></a>, <a class="reference internal" href="code/examples/plot_overview/javascript.html"><span class="doc">Plots with JavaScript</span></a></li>
+<li>Many more in the <a class="reference internal" href="rst/examples/index.html"><span class="doc">examples</span></a> section</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><strong>Linked data</strong> (a.k.a. <strong>graph data</strong>, <strong>network data</strong>)</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Meaning: Some objects and relationships between them, thought of as nodes connected by edges.</li>
+<li>Examples<ul>
+<li>Quickstart: <a class="reference internal" href="code/examples/quickstart/graph_data.html"><span class="doc">Plotting graph data</span></a></li>
+<li>Archetypical: <a class="reference internal" href="code/examples/plot_overview/javascript.html#Dataset-3:-Graph-as-NetworkX-object"><span class="std std-ref">Les misérables graph</span></a> with node images</li>
+<li>Real-world: <a class="reference internal" href="code/examples/gallery/social_science/neighboring_country_graph.html"><span class="doc">Neighboring country graph</span></a> with variable node sizes</li>
+<li>Many more in the <a class="reference internal" href="rst/examples/index.html"><span class="doc">examples</span></a> section</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>More about <a class="reference internal" href="rst/questions/what.html"><span class="doc">What …?</span></a></p>
+</div>
+<div class="section" id="why-is-it-relevant">
+<h2>Why is it relevant?<a class="headerlink" href="#why-is-it-relevant" title="Permalink to this headline">¶</a></h2>
+<p>Creating plots is a frequent but often tedious task, which can be greatly simplified to become less cumbersome and time consuming. Existing plotting libraries for Python are rich in capabilities and options, yet all this flexibility makes their usage more complicated. The effect is that it introduces a cognitive overhead that can limit their actual application in practical settings. By lowering the complexity of creating common plot types, data may get visualized more often and in a greater diversity of representations, potentially leading to better insights and decisions.</p>
+<p>More about <a class="reference internal" href="rst/questions/why.html"><span class="doc">Why …?</span></a></p>
+</div>
+<div class="section" id="when-should-it-be-used">
+<h2>When should it be used?<a class="headerlink" href="#when-should-it-be-used" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you deal with vector data (e.g. when using <a class="reference external" href="https://pandas.pydata.org">Pandas</a>, <a class="reference external" href="https://numpy.org">NumPy</a>, <a class="reference external" href="https://scikit-learn.org">scikit-learn</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Delimiter-separated_values">DSV files</a>) or graph data (e.g. when using <a class="reference external" href="https://networkx.github.io">NetworkX</a>, <a class="reference external" href="https://igraph.org">igraph</a>, <a class="reference external" href="https://graph-tool.skewed.de">graph-tool</a>) this package enables you to quickly translate it into static and interactive visual representations (e.g. for <a class="reference external" href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">exploratory data analysis</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Visual_analytics">visual analytics</a>).</p>
+</div>
+<div class="section" id="who-may-benefit-from-it">
+<h2>Who may benefit from it?<a class="headerlink" href="#who-may-benefit-from-it" title="Permalink to this headline">¶</a></h2>
+<p>This package may help anybody who wants to quickly generate decent looking plots with Python 3, without having to memorize or repeatedly look up API details of different plotting packages. It may also help in cases where precision is needed, such as exact plot, margin, font, marker and line sizes specified in a desired size unit such as inch, mm or pt (1 inch = 25.4 mm = 72 pt), which behind the scenes needs quite some trickery for certain libraries.</p>
+<p>More about <a class="reference internal" href="rst/questions/who.html"><span class="doc">Who …?</span></a></p>
+</div>
+<div class="section" id="how-can-you-get-started">
+<h2>How can you get started?<a class="headerlink" href="#how-can-you-get-started" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The <a class="reference internal" href="rst/installation.html"><span class="doc">installation guide</span></a> explains how to download and install the package.</li>
+<li>The <a class="reference internal" href="rst/examples/quickstart.html"><span class="doc">quickstart examples</span></a> provide a first impression of the package. The code can also be used as a check whether your local installation works.</li>
+<li>The <a class="reference internal" href="rst/examples/plot_overview.html"><span class="doc">plot overview examples</span></a> give a tour of all plotting functions provided by this package. They can be used to see the range of available features and may serve as copy-and-paste templates.</li>
+<li>The <a class="reference internal" href="rst/examples/config_overview.html"><span class="doc">configuration overview examples</span></a> explain the configuration system, which allows to define global plotting options and reusable styles that can be shared with others.</li>
+<li>The <a class="reference internal" href="rst/gui.html"><span class="doc">graphical user interface demo</span></a> introduces the browser-based GUI that is part of this package. It enables the input of data and generation of all plot types without writing a line of code.</li>
+<li>The <a class="reference internal" href="rst/format_specifications.html"><span class="doc">format specification</span></a> defines special purpose data formats used by this library. Currently this is restricted to the JSON graph format (JGF) for defining linked data, i.e. graphs with properties.</li>
+<li>The <a class="reference internal" href="rst/api/index.html"><span class="doc">API documentation</span></a> is the single source of truth for all details about each plotting function available in this package.</li>
+</ul>
+</div>
+<div class="section" id="where-is-everything-located">
+<h2>Where is everything located?<a class="headerlink" href="#where-is-everything-located" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="rst/package_references.html"><span class="doc">package reference page</span></a> contains links to all parts of this project, which includes source code (tests, docs, examples), packaged code for distribution and documentation.</p>
+</div>
+<div class="section" id="table-of-website-contents">
+<h2>Table of website contents<a class="headerlink" href="#table-of-website-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rst/api/index.html">API documentation</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rst/package_references.html" class="btn btn-neutral float-right" title="Package references" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

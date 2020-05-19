@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.matplotlib._data_structures &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.matplotlib._data_structures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.matplotlib._data_structures</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data structures for representing Matplotlib plots.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">io</span> <span class="k">as</span> <span class="nn">_io</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
+
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_processing</span> <span class="k">as</span> <span class="n">_shared_processing</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">base64</span> <span class="k">as</span> <span class="n">_base64</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">operating_system</span> <span class="k">as</span> <span class="n">_operating_system</span>
+
+
+<div class="viewcode-block" id="Figure"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure">[docs]</a><span class="k">class</span> <span class="nc">Figure</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Data structure for wrapping, representing, displaying and exporting a Matplotlib figure.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://matplotlib.org/users/index.html</span>
+<span class="sd">    - https://matplotlib.org/tutorials/introductory/pyplot.html</span>
+<span class="sd">    - https://matplotlib.org/api/index.html</span>
+<span class="sd">    - https://matplotlib.org/api/pyplot_summary.html</span>
+<span class="sd">    - https://matplotlib.org/gallery/index.html</span>
+<span class="sd">    - https://matplotlib.org/gallery/index.html#api-examples</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span>
+                 <span class="n">width_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">height_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">dpi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_auto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_left_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_left_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_left_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_left_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_right_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_right_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_right_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_right_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_top_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_top_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_top_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_top_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_bottom_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_bottom_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_bottom_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_bottom_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a figure with a Matplotlib figure object.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">fig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span>
+            <span class="n">width_mm</span><span class="p">,</span> <span class="n">width_in</span><span class="p">,</span> <span class="n">width_pt</span><span class="p">,</span> <span class="n">height_mm</span><span class="p">,</span> <span class="n">height_in</span><span class="p">,</span> <span class="n">height_pt</span><span class="p">,</span> <span class="n">dpi</span><span class="p">,</span>
+            <span class="n">margin_auto</span><span class="p">,</span> <span class="n">margin_left_mm</span><span class="p">,</span> <span class="n">margin_left_in</span><span class="p">,</span> <span class="n">margin_left_pt</span><span class="p">,</span> <span class="n">margin_left_rel</span><span class="p">,</span>
+            <span class="n">margin_right_mm</span><span class="p">,</span> <span class="n">margin_right_in</span><span class="p">,</span> <span class="n">margin_right_pt</span><span class="p">,</span> <span class="n">margin_right_rel</span><span class="p">,</span>
+            <span class="n">margin_top_mm</span><span class="p">,</span> <span class="n">margin_top_in</span><span class="p">,</span> <span class="n">margin_top_pt</span><span class="p">,</span> <span class="n">margin_top_rel</span><span class="p">,</span>
+            <span class="n">margin_bottom_mm</span><span class="p">,</span> <span class="n">margin_bottom_in</span><span class="p">,</span> <span class="n">margin_bottom_pt</span><span class="p">,</span> <span class="n">margin_bottom_rel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete a figure by closing the embedded Matplotlib figure object.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="c1"># IPython integration</span>
+    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide HTML text for integration with IPython rich display representation.</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        - https://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display</span>
+<span class="sd">        - https://ipython.readthedocs.io/en/stable/api/generated/IPython.core.formatters.html#IPython.core.formatters.HTMLFormatter</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">==</span> <span class="s1">&#39;eps&#39;</span><span class="p">:</span>
+            <span class="n">html_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps_object_element</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">:</span>
+            <span class="n">html_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_object_element</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">==</span> <span class="s1">&#39;png&#39;</span><span class="p">:</span>
+            <span class="n">html_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">png_img_element</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">==</span> <span class="s1">&#39;ps&#39;</span><span class="p">:</span>
+            <span class="n">html_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ps_object_element</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">==</span> <span class="s1">&#39;svg&#39;</span><span class="p">:</span>
+            <span class="n">html_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">svg_img_element</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Unknown display format: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">html_text</span>
+
+    <span class="c1"># Setters</span>
+<div class="viewcode-block" id="Figure.set_size"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.set_size">[docs]</a>    <span class="k">def</span> <span class="nf">set_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">height_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_auto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_left_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_left_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_left_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_left_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_right_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_right_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_right_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_right_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_top_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_top_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_top_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_top_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_bottom_mm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_bottom_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">margin_bottom_pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin_bottom_rel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set size, resolution and margins of the plot.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        width_mm : float</span>
+<span class="sd">            Plot width in millimeters.</span>
+<span class="sd">            Overrules ``width_in`` and ``width_pt``.</span>
+<span class="sd">        width_in : float</span>
+<span class="sd">            Plot width in inches.</span>
+<span class="sd">            Overrules ``width_pt``.</span>
+<span class="sd">        width_pt : float</span>
+<span class="sd">            Plot width in points (1 in = 72 pt).</span>
+
+<span class="sd">        height_mm : float</span>
+<span class="sd">            Plot height in millimeters.</span>
+<span class="sd">            Overrules ``height_in`` and ``height_pt``.</span>
+<span class="sd">        height_in : float</span>
+<span class="sd">            Plot height in inches.</span>
+<span class="sd">            Overrules ``height_pt``.</span>
+<span class="sd">        height_pt : float</span>
+<span class="sd">            Plot height in points (1 in = 72 pt).</span>
+
+<span class="sd">        dpi : int</span>
+<span class="sd">            Dots per inch, used synonymously with pixels per inch (ppi).</span>
+<span class="sd">            Example: Using width_in=2 and dpi=300 results in an image that is 600 pixels wide .</span>
+<span class="sd">            Note that font size is specified in pt (=1/72 in). Therefore, using width_in=1</span>
+<span class="sd">            and dpi=600 also results in an image that is 600 pixels wide but texts are twice as large.</span>
+
+<span class="sd">        margin_auto : bool</span>
+<span class="sd">            If True, all margins are set automatically by layout calculations of</span>
+<span class="sd">            the plotting library.</span>
+<span class="sd">            Caution: Other margin arguments are ignored in this case!</span>
+
+<span class="sd">        margin_left_mm : float</span>
+<span class="sd">            Left margin in millimeters.</span>
+<span class="sd">            Overrules ``margin_left_in``, ``margin_left_pt`` and ``margin_left_rel``.</span>
+<span class="sd">        margin_left_in : float</span>
+<span class="sd">            Left margin in inches.</span>
+<span class="sd">            Overrules ``margin_left_pt`` and ``margin_left_rel``.</span>
+<span class="sd">        margin_left_pt : float</span>
+<span class="sd">            Left margin in points (1 in = 72 pt).</span>
+<span class="sd">            Overrules ``margin_left_rel``.</span>
+<span class="sd">        margin_left_rel : float</span>
+<span class="sd">            Left margin in percent, i.e. a relative measure.</span>
+
+<span class="sd">        margin_right_mm : float</span>
+<span class="sd">            right margin in millimeters.</span>
+<span class="sd">            Overrules ``margin_right_in``, ``margin_right_pt`` and ``margin_right_rel``.</span>
+<span class="sd">        margin_right_in : float</span>
+<span class="sd">            right margin in inches.</span>
+<span class="sd">            Overrules ``margin_right_pt`` and ``margin_right_rel``.</span>
+<span class="sd">        margin_right_pt : float</span>
+<span class="sd">            right margin in points (1 in = 72 pt).</span>
+<span class="sd">            Overrules ``margin_right_rel``.</span>
+<span class="sd">        margin_right_rel : float</span>
+<span class="sd">            right margin in percent, i.e. a relative measure.</span>
+
+<span class="sd">        margin_top_mm : float</span>
+<span class="sd">            top margin in millimeters.</span>
+<span class="sd">            Overrules ``margin_top_in``, ``margin_top_pt`` and ``margin_top_rel``.</span>
+<span class="sd">        margin_top_in : float</span>
+<span class="sd">            top margin in inches.</span>
+<span class="sd">            Overrules ``margin_top_pt`` and ``margin_top_rel``.</span>
+<span class="sd">        margin_top_pt : float</span>
+<span class="sd">            top margin in points (1 in = 72 pt).</span>
+<span class="sd">            Overrules ``margin_top_rel``.</span>
+<span class="sd">        margin_top_rel : float</span>
+<span class="sd">            top margin in percent, i.e. a relative measure.</span>
+
+<span class="sd">        margin_bottom_mm : float</span>
+<span class="sd">            bottom margin in millimeters.</span>
+<span class="sd">            Overrules ``margin_bottom_in``, ``margin_bottom_pt`` and ``margin_bottom_rel``.</span>
+<span class="sd">        margin_bottom_in : float</span>
+<span class="sd">            bottom margin in inches.</span>
+<span class="sd">            Overrules ``margin_bottom_pt`` and ``margin_bottom_rel``.</span>
+<span class="sd">        margin_bottom_pt : float</span>
+<span class="sd">            bottom margin in points (1 in = 72 pt).</span>
+<span class="sd">            Overrules ``margin_bottom_rel``.</span>
+<span class="sd">        margin_bottom_rel : float</span>
+<span class="sd">            bottom margin in percent, i.e. a relative measure.</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        - https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.set_size_inches</span>
+<span class="sd">        - https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.subplots_adjust</span>
+<span class="sd">        - https://matplotlib.org/api/_as_gen/matplotlib.pyplot.tight_layout.html</span>
+<span class="sd">        - https://matplotlib.org/tutorials/intermediate/tight_layout_guide.html</span>
+<span class="sd">        - https://matplotlib.org/tutorials/intermediate/constrainedlayout_guide.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Calculate quantities in all units</span>
+        <span class="n">current_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">SizeManager</span><span class="p">(</span>
+            <span class="n">width_mm</span><span class="p">,</span> <span class="n">width_in</span><span class="p">,</span> <span class="n">width_pt</span><span class="p">,</span> <span class="n">height_mm</span><span class="p">,</span> <span class="n">height_in</span><span class="p">,</span> <span class="n">height_pt</span><span class="p">,</span> <span class="n">dpi</span><span class="p">,</span>
+            <span class="n">margin_auto</span><span class="p">,</span> <span class="n">margin_left_mm</span><span class="p">,</span> <span class="n">margin_left_in</span><span class="p">,</span> <span class="n">margin_left_pt</span><span class="p">,</span> <span class="n">margin_left_rel</span><span class="p">,</span>
+            <span class="n">margin_right_mm</span><span class="p">,</span> <span class="n">margin_right_in</span><span class="p">,</span> <span class="n">margin_right_pt</span><span class="p">,</span> <span class="n">margin_right_rel</span><span class="p">,</span>
+            <span class="n">margin_top_mm</span><span class="p">,</span> <span class="n">margin_top_in</span><span class="p">,</span> <span class="n">margin_top_pt</span><span class="p">,</span> <span class="n">margin_top_rel</span><span class="p">,</span>
+            <span class="n">margin_bottom_mm</span><span class="p">,</span> <span class="n">margin_bottom_in</span><span class="p">,</span> <span class="n">margin_bottom_pt</span><span class="p">,</span> <span class="n">margin_bottom_rel</span><span class="p">,</span>
+            <span class="n">current_size</span><span class="p">)</span>
+        <span class="c1"># Set plot size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height_in</span><span class="p">)</span>
+        <span class="c1"># Set margins</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">margin_auto</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span>
+                <span class="n">left</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">margin_left_rel</span><span class="p">,</span>
+                <span class="n">right</span><span class="o">=</span><span class="mf">1.0</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">margin_right_rel</span><span class="p">,</span>
+                <span class="n">top</span><span class="o">=</span><span class="mf">1.0</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">margin_top_rel</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">margin_bottom_rel</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Figure.set_display_format"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.set_display_format">[docs]</a>    <span class="k">def</span> <span class="nf">set_display_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set data format of the image shown by display() or automatically in notebooks.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data_format : str</span>
+<span class="sd">            Possible values: &quot;eps&quot;, &quot;pdf&quot;, &quot;png&quot;, &quot;ps&quot;, &quot;svg&quot;,</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_format</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data_format</span> <span class="o">=</span> <span class="n">data_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">known_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;eps&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data_format</span> <span class="ow">in</span> <span class="n">known_formats</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_display_format</span> <span class="o">=</span> <span class="n">data_format</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Unknown data format. Possible values: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">known_formats</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    <span class="c1"># Display in browser or notebook</span>
+<div class="viewcode-block" id="Figure.display"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.display">[docs]</a>    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display the plot in a webbrowser or as IPython rich display representation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inline : bool</span>
+<span class="sd">            If True, the plot will be shown inline in a Jupyter notebook or QT console.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Matplotlib usually uses Tkinter to display plots. Here the plot is instead shown in a</span>
+<span class="sd">        webbrowser, by transforming it into a HTML image element (e.g. png, svg).</span>
+<span class="sd">        This should be a bit more robust. For example, it can also be called within a</span>
+<span class="sd">        Jupyter notebook for which the standard method would result in a backend error.</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        - https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">inline</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_operating_system</span><span class="o">.</span><span class="n">open_html_text_in_webbrowser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">())</span></div>
+
+    <span class="c1"># Representation as text</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">html_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a standalone HTML text representation of the plot without any dependencies.</span>
+
+<span class="sd">        The plot is converted to an SVG image element with a base64 data URL, which is then</span>
+<span class="sd">        embedded in a HTML context.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/head&gt;&lt;body&gt;</span><span class="si">{}</span><span class="s1">&lt;/body&gt;&lt;/html&gt;&#39;</span><span class="p">)</span>
+        <span class="n">html_text</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">svg_img_element</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">html_text</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">svg_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create an SVG text representation of the plot, usable in HTML context or SVG file.&quot;&quot;&quot;</span>
+        <span class="c1"># Write SVG output into memory</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">_io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                    <span class="n">fname</span><span class="o">=</span><span class="n">file_handle</span><span class="p">,</span>
+                    <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span>
+                    <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_facecolor</span><span class="p">(),</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">svg_text</span> <span class="o">=</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Matplotlib failed to generate an image in &quot;svg&quot; format.&#39;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="c1"># Remove &#39;\n&#39; and unnecessary whitespaces</span>
+        <span class="n">svg_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">svg_text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+        <span class="c1"># Remove &lt;xml&gt; prefix</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">svg_text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&lt;svg&#39;</span><span class="p">)</span>
+        <span class="n">svg_text</span> <span class="o">=</span> <span class="n">svg_text</span><span class="p">[</span><span class="n">start</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">svg_text</span>
+
+    <span class="c1"># Representation as data URL</span>
+    <span class="k">def</span> <span class="nf">_to_binary_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a binary representation of the plot in a chosen image format.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">_io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+                <span class="c1"># Note: Passing facecolor is necessary, otherwise it would default to &#39;w&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                    <span class="n">fname</span><span class="o">=</span><span class="n">file_handle</span><span class="p">,</span>
+                    <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span>
+                    <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_facecolor</span><span class="p">(),</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                    <span class="nb">format</span><span class="o">=</span><span class="n">data_format</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">file_handle</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">binary_data</span> <span class="o">=</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Matplotlib failed to generate an image in &quot;</span><span class="si">{}</span><span class="s1">&quot; format.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">binary_data</span>
+
+    <span class="k">def</span> <span class="nf">_to_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with base64 encoded date in a chosen image format.&quot;&quot;&quot;</span>
+        <span class="n">binary_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_binary_data</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+        <span class="n">base64_text</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">binary_data_to_base64_text</span><span class="p">(</span><span class="n">binary_data</span><span class="p">)</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">base64_text_to_data_url</span><span class="p">(</span><span class="n">base64_text</span><span class="p">,</span> <span class="n">data_format</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data_url</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">eps_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with EPS image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="s1">&#39;eps&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pdf_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with PDF image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">png_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with PNG image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ps_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with PS image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">svg_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a data URL representation with SVG image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Representation as HTML element (with data URL embedded in img or object tag)</span>
+    <span class="k">def</span> <span class="nf">_to_img_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert the plot to a HTML image element with suitable size (1 in = 96 CSS px).&quot;&quot;&quot;</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+        <span class="n">alternative_text</span> <span class="o">=</span> <span class="s1">&#39;A Matplotlib plot rendered as image in </span><span class="si">{}</span><span class="s1"> format.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+        <span class="n">img_element</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">url_to_img_element</span><span class="p">(</span>
+            <span class="n">data_url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width_px</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height_px</span><span class="p">,</span> <span class="n">alternative_text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img_element</span>
+
+    <span class="k">def</span> <span class="nf">_to_object_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert the plot to a HTML object element with suitable size (1 in = 96 CSS px).&quot;&quot;&quot;</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+        <span class="n">alternative_text</span> <span class="o">=</span> <span class="s1">&#39;A Matplotlib plot rendered as image in </span><span class="si">{}</span><span class="s1"> format.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+        <span class="n">object_element</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">url_to_object_element</span><span class="p">(</span>
+            <span class="n">data_url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width_px</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height_px</span><span class="p">,</span> <span class="n">alternative_text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">object_element</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">eps_object_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a HTML object element with EPS image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_object_element</span><span class="p">(</span><span class="s1">&#39;eps&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pdf_object_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a HTML image element with PDF image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_object_element</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">png_img_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a HTML image element with PNG image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_img_element</span><span class="p">(</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ps_object_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a HTML object element with PS image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_object_element</span><span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">svg_img_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a HTML image element with SVG image format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_img_element</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Export as HTML file</span>
+<div class="viewcode-block" id="Figure.export_html"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_html">[docs]</a>    <span class="k">def</span> <span class="nf">export_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as HTML file that contains a vector graphic in SVG format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created HTML file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.html&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated HTML file, guaranteed to end with &quot;.html&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Precondition</span>
+        <span class="n">filepath_used</span> <span class="o">=</span> <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_file_extension</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+        <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_parent_directory</span><span class="p">(</span><span class="n">filepath_used</span><span class="p">)</span>
+
+        <span class="c1"># Transformation</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath_used</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+            <span class="n">file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_text</span><span class="p">)</span>
+
+        <span class="c1"># Postcondition</span>
+        <span class="n">_operating_system</span><span class="o">.</span><span class="n">is_nonempty_file</span><span class="p">(</span>
+            <span class="n">filepath_used</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Export of plot as HTML file failed.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filepath_used</span></div>
+
+    <span class="c1"># Export as image file: 1) raster graphics</span>
+    <span class="k">def</span> <span class="nf">_export_img</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as raster or vector graphic in different formats.</span>
+
+<span class="sd">        Currently available according help text returned by</span>
+<span class="sd">        ``plt.gcf().canvas.get_supported_filetypes_grouped()``:</span>
+<span class="sd">        - Postscript: &#39;ps&#39;</span>
+<span class="sd">        - Encapsulated Postscript: &#39;eps&#39;</span>
+<span class="sd">        - Portable Document Format: &#39;pdf&#39;</span>
+<span class="sd">        - PGF code for LaTeX: &#39;pgf&#39;</span>
+<span class="sd">        - Portable Network Graphics: &#39;png&#39;</span>
+<span class="sd">        - Raw RGBA bitmap: &#39;raw&#39;, &#39;rgba&#39;</span>
+<span class="sd">        - Scalable Vector Graphics: &#39;svg&#39;, &#39;svgz&#39;</span>
+<span class="sd">        - Joint Photographic Experts Group: &#39;jpeg&#39;, &#39;jpg&#39;</span>
+<span class="sd">        - Tagged Image File Format: &#39;tif&#39;, &#39;tiff&#39;</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        - https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Precondition</span>
+        <span class="n">filepath_used</span> <span class="o">=</span> <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_file_extension</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="p">)</span>
+        <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_parent_directory</span><span class="p">(</span><span class="n">filepath_used</span><span class="p">)</span>
+
+        <span class="c1"># Transformation</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="n">fname</span><span class="o">=</span><span class="n">filepath_used</span><span class="p">,</span>
+                <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span>
+                <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">,</span>
+                <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_facecolor</span><span class="p">(),</span>
+                <span class="n">edgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                <span class="nb">format</span><span class="o">=</span><span class="n">data_format</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Matplotlib failed to generate an image in &quot;</span><span class="si">{}</span><span class="s1">&quot; format.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="c1"># Postcondition</span>
+        <span class="n">_operating_system</span><span class="o">.</span><span class="n">is_nonempty_file</span><span class="p">(</span>
+            <span class="n">filepath_used</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Export of plot as image file in </span><span class="si">{}</span><span class="s1"> format failed.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">data_format</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">filepath_used</span>
+
+<div class="viewcode-block" id="Figure.export_png"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_png">[docs]</a>    <span class="k">def</span> <span class="nf">export_png</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as raster graphic in PNG format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created PNG file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.png&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated PNG file, guaranteed to end with &quot;.png&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span></div>
+
+    <span class="c1"># Export as image file: 2) vector graphics</span>
+<div class="viewcode-block" id="Figure.export_eps"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_eps">[docs]</a>    <span class="k">def</span> <span class="nf">export_eps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as vector graphic in EPS format.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">           Matplotlib does not support transparency for vector graphics in EPS format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created EPS file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.eps&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated EPS file, guaranteed to end with &quot;.eps&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;eps&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Figure.export_pdf"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_pdf">[docs]</a>    <span class="k">def</span> <span class="nf">export_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as vector graphic in PDF format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created PDF file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.pdf&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated PDF file, guaranteed to end with &quot;.pdf&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Figure.export_pgf"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_pgf">[docs]</a>    <span class="k">def</span> <span class="nf">export_pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as vector graphic in PGF format for LaTeX.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created PGF file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.pgf&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated PGF file, guaranteed to end with &quot;.pgf&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;pgf&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Figure.export_ps"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_ps">[docs]</a>    <span class="k">def</span> <span class="nf">export_ps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as vector graphic in PS format.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">           Matplotlib does not support transparency for vector graphics in PS format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created PS file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.ps&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated PS file, guaranteed to end with &quot;.ps&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;ps&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Figure.export_svg"><a class="viewcode-back" href="../../../rst/api/matplotlib/figure.html#unified_plotting.matplotlib._data_structures.Figure.export_svg">[docs]</a>    <span class="k">def</span> <span class="nf">export_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export the plot as vector graphic in SVG format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Filepath of the created SVG file.</span>
+<span class="sd">            If the file exists it will be overwritten without warning.</span>
+<span class="sd">            If the path does not end with &quot;.svg&quot; it will be changed to do so.</span>
+<span class="sd">            If the parent directory does not exist it will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filepath_used : str</span>
+<span class="sd">            Filepath of the generated SVG file, guaranteed to end with &quot;.svg&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_img</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

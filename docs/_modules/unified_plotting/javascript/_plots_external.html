@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.javascript._plots_external &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.javascript._plots_external</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.javascript._plots_external</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;JavaScript plots for external data (files, resources).&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">mimetypes</span> <span class="k">as</span> <span class="nn">_mimetypes</span>
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span> <span class="k">as</span> <span class="n">_Number</span>
+
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">_requests</span>
+
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">base64</span> <span class="k">as</span> <span class="n">_base64</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">operating_system</span> <span class="k">as</span> <span class="n">_operating_system</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_data_structures</span><span class="p">,</span> <span class="n">_template_system</span>
+
+
+<span class="k">def</span> <span class="nf">_detect_mimetype</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mime_type</span> <span class="o">=</span> <span class="n">_mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">mime_type</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mime_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;Failed to auto-detect MIME type of the given data. Please provide it manually, &#39;</span>
+            <span class="s1">&#39;e.g. &quot;application/pdf&quot;, &quot;image/png&quot;, &quot;image/jpeg&quot; or &quot;image/svg+xml&quot;.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">mime_type</span>
+
+
+<span class="k">def</span> <span class="nf">_fetch_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">_requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">assert</span> <span class="n">result</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Failed to fetch data from given URL &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">_data_to_data_url</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">):</span>
+    <span class="c1"># Case 1: Data is a file</span>
+    <span class="k">if</span> <span class="n">_operating_system</span><span class="o">.</span><span class="n">is_nonempty_file</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">base64_text</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">file_to_base64_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;data:</span><span class="si">{mt}</span><span class="s1">;base64,</span><span class="si">{b64}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b64</span><span class="o">=</span><span class="n">base64_text</span><span class="p">,</span> <span class="n">mt</span><span class="o">=</span><span class="n">mime_type</span><span class="p">)</span>
+    <span class="c1"># Case 2: Data is already a data URL</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;data:&#39;</span><span class="p">):</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="c1"># Case 3: Assume data is a URL and try to fetch it, otherwise treat the text itself as data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">_fetch_url</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="n">base64_text</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">binary_data_to_base64_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base64_text</span> <span class="o">=</span> <span class="n">_base64</span><span class="o">.</span><span class="n">text_to_base64_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;data:</span><span class="si">{mt}</span><span class="s1">;base64,</span><span class="si">{b64}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b64</span><span class="o">=</span><span class="n">base64_text</span><span class="p">,</span> <span class="n">mt</span><span class="o">=</span><span class="n">mime_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_url</span>
+
+
+<div class="viewcode-block" id="image_viewer"><a class="viewcode-back" href="../../../rst/api/javascript/plots_external/image_viewer.html#unified_plotting.javascript._plots_external.image_viewer">[docs]</a><span class="k">def</span> <span class="nf">image_viewer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">min_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">resizable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an embedded image from an URL, data URL, filepath or SVG text.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : str</span>
+<span class="sd">        Image data in form of an URL, data URL, filepath or SVG text.</span>
+<span class="sd">    mime_type : str</span>
+<span class="sd">        MIME type (media type) of the data. If it is not provided, the system tries to guess</span>
+<span class="sd">        the correct MIME type.</span>
+<span class="sd">        Examples: &quot;application/pdf&quot;, &quot;image/png&quot;, &quot;image/jpeg&quot;, &quot;image/svg+xml&quot;</span>
+<span class="sd">    width : int or str</span>
+<span class="sd">        Exact width of the embedded image.</span>
+<span class="sd">    height : int or str</span>
+<span class="sd">        Exact height of the embedded image.</span>
+<span class="sd">    min_width : int or str</span>
+<span class="sd">        Minimum width of the embedded image.</span>
+<span class="sd">    min_height : int or str</span>
+<span class="sd">        Minimum height of the embedded image.</span>
+<span class="sd">    max_width : int or str</span>
+<span class="sd">        Maximum width of the embedded image.</span>
+<span class="sd">    max_height : int or str</span>
+<span class="sd">        Maximum height of the embedded image.</span>
+<span class="sd">    resizable : bool</span>
+<span class="sd">        If True, the image container can be resized by the user in a webbrowser.</span>
+<span class="sd">    border : bool</span>
+<span class="sd">        If True, the image container is shown with a border around it.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Following precedence rules for the different width and height values are defined by CSS:</span>
+
+<span class="sd">    - max-width overrides width, but min-width overrides max-width.</span>
+
+<span class="sd">    - max-height overrides height, but min-height overrides max-height.</span>
+
+<span class="sd">    All width and height values can be provided as a number or a str with following meaning:</span>
+
+<span class="sd">    - If the value is a number, it is interpreted as pixels by converting it to a string</span>
+<span class="sd">      and adding the suffix &quot;px&quot;.</span>
+
+<span class="sd">    - If the value is a string, it can be any CSS length number and unit, e.g. &quot;50%&quot;, &quot;30mm&quot;,</span>
+<span class="sd">      &quot;200pt&quot;, &quot;3in&quot;, &quot;5em&quot;.</span>
+<span class="sd">      Caution: Relative heights may not work as indended, but using vh (=1% of viewport height)</span>
+<span class="sd">      instead of % can help to achieve the desired result.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://developer.mozilla.org/en-US/docs/Web/CSS/max-width</span>
+<span class="sd">    - https://developer.mozilla.org/en-US/docs/Web/CSS/max-height</span>
+<span class="sd">    - https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units</span>
+<span class="sd">    - https://en.wikipedia.org/wiki/Media_type</span>
+<span class="sd">    - https://docs.python.org/3/library/mimetypes.html</span>
+<span class="sd">    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object</span>
+<span class="sd">    - https://developer.mozilla.org/de/docs/Web/HTML/Element/img</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Argument processing</span>
+    <span class="k">def</span> <span class="nf">add_px</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">_Number</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">px&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span>
+
+    <span class="n">width</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">min_width</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">min_width</span><span class="p">)</span>
+    <span class="n">min_height</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">min_height</span><span class="p">)</span>
+    <span class="n">max_width</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">max_width</span><span class="p">)</span>
+    <span class="n">max_height</span> <span class="o">=</span> <span class="n">add_px</span><span class="p">(</span><span class="n">max_height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mime_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mime_type</span> <span class="o">=</span> <span class="n">_detect_mimetype</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">mime_type</span> <span class="o">=</span> <span class="n">mime_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="c1"># - Arguments to CSS style</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">width</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;width:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">height</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;height:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_width</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;min-width:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_width</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_height</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;min-height:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_width</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;max-width:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_width</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_height</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;max-height:</span><span class="si">{}</span><span class="s1">;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">resizable</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;resize:both;overflow:hidden;&#39;</span>
+    <span class="k">if</span> <span class="n">border</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">+=</span> <span class="s1">&#39;border:1px solid lightgray;border-radius:5px;margin:3px;padding:7px;&#39;</span>
+    <span class="k">if</span> <span class="n">style</span><span class="p">:</span>
+        <span class="n">container_style</span> <span class="o">=</span> <span class="s1">&#39; style=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>  <span class="c1"># blank serves as separator from div</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">container_style</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="c1"># - Data to data URL</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data_url</span> <span class="o">=</span> <span class="n">_data_to_data_url</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Could not convert the provided data to a data URL and hence can not embed it.&#39;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="c1"># - Data URL to HTML element</span>
+    <span class="k">if</span> <span class="s1">&#39;image&#39;</span> <span class="ow">in</span> <span class="n">mime_type</span><span class="p">:</span>
+        <span class="n">html_element</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;&lt;img &#39;</span>
+            <span class="s1">&#39;src=&quot;</span><span class="si">{data_url}</span><span class="s1">&quot; &#39;</span>
+            <span class="s1">&#39;style=&quot;max-width:100%;max-height:100%;&quot; &#39;</span>
+            <span class="s1">&#39;alt=&quot;Image can not be displayed.&quot;&gt;&#39;</span>
+            <span class="s1">&#39;&lt;/img&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_url</span><span class="o">=</span><span class="n">data_url</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">html_element</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;&lt;object type=&quot;</span><span class="si">{mime_type}</span><span class="s1">&quot; &#39;</span>
+            <span class="s1">&#39;data=&quot;</span><span class="si">{data_url}</span><span class="s1">&quot; &#39;</span>
+            <span class="s1">&#39;width=&quot;100%&quot; &#39;</span>
+            <span class="s1">&#39;height=&quot;100%&quot; &#39;</span>
+            <span class="s1">&#39;alt=&quot;Image can not be displayed.&quot;&gt;&#39;</span>
+            <span class="s1">&#39;&lt;/object&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mime_type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">data_url</span><span class="o">=</span><span class="n">data_url</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/image_viewer.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;CONTAINER_STYLE&#39;</span><span class="p">:</span> <span class="n">container_style</span><span class="p">,</span>
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">html_element</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

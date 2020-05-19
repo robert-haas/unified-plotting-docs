@@ -1,0 +1,1049 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.javascript._plots_network &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.javascript._plots_network</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.javascript._plots_network</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;JavaScript plots for graph data.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_preprocessing</span> <span class="k">as</span> <span class="n">_shared_preprocessing</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_data_structures</span><span class="p">,</span> <span class="n">_template_system</span>
+
+
+<div class="viewcode-block" id="network_d3"><a class="viewcode-back" href="../../../rst/api/javascript/plots_network/network_d3.html#unified_plotting.javascript._plots_network.network_d3">[docs]</a><span class="k">def</span> <span class="nf">network_d3</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+               <span class="n">network_height</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">details_height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+               <span class="n">show_details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_details_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_menu_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_node</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">node_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_node_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="n">node_size_normalization_min</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">node_size_normalization_max</span><span class="o">=</span><span class="mf">75.0</span><span class="p">,</span>
+               <span class="n">node_drag_fix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_neighborhood</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_node_image</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_image_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">show_node_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_node_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+               <span class="n">node_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">node_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">node_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+               <span class="n">show_edge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">edge_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_edge_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="n">edge_size_normalization_min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edge_size_normalization_max</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+               <span class="n">edge_curvature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">edge_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_edge_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_edge_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+               <span class="n">edge_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">edge_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">edge_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+               <span class="n">zoom_factor</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">large_network_threshold</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+               <span class="n">layout_algorithm_active</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">use_many_body_force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many_body_force_strength</span><span class="o">=-</span><span class="mf">70.0</span><span class="p">,</span>
+               <span class="n">many_body_force_theta</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+               <span class="n">use_many_body_force_min_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">many_body_force_min_distance</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+               <span class="n">use_many_body_force_max_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">many_body_force_max_distance</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span>
+               <span class="n">use_links_force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">links_force_distance</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">links_force_strength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">use_collision_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">collision_force_radius</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span>
+               <span class="n">collision_force_strength</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+               <span class="n">use_x_positioning_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">x_positioning_force_strength</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+               <span class="n">use_y_positioning_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_positioning_force_strength</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+               <span class="n">use_centering_force</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an interactive network plot from JSON graph format (JGF) data with d3.v5.js.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : str, dict or graph object</span>
+<span class="sd">        Graph data in :ref:`JSON graph format (JGF) &lt;jgf-format&gt;` as JSON string (*str*),</span>
+<span class="sd">        JSON object (*dict*),</span>
+<span class="sd">        :ref:`graph object of a supported graph library &lt;supported-graph-libraries&gt;`,</span>
+<span class="sd">        or a list of multiple graphs, each defined in any of the previous ways.</span>
+<span class="sd">        If the provided data contains multiple graphs, only the first one is shown on load,</span>
+<span class="sd">        while the other ones can be chosen in the data selection menu in order to be displayed.</span>
+<span class="sd">    network_height : int</span>
+<span class="sd">        Height of the network container in pixels (px).</span>
+<span class="sd">    details_height : int</span>
+<span class="sd">        Height of the details container in pixels (px).</span>
+<span class="sd">    show_details : bool</span>
+<span class="sd">        If True, the details container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_details_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the details container.</span>
+<span class="sd">    show_menu : bool</span>
+<span class="sd">        If True, the menu container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_menu_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the menu container.</span>
+<span class="sd">    show_node : bool</span>
+<span class="sd">        If True, nodes are shown on load, otherwise hidden.</span>
+<span class="sd">    node_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node size.</span>
+<span class="sd">    node_size_data_source : str</span>
+<span class="sd">        Name of the numerical node property that is used as source for node size on load.</span>
+<span class="sd">    use_node_size_normalization : bool</span>
+<span class="sd">        If True, node sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    node_size_normalization_min : float</span>
+<span class="sd">        Minimum value for node size if node size normalization is active.</span>
+<span class="sd">    node_size_normalization_max : float</span>
+<span class="sd">        Maximum value for node size if node size normalization is active.</span>
+<span class="sd">    node_drag_fix : bool</span>
+<span class="sd">        If True, the position of a node becomes fixed after dragging it, i.e. the</span>
+<span class="sd">        layout algorithm does not change its position but the user can drag it again.</span>
+<span class="sd">    node_hover_neighborhood : bool</span>
+<span class="sd">        If True, hovering a node leads to highlighting its neighborhood which consists of</span>
+<span class="sd">        all incident edges and adjacent nodes.</span>
+<span class="sd">    node_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering a node leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this node contains a non-empty string or HTML text.</span>
+<span class="sd">    show_node_image : bool</span>
+<span class="sd">        If True, node images are shown on load for all nodes whose image property in the metadata</span>
+<span class="sd">        contains a valid image URL from which an image can be fetched.</span>
+<span class="sd">    node_image_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node image size.</span>
+<span class="sd">    show_node_label : bool</span>
+<span class="sd">        If True, node labels are shown on load, otherwise hidden.</span>
+<span class="sd">    show_node_label_border : bool</span>
+<span class="sd">        If True, node labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">    node_label_data_source : str</span>
+<span class="sd">        Name of the node property that is used as source for node label text on load.</span>
+<span class="sd">    node_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node label size.</span>
+<span class="sd">    node_label_rotation : float</span>
+<span class="sd">        An angle that modifies node label orientation.</span>
+<span class="sd">    node_label_font : str</span>
+<span class="sd">        Name of the font that is used for node labels.</span>
+<span class="sd">    show_edge : bool</span>
+<span class="sd">        If True, edges are shown on load, otherwise hidden.</span>
+<span class="sd">    edge_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge size (=edge width).</span>
+<span class="sd">    edge_size_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge size on load.</span>
+<span class="sd">    use_edge_size_normalization : bool</span>
+<span class="sd">        If True, edge sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    edge_size_normalization_min : float</span>
+<span class="sd">        Minimum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_size_normalization_max : float</span>
+<span class="sd">        Maximum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_curvature : float</span>
+<span class="sd">        A factor that modifies edge curvature, where 0.0 means straight lines.</span>
+<span class="sd">    edge_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering an edge leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this edge contains a non-empty string or HTML text.</span>
+<span class="sd">    show_edge_label : bool</span>
+<span class="sd">        If True, edge labels are shown on load, otherwise hidden.</span>
+<span class="sd">    show_edge_label_border : bool</span>
+<span class="sd">        If True, edge labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">    edge_label_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge label text on load.</span>
+<span class="sd">    edge_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge label size.</span>
+<span class="sd">    edge_label_rotation : float</span>
+<span class="sd">        An angle that modifies edge label orientation.</span>
+<span class="sd">    edge_label_font : str</span>
+<span class="sd">        Name of the font that is used for edge labels.</span>
+<span class="sd">    zoom_factor : float</span>
+<span class="sd">        Factor that modifies how close the camera is to the drawing area on load.</span>
+<span class="sd">    large_network_threshold : int</span>
+<span class="sd">        Number that determines from when on a network is considered to be large, which</span>
+<span class="sd">        means that before visualizing it an initial layout is calculated without moving anything.</span>
+<span class="sd">    layout_algorithm_active : bool</span>
+<span class="sd">        If True, the layout algorithm is active on load and leads to movement, otherwise inactive.</span>
+<span class="sd">    use_many_body_force : bool</span>
+<span class="sd">        If True, many body force is active in the layout algorithm.</span>
+<span class="sd">        This force acts between any pair of nodes but can be restricted to only act on nodes</span>
+<span class="sd">        within a certain distance.</span>
+<span class="sd">    many_body_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the force. It can be positive to cause attraction</span>
+<span class="sd">        or negative (usual case) to cause repulsion between nodes.</span>
+<span class="sd">    many_body_force_theta : float</span>
+<span class="sd">        Number that determines the accuracy of the Barnes–Hut approximation of the</span>
+<span class="sd">        many-body simulation where nodes are grouped instead of treated individually</span>
+<span class="sd">        to improve performance.</span>
+<span class="sd">    use_many_body_force_min_distance : bool</span>
+<span class="sd">        If True, a minimum distance between nodes is used in the many-body force calculation.</span>
+<span class="sd">        This effectively leads to an upper bound on the strength of the force between any two</span>
+<span class="sd">        nodes and avoids instability.</span>
+<span class="sd">    many_body_force_min_distance : float</span>
+<span class="sd">        Number that determines the minimum distance between nodes over which the many-body force</span>
+<span class="sd">        is active.</span>
+<span class="sd">    use_many_body_force_max_distance : bool</span>
+<span class="sd">        If True, a maximum distance between nodes is used in the many-body force calculation.</span>
+<span class="sd">        This can improve performance but results in a more localized layout.</span>
+<span class="sd">    many_body_force_max_distance : float</span>
+<span class="sd">        Number that determines the maximum distance between nodes over which the many-body force</span>
+<span class="sd">        is active.</span>
+<span class="sd">    use_links_force : bool</span>
+<span class="sd">        If True, link force is active in the layout algorithm.</span>
+<span class="sd">        This force acts between pairs of nodes that are connected by an edge. It pushes them</span>
+<span class="sd">        together or apart in order to come close to a certain distance between connected nodes.</span>
+<span class="sd">    links_force_distance : float</span>
+<span class="sd">        Number that determines the preferred distance between connected nodes.</span>
+<span class="sd">    links_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the links force.</span>
+<span class="sd">    use_collision_force : bool</span>
+<span class="sd">        If True, collision force is active in the layout algorithm.</span>
+<span class="sd">        This force treats nodes as circles instead of points and acts on pairs of nodes that</span>
+<span class="sd">        overlap in order to push them apart.</span>
+<span class="sd">    collision_force_radius : float</span>
+<span class="sd">        Number that determines the radius of the circle around each node.</span>
+<span class="sd">    collision_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the force.</span>
+<span class="sd">    use_x_positioning_force : bool</span>
+<span class="sd">        If True, x-positioning force is active in the layout algorithm.</span>
+<span class="sd">        This force modifies the x position of each node towards 0.0, effectively pushing them</span>
+<span class="sd">        towards the y-axis.</span>
+<span class="sd">    x_positioning_force_strength : float</span>
+<span class="sd">        Number that indicates the strength of the force.</span>
+<span class="sd">    use_y_positioning_force : bool</span>
+<span class="sd">        This force modifies the y position of each node towards 0.0, effectively pushing them</span>
+<span class="sd">        towards the x-axis.</span>
+<span class="sd">    y_positioning_force_strength : float</span>
+<span class="sd">        Number that indicates the strength of the force.</span>
+<span class="sd">    use_centering_force : bool</span>
+<span class="sd">        This force attracts each node towards the center of the coordinate system at (0, 0)</span>
+<span class="sd">        to keep the graph in the display area. It may lead to unexpected repulsion effects</span>
+<span class="sd">        if all nodes are fixed and then a single one is released by dragging it.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://d3js.org</span>
+<span class="sd">    - https://github.com/d3/d3-force</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Argument processing</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_graph_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/network_d3.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;DEFINE_D3&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;third_party/d3/d3.v5.min.def.js&#39;</span><span class="p">),</span>
+
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+        <span class="s1">&#39;NETWORK_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">network_height</span><span class="p">),</span>
+        <span class="s1">&#39;DETAILS_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">details_height</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details_toggle_button</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu_toggle_button</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_NODE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_node_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_DRAG_FIX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_drag_fix</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_NEIGHBORHOOD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_neighborhood</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_IMAGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_image</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_IMAGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_image_size_factor</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_NODE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_EDGE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_edge_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_CURVATURE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_curvature</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_EDGE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;ZOOM_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">zoom_factor</span><span class="p">),</span>
+        <span class="s1">&#39;LARGE_NETWORK_THRESHOLD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">large_network_threshold</span><span class="p">),</span>
+
+        <span class="s1">&#39;LAYOUT_ALGORITHM_ACTIVE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">layout_algorithm_active</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_many_body_force</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_THETA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_theta</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE_MIN_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+            <span class="n">use_many_body_force_min_distance</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_MIN_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_min_distance</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE_MAX_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+            <span class="n">use_many_body_force_max_distance</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_MAX_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_max_distance</span><span class="p">),</span>
+        <span class="s1">&#39;USE_LINKS_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_links_force</span><span class="p">),</span>
+        <span class="s1">&#39;LINKS_FORCE_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">links_force_distance</span><span class="p">),</span>
+        <span class="s1">&#39;LINKS_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">links_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_COLLISION_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_collision_force</span><span class="p">),</span>
+        <span class="s1">&#39;COLLISION_FORCE_RADIUS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">collision_force_radius</span><span class="p">),</span>
+        <span class="s1">&#39;COLLISION_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">collision_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_X_POSITIONING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_x_positioning_force</span><span class="p">),</span>
+        <span class="s1">&#39;X_POSITIONING_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">x_positioning_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_Y_POSITIONING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_y_positioning_force</span><span class="p">),</span>
+        <span class="s1">&#39;Y_POSITIONING_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">y_positioning_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_CENTERING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_centering_force</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="network_vis"><a class="viewcode-back" href="../../../rst/api/javascript/plots_network/network_vis.html#unified_plotting.javascript._plots_network.network_vis">[docs]</a><span class="k">def</span> <span class="nf">network_vis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">network_height</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">details_height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">show_details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_details_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">show_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_menu_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">show_node</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">node_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_node_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">node_size_normalization_min</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">node_size_normalization_max</span><span class="o">=</span><span class="mf">75.0</span><span class="p">,</span>
+                <span class="n">node_drag_fix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_neighborhood</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">show_node_image</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_image_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">show_node_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_node_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="n">node_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">node_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">node_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                <span class="n">show_edge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">edge_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_edge_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">edge_size_normalization_min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edge_size_normalization_max</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                <span class="n">edge_curvature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">edge_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">show_edge_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_edge_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="n">edge_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">edge_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">edge_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                <span class="n">zoom_factor</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">large_network_threshold</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">layout_algorithm_active</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout_algorithm</span><span class="o">=</span><span class="s1">&#39;barnesHut&#39;</span><span class="p">,</span>
+                <span class="n">gravitational_constant</span><span class="o">=-</span><span class="mf">2000.0</span><span class="p">,</span> <span class="n">central_gravity</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">spring_length</span><span class="o">=</span><span class="mf">70.0</span><span class="p">,</span>
+                <span class="n">spring_constant</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">avoid_overlap</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an interactive network plot from JSON graph format (JGF) data with vis.js.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This plot differs from other network plots in following aspects:</span>
+
+<span class="sd">    - Nodes do not have a border. Edges do not come with labels. Accordingly, this plot ignores</span>
+<span class="sd">      following properties defined in the JSON graph format:</span>
+
+<span class="sd">      - Graph metadata: ``node_border_color``, ``node_border_size``, ``edge_label_color``,</span>
+<span class="sd">        ``edge_label_size``</span>
+<span class="sd">      - Node metadata: ``border_color``, ``border_size``</span>
+<span class="sd">      - Edge metadata: ``label_color``, ``label_size``</span>
+
+<span class="sd">    - If nodes are hidden, then node labels and node images are hidden too.</span>
+<span class="sd">    - Hovering over a node does not support neighborhood highlighting yet.</span>
+<span class="sd">    - Node labels can not be rotated (and edge labels are not available yet).</span>
+<span class="sd">    - There is no control over the initial zoom factor yet.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This network plot currently differs from other network plots in following aspects:</span>
+
+<span class="sd">    - vis.js does not support setting the opacity of nodes and edges.</span>
+<span class="sd">      It also does not support setting arrow colors different from the edge color.</span>
+<span class="sd">      Accordingly, this plot ignores following properties defined in the JSON graph format:</span>
+<span class="sd">      - Graph metadata: ``arrow_color``, ``node_opacity``, ``edge_opacity``</span>
+<span class="sd">      - Node metadata: ``opacity``</span>
+<span class="sd">      - Edge metadata: ``opacity``</span>
+
+<span class="sd">    - Node and edge opacity can not be set.</span>
+<span class="sd">    - Node and edge labels can not be rotated.</span>
+<span class="sd">    - Node and edge label borders may not be visible if zoomed closely.</span>
+<span class="sd">    - If edges are hidden, then edge labels are hidden too.</span>
+<span class="sd">    - If multiple self-loops (=edges that have the same source and target node) are present for</span>
+<span class="sd">      a single node, they are drawn on top of each other and may not be distinguishable.</span>
+<span class="sd">    - The initial zoom can not be controlled yet.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : str, dict or graph object</span>
+<span class="sd">        Graph data in :ref:`JSON graph format (JGF) &lt;jgf-format&gt;` as JSON string (*str*),</span>
+<span class="sd">        JSON object (*dict*),</span>
+<span class="sd">        :ref:`graph object of a supported graph library &lt;supported-graph-libraries&gt;`,</span>
+<span class="sd">        or a list of multiple graphs, each defined in any of the previous ways.</span>
+<span class="sd">        If the provided data contains multiple graphs, only the first one is shown on load,</span>
+<span class="sd">        while the other ones can be chosen in the data selection menu in order to be displayed.</span>
+<span class="sd">    network_height : int</span>
+<span class="sd">        Height of the network container in pixels (px).</span>
+<span class="sd">    details_height : int</span>
+<span class="sd">        Height of the details container in pixels (px).</span>
+<span class="sd">    show_details : bool</span>
+<span class="sd">        If True, the details container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_details_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the details container.</span>
+<span class="sd">    show_menu : bool</span>
+<span class="sd">        If True, the menu container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_menu_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the menu container.</span>
+<span class="sd">    show_node : bool</span>
+<span class="sd">        If True, nodes are shown on load, otherwise hidden.</span>
+<span class="sd">    node_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node size.</span>
+<span class="sd">    node_size_data_source : str</span>
+<span class="sd">        Name of the numerical node property that is used as source for node size on load.</span>
+<span class="sd">    use_node_size_normalization : bool</span>
+<span class="sd">        If True, node sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    node_size_normalization_min : float</span>
+<span class="sd">        Minimum value for node size if node size normalization is active.</span>
+<span class="sd">    node_size_normalization_max : float</span>
+<span class="sd">        Maximum value for node size if node size normalization is active.</span>
+<span class="sd">    node_drag_fix : bool</span>
+<span class="sd">        If True, the position of a node becomes fixed after dragging it, i.e. the</span>
+<span class="sd">        layout algorithm does not change its position but the user can drag it again.</span>
+<span class="sd">    node_hover_neighborhood : bool</span>
+<span class="sd">        If True, hovering a node leads to highlighting its neighborhood which consists of</span>
+<span class="sd">        all incident edges and adjacent nodes.</span>
+<span class="sd">    node_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering a node leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this node contains a non-empty string or HTML text.</span>
+<span class="sd">    show_node_image : bool</span>
+<span class="sd">        If True, node images are shown on load for all nodes whose image property in the metadata</span>
+<span class="sd">        contains a valid image URL from which an image can be fetched.</span>
+<span class="sd">    node_image_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node image size.</span>
+<span class="sd">    show_node_label : bool</span>
+<span class="sd">        If True, node labels are shown on load, otherwise hidden.</span>
+<span class="sd">    show_node_label_border : bool</span>
+<span class="sd">        If True, node labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">    node_label_data_source : str</span>
+<span class="sd">        Name of the node property that is used as source for node label text on load.</span>
+<span class="sd">    node_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node label size.</span>
+<span class="sd">    node_label_rotation : float</span>
+<span class="sd">        An angle that modifies node label orientation.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    node_label_font : str</span>
+<span class="sd">        Name of the font that is used for node labels.</span>
+<span class="sd">    show_edge : bool</span>
+<span class="sd">        If True, edges are shown on load, otherwise hidden.</span>
+<span class="sd">    edge_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge size (=edge width).</span>
+<span class="sd">    edge_size_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge size on load.</span>
+<span class="sd">    use_edge_size_normalization : bool</span>
+<span class="sd">        If True, edge sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    edge_size_normalization_min : float</span>
+<span class="sd">        Minimum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_size_normalization_max : float</span>
+<span class="sd">        Maximum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_curvature : float</span>
+<span class="sd">        A factor that modifies edge curvature, where 0.0 means straight lines.</span>
+<span class="sd">    edge_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering an edge leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this edge contains a non-empty string or HTML text.</span>
+<span class="sd">    show_edge_label : bool</span>
+<span class="sd">        If True, edge labels are shown on load, otherwise hidden.</span>
+<span class="sd">    show_edge_label_border : bool</span>
+<span class="sd">        If True, edge labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">    edge_label_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge label text on load.</span>
+<span class="sd">    edge_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge label size.</span>
+<span class="sd">    edge_label_rotation : float</span>
+<span class="sd">        An angle that modifies edge label orientation.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    edge_label_font : str</span>
+<span class="sd">        Name of the font that is used for edge labels.</span>
+<span class="sd">    zoom_factor : float</span>
+<span class="sd">        Factor that modifies how close the camera is to the drawing area on load.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    large_network_threshold : int</span>
+<span class="sd">        Number that determines from when on a network is considered to be large, which</span>
+<span class="sd">        means that before visualizing it an initial layout is calculated without moving anything.</span>
+<span class="sd">        Caution: This feature is currently not available.</span>
+<span class="sd">    layout_algorithm_active : bool</span>
+<span class="sd">        If True, the layout algorithm is active on load and leads to movement, otherwise inactive.</span>
+<span class="sd">    layout_algorithm : str</span>
+<span class="sd">        Name of the used layout algorithm (vis.js term: &quot;solver&quot; of the &quot;physics simulation&quot;).</span>
+<span class="sd">        Possible values: &quot;barnesHut&quot;, &quot;forceAtlas2Based&quot;, &quot;repulsion&quot;, &quot;hierarchicalRepulsion&quot;</span>
+<span class="sd">    gravitational_constant : float</span>
+<span class="sd">        Number that determines the strength of the many-body force acting between all pairs of</span>
+<span class="sd">        nodes. It can be positive to cause attraction or negative (usual case) to cause repulsion.</span>
+<span class="sd">        Only active if layout_algorithm is &quot;barnesHut&quot; or &quot;forceAtlas2Based&quot;.</span>
+<span class="sd">    central_gravity : float</span>
+<span class="sd">        Number that determines the strength of the centering force that pulls the network</span>
+<span class="sd">        towards the center of the coordinate system (0,0) to keep it in the display area.</span>
+<span class="sd">    spring_length : float</span>
+<span class="sd">        Number that determines the desired distance in the links force (vis.js terminology: edges</span>
+<span class="sd">        are modeled as &quot;springs&quot;) that acts between connected pairs of nodes.</span>
+<span class="sd">    spring_constant : float</span>
+<span class="sd">        Number that determines the strength of the links force.</span>
+<span class="sd">    avoid_overlap : float</span>
+<span class="sd">        Number that determines the strength of the collision force that acts between nodes</span>
+<span class="sd">        if they come too close together.</span>
+<span class="sd">        Only active if layout_algorithm is &quot;barnesHut&quot;, &quot;forceAtlas2Based&quot; or</span>
+<span class="sd">        &quot;hierarchicalRepulsion&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://visjs.org</span>
+<span class="sd">    - https://visjs.github.io/vis-network/docs/network</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Argument processing</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_graph_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/network_vis.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;DEFINE_VIS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/vis-network/vis-network.min.def.js&#39;</span><span class="p">),</span>
+
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+        <span class="s1">&#39;NETWORK_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">network_height</span><span class="p">),</span>
+        <span class="s1">&#39;DETAILS_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">details_height</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details_toggle_button</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu_toggle_button</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_NODE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_node_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_DRAG_FIX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_drag_fix</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_NEIGHBORHOOD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_neighborhood</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_IMAGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_image</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_IMAGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_image_size_factor</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_NODE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_EDGE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_edge_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_CURVATURE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_curvature</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_EDGE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;ZOOM_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">zoom_factor</span><span class="p">),</span>
+        <span class="s1">&#39;LARGE_NETWORK_THRESHOLD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">large_network_threshold</span><span class="p">),</span>
+
+        <span class="s1">&#39;LAYOUT_ALGORITHM_ACTIVE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">layout_algorithm_active</span><span class="p">),</span>
+        <span class="s1">&#39;LAYOUT_ALGORITHM&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">layout_algorithm</span><span class="p">),</span>
+        <span class="s1">&#39;GRAVITATIONLAL_CONSTANT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">gravitational_constant</span><span class="p">),</span>
+        <span class="s1">&#39;CENTRAL_GRAVITY&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">central_gravity</span><span class="p">),</span>
+        <span class="s1">&#39;SPRING_LENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">spring_length</span><span class="p">),</span>
+        <span class="s1">&#39;SPRING_CONSTANT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">spring_constant</span><span class="p">),</span>
+        <span class="s1">&#39;AVOID_OVERLAP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">avoid_overlap</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="network_webgl"><a class="viewcode-back" href="../../../rst/api/javascript/plots_network/network_webgl.html#unified_plotting.javascript._plots_network.network_webgl">[docs]</a><span class="k">def</span> <span class="nf">network_webgl</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                  <span class="n">network_height</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">details_height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                  <span class="n">show_details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_details_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">show_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_menu_toggle_button</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">show_node</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                  <span class="n">node_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_node_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">node_size_normalization_min</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">node_size_normalization_max</span><span class="o">=</span><span class="mf">75.0</span><span class="p">,</span>
+                  <span class="n">node_drag_fix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_neighborhood</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">show_node_image</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_image_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                  <span class="n">show_node_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_node_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                  <span class="n">node_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">node_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">node_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                  <span class="n">show_edge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                  <span class="n">edge_size_data_source</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">use_edge_size_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">edge_size_normalization_min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edge_size_normalization_max</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                  <span class="n">edge_curvature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">edge_hover_tooltip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">show_edge_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_edge_label_border</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edge_label_data_source</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                  <span class="n">edge_label_size_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">edge_label_rotation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">edge_label_font</span><span class="o">=</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                  <span class="n">zoom_factor</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">large_network_threshold</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                  <span class="n">layout_algorithm_active</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">use_many_body_force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many_body_force_strength</span><span class="o">=-</span><span class="mf">70.0</span><span class="p">,</span>
+                  <span class="n">many_body_force_theta</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+                  <span class="n">use_many_body_force_min_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">many_body_force_min_distance</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+                  <span class="n">use_many_body_force_max_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">many_body_force_max_distance</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span>
+                  <span class="n">use_links_force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">links_force_distance</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">links_force_strength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                  <span class="n">use_x_positioning_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">x_positioning_force_strength</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                  <span class="n">use_y_positioning_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_positioning_force_strength</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                  <span class="n">use_z_positioning_force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_positioning_force_strength</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                  <span class="n">use_centering_force</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an interactive network plot from JSON graph format (JGF) data with 3d-force-graph.js.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This plot differs from other network plots in following aspects:</span>
+
+<span class="sd">    - Nodes do not have a border. Edges do not come with labels. Accordingly, this plot ignores</span>
+<span class="sd">      following properties defined in the JSON graph format:</span>
+
+<span class="sd">      - Graph metadata: ``node_border_color``, ``node_border_size``, ``edge_label_color``,</span>
+<span class="sd">        ``edge_label_size``</span>
+<span class="sd">      - Node metadata: ``border_color``, ``border_size``</span>
+<span class="sd">      - Edge metadata: ``label_color``, ``label_size``</span>
+
+<span class="sd">    - If nodes are hidden, then node labels and node images are hidden too.</span>
+<span class="sd">    - Hovering over a node does not support neighborhood highlighting yet.</span>
+<span class="sd">    - Node labels can not be rotated (and edge labels are not available yet).</span>
+<span class="sd">    - There is no control over the initial zoom factor yet.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : str, dict or graph object</span>
+<span class="sd">        Graph data in :ref:`JSON graph format (JGF) &lt;jgf-format&gt;` as JSON string (*str*),</span>
+<span class="sd">        JSON object (*dict*),</span>
+<span class="sd">        :ref:`graph object of a supported graph library &lt;supported-graph-libraries&gt;`,</span>
+<span class="sd">        or a list of multiple graphs, each defined in any of the previous ways.</span>
+<span class="sd">        If the provided data contains multiple graphs, only the first one is shown on load,</span>
+<span class="sd">        while the other ones can be chosen in the data selection menu in order to be displayed.</span>
+<span class="sd">    network_height : int</span>
+<span class="sd">        Height of the network container in pixels (px).</span>
+<span class="sd">    details_height : int</span>
+<span class="sd">        Height of the details container in pixels (px).</span>
+<span class="sd">    show_details : bool</span>
+<span class="sd">        If True, the details container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_details_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the details container.</span>
+<span class="sd">    show_menu : bool</span>
+<span class="sd">        If True, the menu container is shown on load, otherwise hidden.</span>
+<span class="sd">    show_menu_toggle_button : bool</span>
+<span class="sd">        If True, a button is shown that allows to toggle the visibility of the menu container.</span>
+<span class="sd">    show_node : bool</span>
+<span class="sd">        If True, nodes are shown on load, otherwise hidden.</span>
+<span class="sd">    node_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node size.</span>
+<span class="sd">    node_size_data_source : str</span>
+<span class="sd">        Name of the numerical node property that is used as source for node size on load.</span>
+<span class="sd">    use_node_size_normalization : bool</span>
+<span class="sd">        If True, node sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    node_size_normalization_min : float</span>
+<span class="sd">        Minimum value for node size if node size normalization is active.</span>
+<span class="sd">    node_size_normalization_max : float</span>
+<span class="sd">        Maximum value for node size if node size normalization is active.</span>
+<span class="sd">    node_drag_fix : bool</span>
+<span class="sd">        If True, the position of a node becomes fixed after dragging it, i.e. the</span>
+<span class="sd">        layout algorithm does not change its position but the user can drag it again.</span>
+<span class="sd">    node_hover_neighborhood : bool</span>
+<span class="sd">        If True, hovering a node leads to highlighting its neighborhood which consists of</span>
+<span class="sd">        all incident edges and adjacent nodes.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    node_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering a node leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this node contains a non-empty string or HTML text.</span>
+<span class="sd">    show_node_image : bool</span>
+<span class="sd">        If True, node images are shown on load for all nodes whose image property in the metadata</span>
+<span class="sd">        contains a valid image URL from which an image can be fetched.</span>
+<span class="sd">    node_image_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node image size.</span>
+<span class="sd">    show_node_label : bool</span>
+<span class="sd">        If True, node labels are shown on load, otherwise hidden.</span>
+<span class="sd">    show_node_label_border : bool</span>
+<span class="sd">        If True, node labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">    node_label_data_source : str</span>
+<span class="sd">        Name of the node property that is used as source for node label text on load.</span>
+<span class="sd">    node_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies node label size.</span>
+<span class="sd">    node_label_rotation : float</span>
+<span class="sd">        An angle that modifies node label orientation.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    node_label_font : str</span>
+<span class="sd">        Name of the font that is used for node labels.</span>
+<span class="sd">    show_edge : bool</span>
+<span class="sd">        If True, edges are shown on load, otherwise hidden.</span>
+<span class="sd">    edge_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge size (=edge width).</span>
+<span class="sd">    edge_size_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge size on load.</span>
+<span class="sd">    use_edge_size_normalization : bool</span>
+<span class="sd">        If True, edge sizes are normalized to lie in an interval between a</span>
+<span class="sd">        chosen min and max value.</span>
+<span class="sd">    edge_size_normalization_min : float</span>
+<span class="sd">        Minimum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_size_normalization_max : float</span>
+<span class="sd">        Maximum value for edge size if node size normalization is active.</span>
+<span class="sd">    edge_curvature : float</span>
+<span class="sd">        A factor that modifies edge curvature, where 0.0 means straight lines.</span>
+<span class="sd">    edge_hover_tooltip : bool</span>
+<span class="sd">        If True, hovering an edge leads to popping up a tooltip if the hover property in the</span>
+<span class="sd">        metadata of this edge contains a non-empty string or HTML text.</span>
+<span class="sd">    show_edge_label : bool</span>
+<span class="sd">        If True, edge labels are shown on load, otherwise hidden.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    show_edge_label_border : bool</span>
+<span class="sd">        If True, edge labels have a small border in the color of the background to better</span>
+<span class="sd">        separate the text from other visual elements like edges or nodes.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    edge_label_data_source : str</span>
+<span class="sd">        Name of the edge property that is used as source for edge label text on load.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    edge_label_size_factor : float</span>
+<span class="sd">        A scaling factor that modifies edge label size.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    edge_label_rotation : float</span>
+<span class="sd">        An angle that modifies edge label orientation.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    edge_label_font : str</span>
+<span class="sd">        Name of the font that is used for edge labels.</span>
+<span class="sd">    zoom_factor : float</span>
+<span class="sd">        Factor that modifies how close the camera is to the drawing area on load.</span>
+<span class="sd">        Caution: This feature is currently ignored in this plot and only here for API consistency.</span>
+<span class="sd">    large_network_threshold : int</span>
+<span class="sd">        Number that determines from when on a network is considered to be large, which</span>
+<span class="sd">        means that before visualizing it an initial layout is calculated without moving anything.</span>
+<span class="sd">    layout_algorithm_active : bool</span>
+<span class="sd">        If True, the layout algorithm is active on load and leads to movement, otherwise inactive.</span>
+<span class="sd">    use_many_body_force : bool</span>
+<span class="sd">        If True, many body force is active in the layout algorithm.</span>
+<span class="sd">        This force acts between any pair of nodes but can be restricted to only act on nodes</span>
+<span class="sd">        within a certain distance.</span>
+<span class="sd">    many_body_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the force. It can be positive to cause attraction</span>
+<span class="sd">        or negative (usual case) to cause repulsion between nodes.</span>
+<span class="sd">    many_body_force_theta : float</span>
+<span class="sd">        Number that determines the accuracy of the Barnes–Hut approximation of the</span>
+<span class="sd">        many-body simulation where nodes are grouped instead of treated individually</span>
+<span class="sd">        to improve performance.</span>
+<span class="sd">    use_many_body_force_min_distance : bool</span>
+<span class="sd">        If True, a minimum distance between nodes is used in the many-body force calculation.</span>
+<span class="sd">        This effectively leads to an upper bound on the strength of the force between any two</span>
+<span class="sd">        nodes and avoids instability.</span>
+<span class="sd">    many_body_force_min_distance : float</span>
+<span class="sd">        Number that determines the minimum distance between nodes over which the many-body force</span>
+<span class="sd">        is active.</span>
+<span class="sd">    use_many_body_force_max_distance : bool</span>
+<span class="sd">        If True, a maximum distance between nodes is used in the many-body force calculation.</span>
+<span class="sd">        This can improve performance but results in a more localized layout.</span>
+<span class="sd">    many_body_force_max_distance : float</span>
+<span class="sd">        Number that determines the maximum distance between nodes over which the many-body force</span>
+<span class="sd">        is active.</span>
+<span class="sd">    use_links_force : bool</span>
+<span class="sd">        If True, link force is active in the layout algorithm.</span>
+<span class="sd">        This force acts between pairs of nodes that are connected by an edge. It pushes them</span>
+<span class="sd">        together or apart in order to come close to a certain distance between connected nodes.</span>
+<span class="sd">    links_force_distance : float</span>
+<span class="sd">        Number that determines the preferred distance between connected nodes.</span>
+<span class="sd">    links_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the links force.</span>
+<span class="sd">    use_collision_force : bool</span>
+<span class="sd">        If True, collision force is active in the layout algorithm.</span>
+<span class="sd">        This force treats nodes as circles instead of points and acts on pairs of nodes that</span>
+<span class="sd">        overlap in order to push them apart.</span>
+<span class="sd">    collision_force_radius : float</span>
+<span class="sd">        Number that determines the radius of the circle around each node.</span>
+<span class="sd">    collision_force_strength : float</span>
+<span class="sd">        Number that determines the strength of the force.</span>
+<span class="sd">    use_x_positioning_force : bool</span>
+<span class="sd">        If True, x-positioning force is active in the layout algorithm.</span>
+<span class="sd">        This force modifies the x position of each node towards 0.0, effectively pushing them</span>
+<span class="sd">        towards the yz-plane.</span>
+<span class="sd">    x_positioning_force_strength : float</span>
+<span class="sd">        Number that indicates the strength of the force.</span>
+<span class="sd">    use_y_positioning_force : bool</span>
+<span class="sd">        This force modifies the y position of each node towards 0.0, effectively pushing them</span>
+<span class="sd">        towards the xz-plane.</span>
+<span class="sd">    y_positioning_force_strength : float</span>
+<span class="sd">        Number that indicates the strength of the force.</span>
+<span class="sd">    use_z_positioning_force : bool</span>
+<span class="sd">        If True, z-positioning force is active in the layout algorithm.</span>
+<span class="sd">        This force modifies the z position of each node towards 0.0, effectively pushing them</span>
+<span class="sd">        towards the xy-plane.</span>
+<span class="sd">    z_positioning_force_strength : float</span>
+<span class="sd">        Number that indicates the strength of the force.</span>
+<span class="sd">    use_centering_force : bool</span>
+<span class="sd">        This force attracts each node towards the center of the coordinate system at (0, 0, 0)</span>
+<span class="sd">        to keep the graph in the display area. It may lead to unexpected repulsion effects</span>
+<span class="sd">        if all nodes are fixed and then a single one is released by dragging it.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;js-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://github.com/vasturiano/3d-force-graph</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Argument processing</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_graph_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;templates/network_webgl.html&#39;</span><span class="p">)</span>
+    <span class="n">insert_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;DEFINE_THREE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;third_party/three/three.min.def.js&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;DEFINE_3D_FORCE_GRAPH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="s1">&#39;third_party/3d-force-graph/3d-force-graph.min.def.js&#39;</span><span class="p">),</span>
+
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+        <span class="s1">&#39;NETWORK_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">network_height</span><span class="p">),</span>
+        <span class="s1">&#39;DETAILS_HEIGHT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">details_height</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_DETAILS_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_details_toggle_button</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_MENU_TOGGLE_BUTTON&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_menu_toggle_button</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_NODE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_node_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_DRAG_FIX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_drag_fix</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_NEIGHBORHOOD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_neighborhood</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_IMAGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_image</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_IMAGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_image_size_factor</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_NODE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_NODE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_node_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;NODE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">node_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;USE_EDGE_SIZE_NORMALIZATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_edge_size_normalization</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MIN&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_min</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_SIZE_NORMALIZATION_MAX&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_size_normalization_max</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_CURVATURE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_curvature</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_HOVER_TOOLTIP&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_hover_tooltip</span><span class="p">),</span>
+
+        <span class="s1">&#39;SHOW_EDGE_LABEL&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label</span><span class="p">),</span>
+        <span class="s1">&#39;SHOW_EDGE_LABEL_BORDER&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">show_edge_label_border</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_DATA_SOURCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_data_source</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_SIZE_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_size_factor</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_ROTATION&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_rotation</span><span class="p">),</span>
+        <span class="s1">&#39;EDGE_LABEL_FONT&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">edge_label_font</span><span class="p">),</span>
+
+        <span class="s1">&#39;ZOOM_FACTOR&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">zoom_factor</span><span class="p">),</span>
+        <span class="s1">&#39;LARGE_NETWORK_THRESHOLD&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">large_network_threshold</span><span class="p">),</span>
+
+        <span class="s1">&#39;LAYOUT_ALGORITHM_ACTIVE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">layout_algorithm_active</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_many_body_force</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_THETA&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_theta</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE_MIN_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+            <span class="n">use_many_body_force_min_distance</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_MIN_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_min_distance</span><span class="p">),</span>
+        <span class="s1">&#39;USE_MANY_BODY_FORCE_MAX_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+            <span class="n">use_many_body_force_max_distance</span><span class="p">),</span>
+        <span class="s1">&#39;MANY_BODY_FORCE_MAX_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">many_body_force_max_distance</span><span class="p">),</span>
+        <span class="s1">&#39;USE_LINKS_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_links_force</span><span class="p">),</span>
+        <span class="s1">&#39;LINKS_FORCE_DISTANCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">links_force_distance</span><span class="p">),</span>
+        <span class="s1">&#39;LINKS_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">links_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_X_POSITIONING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_x_positioning_force</span><span class="p">),</span>
+        <span class="s1">&#39;X_POSITIONING_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">x_positioning_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_Y_POSITIONING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_y_positioning_force</span><span class="p">),</span>
+        <span class="s1">&#39;Y_POSITIONING_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">y_positioning_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_Z_POSITIONING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_z_positioning_force</span><span class="p">),</span>
+        <span class="s1">&#39;Z_POSITIONING_FORCE_STRENGTH&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">z_positioning_force_strength</span><span class="p">),</span>
+        <span class="s1">&#39;USE_CENTERING_FORCE&#39;</span><span class="p">:</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">use_centering_force</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">site_template</span> <span class="o">=</span> <span class="n">_template_system</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">site_template</span><span class="p">,</span> <span class="n">insert_data</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_data_structures</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">site_template</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

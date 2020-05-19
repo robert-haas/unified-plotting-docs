@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>surface &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="n-D plots" href="../plots_nd/index.html" />
+    <link rel="prev" title="scatter_3d" href="scatter_3d.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../package.html">Unified Plotting</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Plotly</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../plots_2d/index.html">2D plots</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">3D plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plots_nd/index.html">n-D plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plots_financial/index.html">Financial plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../figure.html">Figure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../matplotlib/index.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../javascript/index.html">JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unified_arguments.html">Unified argument values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">API documentation</a> &raquo;</li>
+        
+          <li><a href="../../package.html">Unified Plotting</a> &raquo;</li>
+        
+          <li><a href="../index.html">Plotly</a> &raquo;</li>
+        
+          <li><a href="index.html">3D plots</a> &raquo;</li>
+        
+      <li>surface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/rst/api/plotly/plots_3d/surface.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="surface">
+<h1>surface<a class="headerlink" href="#surface" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="unified_plotting.plotly._plots_3d.surface">
+<code class="descname">surface</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>opacity=None</em>, <em>axis_aspect_ratio=None</em>, <em>camera_position=None</em>, <em>show_surface=True</em>, <em>surface_opacity=1.0</em>, <em>show_projection_x=False</em>, <em>show_projection_y=False</em>, <em>show_projection_z=False</em>, <em>projection_x_opacity=1.0</em>, <em>projection_y_opacity=1.0</em>, <em>projection_z_opacity=1.0</em>, <em>projection_shift_factor=0.05</em>, <em>interpolation_method=None</em>, <em>interpolation_selection=None</em>, <em>interpolation_num_x_gridpoints=None</em>, <em>interpolation_num_y_gridpoints=None</em>, <em>width_mm=None</em>, <em>width_in=None</em>, <em>width_pt=None</em>, <em>height_mm=None</em>, <em>height_in=None</em>, <em>height_pt=None</em>, <em>dpi=None</em>, <em>margin_auto=None</em>, <em>margin_left_mm=None</em>, <em>margin_left_in=None</em>, <em>margin_left_pt=None</em>, <em>margin_left_rel=None</em>, <em>margin_right_mm=None</em>, <em>margin_right_in=None</em>, <em>margin_right_pt=None</em>, <em>margin_right_rel=None</em>, <em>margin_top_mm=None</em>, <em>margin_top_in=None</em>, <em>margin_top_pt=None</em>, <em>margin_top_rel=None</em>, <em>margin_bottom_mm=None</em>, <em>margin_bottom_in=None</em>, <em>margin_bottom_pt=None</em>, <em>margin_bottom_rel=None</em>, <em>plot_background_color=None</em>, <em>paper_background_color=None</em>, <em>show_title=None</em>, <em>title=None</em>, <em>title_font=None</em>, <em>title_size=None</em>, <em>title_color=None</em>, <em>title_position=None</em>, <em>show_x_axis=None</em>, <em>x_axis_color=None</em>, <em>x_axis_scale=None</em>, <em>x_axis_range=None</em>, <em>x_axis_offset=None</em>, <em>show_x_spine=None</em>, <em>x_spine_color=None</em>, <em>show_x_title=None</em>, <em>x_title=None</em>, <em>x_title_font=None</em>, <em>x_title_size=None</em>, <em>x_title_color=None</em>, <em>x_title_offset=None</em>, <em>show_x_tick=None</em>, <em>x_tick_color=None</em>, <em>x_tick_position=None</em>, <em>x_tick_direction=None</em>, <em>x_tick_length=None</em>, <em>x_tick_width=None</em>, <em>show_x_label=True</em>, <em>x_label=None</em>, <em>x_label_font=None</em>, <em>x_label_size=None</em>, <em>x_label_color=None</em>, <em>x_label_offset=None</em>, <em>x_label_rotation=None</em>, <em>show_y_axis=None</em>, <em>y_axis_color=None</em>, <em>y_axis_scale=None</em>, <em>y_axis_range=None</em>, <em>y_axis_offset=None</em>, <em>show_y_spine=None</em>, <em>y_spine_color=None</em>, <em>show_y_title=None</em>, <em>y_title=None</em>, <em>y_title_font=None</em>, <em>y_title_size=None</em>, <em>y_title_color=None</em>, <em>y_title_offset=None</em>, <em>show_y_tick=None</em>, <em>y_tick_color=None</em>, <em>y_tick_position=None</em>, <em>y_tick_direction=None</em>, <em>y_tick_length=None</em>, <em>y_tick_width=None</em>, <em>show_y_label=True</em>, <em>y_label=None</em>, <em>y_label_font=None</em>, <em>y_label_size=None</em>, <em>y_label_color=None</em>, <em>y_label_offset=None</em>, <em>y_label_rotation=None</em>, <em>show_z_axis=None</em>, <em>z_axis_color=None</em>, <em>z_axis_scale=None</em>, <em>z_axis_range=None</em>, <em>z_axis_offset=None</em>, <em>show_z_spine=None</em>, <em>z_spine_color=None</em>, <em>show_z_title=None</em>, <em>z_title=None</em>, <em>z_title_font=None</em>, <em>z_title_size=None</em>, <em>z_title_color=None</em>, <em>z_title_offset=None</em>, <em>show_z_tick=None</em>, <em>z_tick_color=None</em>, <em>z_tick_position=None</em>, <em>z_tick_direction=None</em>, <em>z_tick_length=None</em>, <em>z_tick_width=None</em>, <em>show_z_label=True</em>, <em>z_label=None</em>, <em>z_label_font=None</em>, <em>z_label_size=None</em>, <em>z_label_color=None</em>, <em>z_label_offset=None</em>, <em>z_label_rotation=None</em>, <em>show_x_grid=None</em>, <em>x_grid_color=None</em>, <em>x_grid_width=None</em>, <em>x_grid_style=None</em>, <em>show_y_grid=None</em>, <em>y_grid_color=None</em>, <em>y_grid_width=None</em>, <em>y_grid_style=None</em>, <em>show_z_grid=None</em>, <em>z_grid_color=None</em>, <em>z_grid_width=None</em>, <em>z_grid_style=None</em>, <em>show_colormap=None</em>, <em>colormap=None</em>, <em>colormap_reversed=None</em>, <em>colormap_label_font=None</em>, <em>colormap_label_size=None</em>, <em>colormap_label_color=None</em>, <em>colormap_border_size=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/unified_plotting/plotly/_plots_3d.html#surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._plots_3d.surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a surface plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first">
+<li><p class="first"><strong>x</strong> (<em>list</em>) – A list of numbers or if <code class="docutils literal notranslate"><span class="pre">x_axis_scale=&quot;categorical&quot;</span></code> a list of strings.
+If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will
+be removed automatically and a warning will be shown.
+The meaning of the <code class="docutils literal notranslate"><span class="pre">n</span></code> items in this list depends on the shape of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+</li>
+<li><p class="first"><strong>y</strong> (<em>list</em>) – A list of numbers or if <code class="docutils literal notranslate"><span class="pre">y_axis_scale=&quot;categorical&quot;</span></code> a list of strings.
+If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will
+be removed automatically and a warning will be shown.
+The meaning of the <code class="docutils literal notranslate"><span class="pre">m</span></code> items in this list depends on the shape of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+</li>
+<li><p class="first"><strong>z</strong> (<em>list or list of lists</em>) – A list of numbers or if <code class="docutils literal notranslate"><span class="pre">z_axis_scale=&quot;categorical&quot;</span></code> a list of strings or a list of
+multiple such lists.
+If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will
+be removed automatically and a warning will be shown.</p>
+<p>There are two possible shapes for <code class="docutils literal notranslate"><span class="pre">z</span></code>:</p>
+<ol class="arabic simple">
+<li>A list of <code class="docutils literal notranslate"><span class="pre">n</span></code> items. In this case, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> need to have the same number
+of items as <code class="docutils literal notranslate"><span class="pre">z</span></code>. Each entry represents a point at an arbitrary position in 3D space.
+In order to get a valid description of a surface, a regular grid of points is created
+automatcially based on the ranges of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> and then interpolation is
+performed to get a height for each point that fits to the closest <code class="docutils literal notranslate"><span class="pre">z</span></code> values.</li>
+<li>A list of <code class="docutils literal notranslate"><span class="pre">m</span></code> lists, each containing <code class="docutils literal notranslate"><span class="pre">n</span></code> items. In this case, <code class="docutils literal notranslate"><span class="pre">x</span></code> needs to
+have <code class="docutils literal notranslate"><span class="pre">n</span></code> items and <code class="docutils literal notranslate"><span class="pre">y</span></code> needs to have <code class="docutils literal notranslate"><span class="pre">m</span></code> items. <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+form the basis of a rectilinear <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">m</span></code> grid of points and <code class="docutils literal notranslate"><span class="pre">z</span></code> provides the
+height of each. No interpolation is performed because the input is already a valid
+description of a surface.</li>
+</ol>
+</li>
+<li><p class="first"><strong>opacity</strong> (<em>float</em>) – Opacity of the plot elements, in this case the contour lines.
+Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</p>
+</li>
+<li><p class="first"><strong>axis_aspect_ratio</strong> (<em>tuple</em>) – Ratio of the three axis sizes.
+Requires a tuple of float numbers of form (x_ratio, y_ratio, z_ratio),
+for example (1.0, 1.0, 0.5) leads to a z axis which is half the size of x and y.
+Default value: (1.0, 1.0, 1.0), leads to all axes having equal display size.</p>
+</li>
+<li><p class="first"><strong>camera_position</strong> (<em>list of tuples</em>) – The camera position is defined by three vectors with three entries each:</p>
+<ol class="arabic simple">
+<li>Up vector: Determines the up direction on the page. Default: (0, 0, 1)</li>
+<li>Center vector: Determines the center point. Default: (0, 0, 0)</li>
+<li>Eye vector: Determines the position of the camera. Default: (1.25, 1.25, 1.25)</li>
+</ol>
+<p>For more information, see <a class="reference external" href="https://plot.ly/python/3d-camera-controls">https://plot.ly/python/3d-camera-controls</a></p>
+<p>Example: [(0, 0, 1), (0, 0, 0), (1.25, 1.25, 1.25)]</p>
+</li>
+<li><p class="first"><strong>show_surface</strong> (<em>bool</em>) – Show or hide the 3D surface.</p>
+</li>
+<li><p class="first"><strong>surface_opacity</strong> (<em>float</em>) – Opacity of the 3D surface.
+Overrules <code class="docutils literal notranslate"><span class="pre">opacity</span></code>.
+Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</p>
+</li>
+<li><p class="first"><strong>show_projection_x</strong> (<em>bool</em>) – Show or hide the projection in x-direction onto the yz-plane.</p>
+</li>
+<li><p class="first"><strong>show_projection_y</strong> (<em>bool</em>) – Show or hide the projection in y-direction onto the xz-plane.</p>
+</li>
+<li><p class="first"><strong>show_projection_z</strong> (<em>bool</em>) – Show or hide the projection in z-direction onto the xy-plane.</p>
+</li>
+<li><p class="first"><strong>projection_x_opacity</strong> (<em>float</em>) – Opacity of the projection in x-direction.
+Overrules <code class="docutils literal notranslate"><span class="pre">opacity</span></code>.
+Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</p>
+</li>
+<li><p class="first"><strong>projection_y_opacity</strong> (<em>float</em>) – Opacity of the projection in y-direction.
+Overrules <code class="docutils literal notranslate"><span class="pre">opacity</span></code>.
+Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</p>
+</li>
+<li><p class="first"><strong>projection_z_opacity</strong> (<em>float</em>) – Opacity of the projection in z-direction.
+Overrules <code class="docutils literal notranslate"><span class="pre">opacity</span></code>.
+Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</p>
+</li>
+<li><p class="first"><strong>projection_shift_factor</strong> (<em>float</em>) – Factor that determines the distance of the projection planes from the data points.
+Default: 0.05 means a distance of 5% of the span of the data.</p>
+</li>
+<li><p class="first"><strong>interpolation_method</strong> (<em>str</em>) – Method for calculating the unknown values at regular grid points that sit between the
+given points with known values.
+Caution: Currently this becomes only active if the given data points are not already on
+a regular grid.
+Possible values: “allrounder_linear”, “allrounder_nearest”, “allrounder_cubic”,
+“rbf_cubic”, “rbf_gaussian”, “rbf_inverse”, “rbf_linear”, “rbf_multiquadric”,
+“rbf_quintic”, “rbf_thin_plate”, “spline_linear”, “spline_cubic”, “spline_quintic”.</p>
+</li>
+<li><p class="first"><strong>interpolation_selection</strong> (<em>str</em>) – If at the same x, y point there are multiple known z-values,
+which one shall be used, i.e. through which one shall the surface go.
+Possible values: “min”, “max”.</p>
+</li>
+<li><p class="first"><strong>interpolation_num_x_gridpoints</strong> (<em>int</em>) – Number of grid points along the x-Axis.</p>
+</li>
+<li><p class="first"><strong>interpolation_num_y_gridpoints</strong> (<em>int</em>) – Number of grid points along the y-Axis.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <a class="reference internal" href="../figure.html#plotly-figure"><span class="std std-ref">Figure</span></a> object that can be used for displaying or exporting the plot.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/reference/#surface">https://plot.ly/python/reference/#surface</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/3d-surface-plots">https://plot.ly/python/3d-surface-plots</a></li>
+<li><a class="reference external" href="https://plot.ly/python/2d-projection-of-3d-surface">https://plot.ly/python/2d-projection-of-3d-surface</a></li>
+</ul>
+<p><strong>Further parameters that are unified across plots and libraries</strong></p>
+<p><em>Plot size, resolution and margins</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>width_mm</strong> (<em>float</em>) – Plot width in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">width_in</span></code> and <code class="docutils literal notranslate"><span class="pre">width_pt</span></code>.</li>
+<li><strong>width_in</strong> (<em>float</em>) – Plot width in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">width_pt</span></code>.</li>
+<li><strong>width_pt</strong> (<em>float</em>) – Plot width in points (1 in = 72 pt).</li>
+<li><strong>height_mm</strong> (<em>float</em>) – Plot height in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">height_in</span></code> and <code class="docutils literal notranslate"><span class="pre">height_pt</span></code>.</li>
+<li><strong>height_in</strong> (<em>float</em>) – Plot height in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">height_pt</span></code>.</li>
+<li><strong>height_pt</strong> (<em>float</em>) – Plot height in points (1 in = 72 pt).</li>
+<li><strong>dpi</strong> (<em>int</em>) – Dots per inch, used synonymously with pixels per inch (ppi).
+Example: Using width_in=2 and dpi=300 results in an image that is 600 pixels wide .
+Note that font size is specified in pt (=1/72 in). Therefore, using width_in=1
+and dpi=600 also results in an image that is 600 pixels wide but texts are twice as large.</li>
+<li><strong>margin_auto</strong> (<em>bool</em>) – If True, all margins are set automatically by layout calculations of
+the plotting library.
+Caution: Other margin arguments are ignored in this case!</li>
+<li><strong>margin_left_mm</strong> (<em>float</em>) – Left margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_left_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.
+Note: If margins are too low for any axis texts,
+then Plotly will modify the margins so the text can fit,
+while Matplotlib will not modify the margins so the text can be outside the image.</li>
+<li><strong>margin_left_in</strong> (<em>float</em>) – Left margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.</li>
+<li><strong>margin_left_pt</strong> (<em>float</em>) – Left margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.</li>
+<li><strong>margin_left_rel</strong> (<em>float</em>) – Left margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_right_mm</strong> (<em>float</em>) – right margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_right_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_in</strong> (<em>float</em>) – right margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_pt</strong> (<em>float</em>) – right margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_rel</strong> (<em>float</em>) – right margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_top_mm</strong> (<em>float</em>) – top margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_top_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_in</strong> (<em>float</em>) – top margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_pt</strong> (<em>float</em>) – top margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_rel</strong> (<em>float</em>) – top margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_bottom_mm</strong> (<em>float</em>) – bottom margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_bottom_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_in</strong> (<em>float</em>) – bottom margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_pt</strong> (<em>float</em>) – bottom margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_rel</strong> (<em>float</em>) – bottom margin in percent, i.e. a relative measure.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Plot and paper color</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>plot_background_color</strong> (<em>str or tuple</em>) – Background color of the main plot area.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>paper_background_color</strong> (<em>str or tuple</em>) – Background color of the entire drawing area.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Plot title</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_title</strong> (<em>bool</em>) – Show or hide the plot title.</li>
+<li><strong>title</strong> (<em>str</em>) – Text of the plot title.</li>
+<li><strong>title_font</strong> (<em>str</em>) – Font of the plot title.</li>
+<li><strong>title_size</strong> (<em>int</em>) – Size of the plot title.</li>
+<li><strong>title_color</strong> (<em>str or tuple</em>) – Color of the plot title.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>title_position</strong> (<em>str</em>) – Position of the plot title.
+Possible values: “left”, “center”, “right”.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>x axis</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_x_axis</strong> (<em>bool</em>) – Show or hide the x-Axis (=title, spine, ticks and labels).
+Overrules <code class="docutils literal notranslate"><span class="pre">show_x_title</span></code>, <code class="docutils literal notranslate"><span class="pre">show_x_spine</span></code>, <code class="docutils literal notranslate"><span class="pre">show_x_tick</span></code>, <code class="docutils literal notranslate"><span class="pre">show_x_label</span></code>.</li>
+<li><strong>x_axis_color</strong> (<em>str or tuple</em>) – Color of the x-Axis (=title, spine, ticks and labels).
+Overrules <code class="docutils literal notranslate"><span class="pre">x_title_color</span></code>, <code class="docutils literal notranslate"><span class="pre">x_spine_color</span></code>, <code class="docutils literal notranslate"><span class="pre">x_tick_color</span></code>, <code class="docutils literal notranslate"><span class="pre">x_label_color</span></code>.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>x_axis_scale</strong> (<em>str</em>) – Scale of the x-Axis.
+Possible values: “lin”, “linear”, “log”, “logarithmic”, “cat”, “categorical”.
+Logarithmic scale is currently not available for 3D plots in Matplotlib.</li>
+<li><strong>x_axis_range</strong> (<em>list</em>) – Start and stop value of the x-Axis.
+Requires a list of two numbers where the first is smaller than the second.</li>
+<li><strong>x_axis_offset</strong> (<em>float</em>) – Offset for the drawing position of the x-Axis (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_x_spine</strong> (<em>bool</em>) – Show or hide x-Axis spine.</li>
+<li><strong>x_spine_color</strong> (<em>str or tuple</em>) – Color of x-Axis spine.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>show_x_title</strong> (<em>bool</em>) – Show or hide the x-Axis title.</li>
+<li><strong>x_title</strong> (<em>str</em>) – Text of the x-Axis title.</li>
+<li><strong>x_title_font</strong> (<em>str</em>) – Font of the x-Axis title.</li>
+<li><strong>x_title_size</strong> (<em>float</em>) – Size of the x-Axis title.</li>
+<li><strong>x_title_color</strong> (<em>str or tuple</em>) – Color of the x-Axis title.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>x_title_offset</strong> (<em>float</em>) – Offset for the drawing position of the x-Axis title (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_x_tick</strong> (<em>bool</em>) – Show or hide x-Axis ticks.</li>
+<li><strong>x_tick_color</strong> (<em>str</em>) – Color of the x-Axis ticks.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>x_tick_position</strong> (<em>list of float</em>) – Positions where x-Axis ticks are places on the spine.
+Currently also determines positions of grid lines.
+Currently not available for Plotly when using a logarithmic axis scale.</li>
+<li><strong>x_tick_direction</strong> (<em>str</em>) – Drawing direction of the x-Axis ticks.
+Possible values: “in”, “out”.
+Currently “in” is not available for 3D plots in Plotly.</li>
+<li><strong>x_tick_length</strong> (<em>float</em>) – Length of the x-Axis ticks.</li>
+<li><strong>x_tick_width</strong> (<em>float</em>) – Width of the x-Axis ticks.</li>
+<li><strong>show_x_label</strong> (<em>bool</em>) – Show or hide x-Axis labels.</li>
+<li><strong>x_label</strong> (<em>list</em>) – List of x-Axis labels.</li>
+<li><strong>x_label_font</strong> (<em>str</em>) – Font of the x-Axis labels.</li>
+<li><strong>x_label_size</strong> (<em>float</em>) – Size of the x-Axis labels.</li>
+<li><strong>x_label_color</strong> (<em>str</em>) – Color of the x-Axis labels.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>x_label_offset</strong> (<em>float</em>) – Offset for the drawing position of the x-Axis labels (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>x_label_rotation</strong> (<em>float</em>) – Counter-clockwise rotation of the x-Axis labels in degree (e.g. 30).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>y axis</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_y_axis</strong> (<em>bool</em>) – Show or hide the y-Axis (=title, spine, ticks and labels).
+Overrules show_y_title, show_y_spine, show_y_tick, show_y_label.</li>
+<li><strong>y_axis_color</strong> (<em>str or tuple</em>) – Color of the y-Axis (=title, spine, ticks and labels).
+Overrules y_title_color, y_spine_color, y_tick_color, y_label_color.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>y_axis_scale</strong> (<em>str</em>) – Scale of the y-Axis.
+Possible values: “lin”, “linear”, “log”, “logarithmic”, “cat”, “categorical”.
+Logarithmic scale is currently not available for 3D plots in Matplotlib.</li>
+<li><strong>y_axis_range</strong> (<em>list</em>) – Start and stop value of the y-Axis.
+Requires a list of two numbers where the first is smaller than the second.</li>
+<li><strong>y_axis_offset</strong> (<em>float</em>) – Offset for the drawing position of the y-Axis (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_y_spine</strong> (<em>bool</em>) – Show or hide y-Axis spine.</li>
+<li><strong>y_spine_color</strong> (<em>str or tuple</em>) – Color of y-Axis spine.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>show_y_title</strong> (<em>bool</em>) – Show or hide the y-Axis title.</li>
+<li><strong>y_title</strong> (<em>str</em>) – Text of the y-Axis title.</li>
+<li><strong>y_title_font</strong> (<em>str</em>) – Font of the y-Axis title.</li>
+<li><strong>y_title_size</strong> (<em>float</em>) – Size of the y-Axis title.</li>
+<li><strong>y_title_color</strong> (<em>str or tuple</em>) – Color of the y-Axis title.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>y_title_offset</strong> (<em>float</em>) – Offset for the drawing position of the y-Axis title (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_y_tick</strong> (<em>bool</em>) – Show or hide y-Axis ticks.</li>
+<li><strong>y_tick_color</strong> (<em>str</em>) – Color of the y-Axis ticks.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>y_tick_position</strong> (<em>list of float</em>) – Positions where y-Axis ticks are places on the spine.
+Currently also determines positions of grid lines.
+Currently not available for Plotly when using a logarithmic axis scale.</li>
+<li><strong>y_tick_direction</strong> (<em>str</em>) – Drawing direction of the y-Axis ticks.
+Possible values: “in”, “out”.
+Currently “in” is not available for 3D plots in Plotly.</li>
+<li><strong>y_tick_length</strong> (<em>float</em>) – Length of the y-Axis ticks.</li>
+<li><strong>y_tick_width</strong> (<em>float</em>) – Width of the y-Axis ticks.</li>
+<li><strong>show_y_label</strong> (<em>bool</em>) – Show or hide y-Axis labels.</li>
+<li><strong>y_label</strong> (<em>list</em>) – List of y-Axis labels.</li>
+<li><strong>y_label_font</strong> (<em>str</em>) – Font of the y-Axis labels.</li>
+<li><strong>y_label_size</strong> (<em>float</em>) – Size of the y-Axis labels.</li>
+<li><strong>y_label_color</strong> (<em>str</em>) – Color of the y-Axis labels.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>y_label_offset</strong> (<em>float</em>) – Offset for the drawing position of the y-Axis labels (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>y_label_rotation</strong> (<em>float</em>) – Counter-clockwise rotation of the y-Axis labels in degree (e.g. 30).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>z axis</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_z_axis</strong> (<em>bool</em>) – Show or hide the z-Axis (=title, spine, ticks and labels).
+Overrules show_z_title, show_z_spine, show_z_tick, show_z_label.</li>
+<li><strong>z_axis_color</strong> (<em>str or tuple</em>) – Color of the z-Axis (=title, spine, ticks and labels).
+Overrules z_title_color, z_spine_color, z_tick_color, z_label_color.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>z_axis_scale</strong> (<em>str</em>) – Scale of the z-Axis.
+Possible values: “lin”, “linear”, “log”, “logarithmic”, “cat”, “categorical”.
+Logarithmic scale is currently not available for 3D plots in Matplotlib.</li>
+<li><strong>z_axis_range</strong> (<em>list</em>) – Start and stop value of the z-Axis.
+Requires a list of two numbers where the first is smaller than the second.</li>
+<li><strong>z_axis_offset</strong> (<em>float</em>) – Offset for the drawing position of the z-Axis (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_z_spine</strong> (<em>bool</em>) – Show or hide z-Axis spine (=main line, ticks are perpendicular).</li>
+<li><strong>z_spine_color</strong> (<em>str or tuple</em>) – Color of z-Axis spine.</li>
+<li><strong>show_z_title</strong> (<em>bool</em>) – Show or hide the z-Axis title.</li>
+<li><strong>z_title</strong> (<em>str</em>) – Text of the z-Axis title.</li>
+<li><strong>z_title_font</strong> (<em>str</em>) – Font of the z-Axis title.</li>
+<li><strong>z_title_size</strong> (<em>float</em>) – Size of the z-Axis title.</li>
+<li><strong>z_title_color</strong> (<em>str or tuple</em>) – Color of the z-Axis title.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>z_title_offset</strong> (<em>float</em>) – Offset for the drawing position of the z-Axis title (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>show_z_tick</strong> (<em>bool</em>) – Show or hide z-Axis ticks.</li>
+<li><strong>z_tick_color</strong> (<em>str</em>) – Color of the z-Axis ticks.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>z_tick_position</strong> (<em>list of float</em>) – Positions where z-Axis ticks are places on the spine.
+Currently also determines positions of grid lines.
+Currently not available for Plotly when using a logarithmic axis scale.</li>
+<li><strong>z_tick_direction</strong> (<em>str</em>) – Drawing direction of the z-Axis ticks.
+Possible values: “in”, “out”.
+Currently “in” is not available for 3D plots in Plotly.</li>
+<li><strong>z_tick_length</strong> (<em>float</em>) – Length of the z-Axis ticks.</li>
+<li><strong>z_tick_width</strong> (<em>float</em>) – Width of the z-Axis ticks.</li>
+<li><strong>show_z_label</strong> (<em>bool</em>) – Show or hide z-Axis labels.</li>
+<li><strong>z_label</strong> (<em>list</em>) – List of z-Axis labels.</li>
+<li><strong>z_label_font</strong> (<em>str</em>) – Font of the z-Axis labels.</li>
+<li><strong>z_label_size</strong> (<em>float</em>) – Size of the z-Axis labels.</li>
+<li><strong>z_label_color</strong> (<em>str</em>) – Color of the z-Axis labels.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>z_label_offset</strong> (<em>float</em>) – Offset for the drawing position of the z-Axis labels (directed away from the plot).
+Currently not available for Plotly.</li>
+<li><strong>z_label_rotation</strong> (<em>float</em>) – Counter-clockwise rotation of the z-Axis labels in degree (e.g. 30).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>x grid</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_x_grid</strong> (<em>bool</em>) – Show or hide the x-Grid.</li>
+<li><strong>x_grid_color</strong> (<em>str or tuple</em>) – Color of the x-Grid.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>x_grid_width</strong> (<em>float</em>) – Width of the x-Grid lines.</li>
+<li><strong>x_grid_style</strong> (<em>str</em>) – Style of the x-Grid lines.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#line-styles"><span class="std std-ref">line_style</span></a>.
+Currently not available for Plotly.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>y grid</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_y_grid</strong> (<em>bool</em>) – Show or hide the y-Grid.</li>
+<li><strong>y_grid_color</strong> (<em>str or tuple</em>) – Color of the y-Grid.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>y_grid_width</strong> (<em>float</em>) – Width of the y-Grid lines.</li>
+<li><strong>y_grid_style</strong> (<em>str</em>) – Style of the y-Grid lines.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#line-styles"><span class="std std-ref">line_style</span></a>.
+Currently not available for Plotly.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>z grid</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_z_grid</strong> (<em>bool</em>) – Show or hide the z-Grid.</li>
+<li><strong>z_grid_color</strong> (<em>str or tuple</em>) – Color of the z-Grid.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colors"><span class="std std-ref">color</span></a>.</li>
+<li><strong>z_grid_width</strong> (<em>float</em>) – Width of the z-Grid lines.</li>
+<li><strong>z_grid_style</strong> (<em>str</em>) – Style of the z-Grid lines.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#line-styles"><span class="std std-ref">line_style</span></a>.
+Currently not available for Plotly.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Colormap</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>show_colormap</strong> (<em>bool</em>) – Show or hide the colormap in form of a colorbar.
+Currently not supported for some plot types.</li>
+<li><strong>colormap</strong> (<em>str</em>) – Colormap.
+Possible values: See <a class="reference internal" href="../../unified_arguments.html#colormaps"><span class="std std-ref">colormap</span></a>.</li>
+<li><strong>colormap_reversed</strong> (<em>bool</em>) – If True, the colormap is reversed.
+Currently not available for Matplotlib.</li>
+<li><strong>colormap_label_font</strong> (<em>str</em>) – Font of the colormap labels.</li>
+<li><strong>colormap_label_size</strong> (<em>float</em>) – Size of the colormap labels.</li>
+<li><strong>colormap_label_color</strong> (<em>str</em>) – Color of the colormap labels.</li>
+<li><strong>colormap_border_size</strong> (<em>float</em>) – Size (in pt) of the border around the legend box.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../plots_nd/index.html" class="btn btn-neutral float-right" title="n-D plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scatter_3d.html" class="btn btn-neutral float-left" title="scatter_3d" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

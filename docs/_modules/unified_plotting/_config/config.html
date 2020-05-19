@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting._config.config &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting._config.config</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting._config.config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This is the module :py:mod:`unified_plotting.config &lt;unified_plotting._config.config&gt;`.</span>
+
+<span class="sd">It provides a central configuration system for the</span>
+<span class="sd">package :py:mod:`unified_plotting`.</span>
+
+<span class="sd">Its main purpose is to provide **global package settings** that</span>
+<span class="sd">determine the **basic style used in every plot**.</span>
+<span class="sd">Each individual setting comes with a sensible default value that is</span>
+<span class="sd">loaded during import of the package but can be altered by the user</span>
+<span class="sd">during runtime. Once some settings were modified, they can also be</span>
+<span class="sd">exported as JSON file and loaded again whenever desired.</span>
+<span class="sd">In this way, user-defined styles can be created and reused.</span>
+
+
+<span class="sd">Change the settings</span>
+<span class="sd">-------------------</span>
+
+<span class="sd">The current settings are stored in the object</span>
+<span class="sd">:py:obj:`unified_plotting.config.settings`.</span>
+
+<span class="sd">- Its members can be accessed and modified via dot notation,</span>
+<span class="sd">  for example:</span>
+
+<span class="sd">  .. code-block:: python</span>
+
+<span class="sd">     import unified_plotting as up</span>
+<span class="sd">     up.config.settings.x_labels_color = &quot;#008800&quot;</span>
+<span class="sd">     up.config.settings.x_labels_fontname = &quot;Arial&quot;</span>
+<span class="sd">     up.config.settings.y_labels_color = &quot;#008800&quot;</span>
+<span class="sd">     up.config.settings.y_labels_fontname = &quot;Arial&quot;</span>
+
+
+<span class="sd">Report the current settings</span>
+<span class="sd">---------------------------</span>
+
+<span class="sd">- The function :py:func:`unified_plotting.config.report`</span>
+<span class="sd">  can be used to get a list of available options as well as their</span>
+<span class="sd">  currently assigned values.</span>
+
+<span class="sd">  .. code-block:: python</span>
+
+<span class="sd">     import unified_plotting as up</span>
+<span class="sd">     up.config.report()</span>
+
+
+<span class="sd">Save and restore settings</span>
+<span class="sd">-------------------------</span>
+
+<span class="sd">The module :py:mod:`unified_plotting.config` contains following</span>
+<span class="sd">functions that interact with the global package settings.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span> <span class="k">as</span> <span class="nn">_json</span>
+<span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">_pprint</span>
+
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_string</span> <span class="k">as</span> <span class="n">_resource_string</span>
+
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">operating_system</span> <span class="k">as</span> <span class="n">_operating_system</span>
+
+
+<span class="k">class</span> <span class="nc">_GenericSettings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Helper class for automatical conversion between nested JSON data and nested Python objects.</span>
+
+<span class="sd">    This allows to load settings from a JSON file and provide it as a</span>
+<span class="sd">    nested object whose members can be accessed and set via simple</span>
+<span class="sd">    dot notation.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://stackoverflow.com/questions/43776223/converting-nested-json-into-python-object</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">given_dict</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">given_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_to_dict</span><span class="p">(</span><span class="n">settings_obj</span><span class="p">):</span>
+        <span class="n">settings_json</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings_obj</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="n">settings_dict</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">settings_json</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">settings_dict</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="load_defaults"><a class="viewcode-back" href="../../../rst/api/config.html#unified_plotting._config.config.load_defaults">[docs]</a><span class="k">def</span> <span class="nf">load_defaults</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Load default settings of this package.</span>
+
+<span class="sd">    This function is called automatically when the package is loaded.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_json_str</span> <span class="o">=</span> <span class="n">_resource_string</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;settings.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data_json_str</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">_GenericSettings</span><span class="o">.</span><span class="n">_from_dict</span><span class="p">)</span>
+    <span class="n">_THIS_MODULE</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="save_defaults_to_json"><a class="viewcode-back" href="../../../rst/api/config.html#unified_plotting._config.config.save_defaults_to_json">[docs]</a><span class="k">def</span> <span class="nf">save_defaults_to_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save the default settings of this package to a JSON file.</span>
+
+<span class="sd">    It may be used as starting point to create a file with user-defined settings.</span>
+<span class="sd">    Only the contained keys will be recognized and the values have to be valid JSON</span>
+<span class="sd">    (e.g. true instead of Python&#39;s True, null instead of Python&#39;s None).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">       Filepath of the created JSON file.</span>
+<span class="sd">       If the file exists it will be overwritten without warning.</span>
+<span class="sd">       If the path does not end with &#39;.json&#39; it will be changed to do so.</span>
+<span class="sd">       If the parent directory does not exist it will be created.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Filepath of the generated JSON file, guaranteed to end with &quot;.json&quot;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Precondition</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_file_extension</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">)</span>
+    <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_parent_directory</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">data_json_str</span> <span class="o">=</span> <span class="n">_resource_string</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;settings.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+        <span class="n">file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data_json_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filepath</span></div>
+
+
+<div class="viewcode-block" id="load_from_json"><a class="viewcode-back" href="../../../rst/api/config.html#unified_plotting._config.config.load_from_json">[docs]</a><span class="k">def</span> <span class="nf">load_from_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load settings from a JSON file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Filepath of the JSON file that contains the settings.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">_GenericSettings</span><span class="o">.</span><span class="n">_from_dict</span><span class="p">)</span>
+    <span class="n">_THIS_MODULE</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="save_to_json"><a class="viewcode-back" href="../../../rst/api/config.html#unified_plotting._config.config.save_to_json">[docs]</a><span class="k">def</span> <span class="nf">save_to_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save the current settings to a JSON file.</span>
+
+<span class="sd">    It can be used to load the same settings in another session.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Filepath of the created JSON file.</span>
+<span class="sd">        If the file exists it will be overwritten without warning.</span>
+<span class="sd">        If the path does not end with &#39;.json&#39; it will be changed to do so.</span>
+<span class="sd">        If the parent directory does not exist it will be created.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Filepath of the generated JSON file, guaranteed to end with &quot;.json&quot;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Precondition</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_file_extension</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">)</span>
+    <span class="n">_operating_system</span><span class="o">.</span><span class="n">ensure_parent_directory</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+    <span class="c1"># Transformation</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_THIS_MODULE</span><span class="o">.</span><span class="n">settings</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+        <span class="n">_json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file_handle</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filepath</span></div>
+
+
+<div class="viewcode-block" id="report"><a class="viewcode-back" href="../../../rst/api/config.html#unified_plotting._config.config.report">[docs]</a><span class="k">def</span> <span class="nf">report</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Print a report of the current settings.&quot;&quot;&quot;</span>
+    <span class="n">settings_obj</span> <span class="o">=</span> <span class="n">_THIS_MODULE</span><span class="o">.</span><span class="n">settings</span>
+    <span class="n">settings_dict</span> <span class="o">=</span> <span class="n">_GenericSettings</span><span class="o">.</span><span class="n">_to_dict</span><span class="p">(</span><span class="n">settings_obj</span><span class="p">)</span>
+    <span class="n">_pprint</span><span class="p">(</span><span class="n">settings_dict</span><span class="p">)</span></div>
+
+
+<span class="c1"># https://stackoverflow.com/questions/1977362/how-to-create-module-wide-variables-in-python</span>
+<span class="n">_THIS_MODULE</span> <span class="o">=</span> <span class="n">_sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">]</span>
+<span class="n">_THIS_MODULE</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">load_defaults</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

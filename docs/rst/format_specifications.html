@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Format specifications &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API documentation" href="api/index.html" />
+    <link rel="prev" title="Graphical user interface" href="gui.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Graphical user interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Format specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#json-graph-format-jgf">JSON Graph Format (JGF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i-basis-jgf">I) Basis: JGF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ii-extension-metadata-properties">II) Extension: Metadata properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auto-conversion-of-external-graph-objects-to-jgf">Auto-conversion of external graph objects to JGF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Format specifications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rst/format_specifications.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="format-specifications">
+<h1>Format specifications<a class="headerlink" href="#format-specifications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="json-graph-format-jgf">
+<span id="jgf-format"></span><h2>JSON Graph Format (JGF)<a class="headerlink" href="#json-graph-format-jgf" title="Permalink to this headline">¶</a></h2>
+<p>This format is used to specify the input for all <strong>network visualizations</strong> in this package.</p>
+<p><a class="reference external" href="https://github.com/jsongraph/json-graph-specification">JGF</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON-based data format</a> for representing either a <strong>single graph</strong> or a collection of <strong>multiple graphs</strong>. It was designed to be easily extensible by defining metadata with domain-specific meaning. Accordingly, this package uses the JGF format as basis and defines freely chosen metadata properties on top of it. The plotting functions of this package recognize these metadata properties and their values can be set by the user in order to control the appearance of different visual elements (e.g. background color, node sizes or edge opacities).</p>
+<div class="section" id="i-basis-jgf">
+<h3>I) Basis: JGF<a class="headerlink" href="#i-basis-jgf" title="Permalink to this headline">¶</a></h3>
+<p>The main part of this data format is specified on the <a class="reference external" href="https://github.com/jsongraph/json-graph-specification">JGF website</a>. The same information is provided here in a slightly rearranged manner with additional comments. JGF distinguishes four types of objects, each coming with some pre-defined properties:</p>
+<ol class="arabic simple">
+<li><strong>graphs object</strong>: a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">array</span></code> of multiple <strong>graph objects</strong></li>
+<li><strong>graph object</strong>: a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">object</span></code> that represents a single graph and which contains following properties</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><strong>label</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> to name the graph</li>
+<li><strong>directed</strong> (optional, default <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">false</span></code>): <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">false</span></code> if the graph is undirected, <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">true</span></code> if the graph is directed</li>
+<li><strong>type</strong> (optional, currently ignored): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> to classify the graph</li>
+<li><strong>metadata</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">object</span></code> to provide custom data for a graph. See <strong>graph metadata</strong> below for a list of properties that are defined for this package and recognized by it.</li>
+<li><strong>nodes</strong> (required): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">array</span></code> of <strong>node objects</strong></li>
+<li><strong>edges</strong> (required): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">array</span></code> of <strong>edge objects</strong></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><strong>node object</strong>: represents a single node within a graph</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>id</strong> (required): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> that needs to be unique among all node ids within a graph object.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This package detects if a node has an id that is already used by another node (which comes earlier in the node list). Such a <strong>node is ignored</strong> as if it were not part of the given data.</p>
+</div>
+</li>
+<li><p class="first"><strong>label</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> to name the node</p>
+</li>
+<li><p class="first"><strong>metadata</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">object</span></code> to provide custom data for a node. See <strong>node metadata</strong> below for a list of properties that are defined for this package and recognized by it.</p>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><strong>edge object</strong>: represents a single edge within a graph between two of its nodes</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>source</strong> (required): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> that needs to be a node id within the graph object.</p>
+</li>
+<li><p class="first"><strong>target</strong> (required): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> that needs to be a node id within the graph object.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This package detects if an edge has a source or target that is not a node id. Such an <strong>edge is ignored</strong> as if it were not part of the given data.</p>
+</div>
+</li>
+<li><p class="first"><strong>relation</strong> (optional, currently ignored): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> that describes the interaction between source and target node</p>
+</li>
+<li><p class="first"><strong>directed</strong> (optional, currently ignored): <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">false</span></code> for an undirected edge, <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">true</span></code> for a directed edge (currently ignored by this package)</p>
+</li>
+<li><p class="first"><strong>label</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> to name the edge</p>
+</li>
+<li><p class="first"><strong>metadata</strong> (optional): a <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">object</span></code> to provide custom data for an edge. See <strong>edge metadata</strong> below for a list of properties that are defined for this package and recognized by it.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Example for defining a single graph in Python</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, graph!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;directed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, node!&quot;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, edge!&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example for defining multiple graphs in Python</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;graphs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;First graph&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Second graph&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Third graph&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;uno&quot;</span><span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ii-extension-metadata-properties">
+<h3>II) Extension: Metadata properties<a class="headerlink" href="#ii-extension-metadata-properties" title="Permalink to this headline">¶</a></h3>
+<p>The following metadata properties can optionally be provided with the graph data in order to modify the appearance of the graph, its nodes and its edges when visualized with this package. For maximum flexibility, all of these properties are defined as <code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">string</span></code> type and internally converted to appropriate formats during data parsing (e.g. <code class="docutils literal notranslate"><span class="pre">node_size</span></code> is a quantitative property and therefore converted to a floating-point number). Passing numerical properties as numerical values will also work.</p>
+<ol class="arabic simple">
+<li><strong>graph metadata</strong></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><strong>arrow_color</strong></li>
+<li><strong>arrow_size</strong></li>
+<li><strong>background_color</strong></li>
+<li><strong>node_color</strong></li>
+<li><strong>node_opacity</strong></li>
+<li><strong>node_size</strong></li>
+<li><strong>node_shape</strong></li>
+<li><strong>node_border_color</strong></li>
+<li><strong>node_border_size</strong></li>
+<li><strong>node_label_color</strong></li>
+<li><strong>node_label_size</strong></li>
+<li><strong>node_hover</strong>: Plain or HTML text displayed on hovering over any node</li>
+<li><strong>node_click</strong>: Plain or HTML text displayed on clicking any node</li>
+<li><strong>node_image</strong>: URL or data URL refering to an image that shall be displayed inside every node</li>
+<li><strong>node_x</strong>: x coordinate to fix every node at, can be released in the UI</li>
+<li><strong>node_y</strong>: y coordinate to fix every node at, can be released in the UI</li>
+<li><strong>node_z</strong>: z coordinate to fix every node at, can be released in the UI (ignored in 2D plots, only active in 3D)</li>
+<li><strong>edge_color</strong></li>
+<li><strong>edge_opacity</strong></li>
+<li><strong>edge_size</strong></li>
+<li><strong>edge_label_color</strong></li>
+<li><strong>edge_label_size</strong></li>
+<li><strong>edge_hover</strong>: Plain or HTML text displayed on hovering over any edge</li>
+<li><strong>edge_click</strong>: Plain or HTML text displayed on clicking any edge</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><strong>node metadata</strong></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><strong>color</strong></li>
+<li><strong>opacity</strong></li>
+<li><strong>size</strong></li>
+<li><strong>shape</strong></li>
+<li><strong>border_color</strong></li>
+<li><strong>border_size</strong></li>
+<li><strong>label_color</strong></li>
+<li><strong>label_size</strong></li>
+<li><strong>hover</strong>: Plain or HTML text displayed on hovering over this node</li>
+<li><strong>click</strong>: Plain or HTML text displayed on clicking this node</li>
+<li><strong>image</strong>: URL or data URL refering to an image that shall be displayed inside this node</li>
+<li><strong>x</strong>: x coordinate to fix this node at, can be released in the UI</li>
+<li><strong>y</strong>: y coordinate to fix this node at, can be released in the UI</li>
+<li><strong>z</strong>: z coordinate to fix this node at, can be released in the UI (ignored in 2D plots, only active in 3D)</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><strong>edge metadata</strong></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><strong>color</strong></li>
+<li><strong>opacity</strong></li>
+<li><strong>size</strong></li>
+<li><strong>label_color</strong></li>
+<li><strong>label_size</strong></li>
+<li><strong>hover</strong>: Plain or HTML text displayed on hovering over this edge</li>
+<li><strong>click</strong>: Plain or HTML text displayed on clicking this edge</li>
+</ul>
+</div></blockquote>
+<p>Example for defining a single graph with metadata in Python</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, graph!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;directed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;background_color&quot;</span><span class="p">:</span> <span class="s2">&quot;#e9f5f5&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;node_size&quot;</span><span class="p">:</span> <span class="s2">&quot;15&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;node_shape&quot;</span><span class="p">:</span> <span class="s2">&quot;rectangle&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;node_hover&quot;</span><span class="p">:</span> <span class="s2">&quot;You hovered over a node!&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;node_click&quot;</span><span class="p">:</span> <span class="s2">&quot;You clicked on a node!&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;edge_color&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;edge_size&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;edge_hover&quot;</span><span class="p">:</span> <span class="s2">&quot;You hovered over an edge!&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;edge_click&quot;</span><span class="p">:</span> <span class="s2">&quot;You clicked on an edge!&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Anton&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello node&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="s2">&quot;hexagon&quot;</span><span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Berta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlotte&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3&quot;</span><span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Dora&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;Anton&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;Berta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;magenta&quot;</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3&quot;</span><span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;Berta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlotte&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;Dora&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlotte&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;Anton&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;Dora&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="auto-conversion-of-external-graph-objects-to-jgf">
+<span id="supported-graph-libraries"></span><h3>Auto-conversion of external graph objects to JGF<a class="headerlink" href="#auto-conversion-of-external-graph-objects-to-jgf" title="Permalink to this headline">¶</a></h3>
+<p>This package supports six popular Python graph libraries which are listed below.
+More specifically, the plotting functions of this package accept the different
+graph objects of of these libraries directly as input.
+Internally the plotting functions first convert the graph objects
+into JGF and then proceed as if JGF data was provided by the user.
+The responsible conversion functions are located in the
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion</span></code> module and
+can also be accessed by the user, e.g. to inspect the resulting
+JGF object and check whether everything is converted as expected.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://graph-tool.skewed.de/">graph-tool</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.graphtool_to_jgf</span></code></li>
+</ul>
+</li>
+<li><a class="reference external" href="https://igraph.org/">igraph</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.igraph_to_jgf</span></code></li>
+</ul>
+</li>
+<li><a class="reference external" href="https://networkit.github.io/">NetworKit</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.networkit_to_jgf</span></code></li>
+</ul>
+</li>
+<li><a class="reference external" href="https://networkx.github.io/">NetworkX</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.networkx_to_jgf</span></code></li>
+</ul>
+</li>
+<li><a class="reference external" href="http://pyntacle.css-mendel.it/">Pyntacle</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.pyntacle_to_jgf</span></code></li>
+</ul>
+</li>
+<li><a class="reference external" href="http://snap.stanford.edu/">SNAP</a><ul>
+<li>Conversion: <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.utilities.format_conversion.snap_to_jgf</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/index.html" class="btn btn-neutral float-right" title="API documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gui.html" class="btn btn-neutral float-left" title="Graphical user interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

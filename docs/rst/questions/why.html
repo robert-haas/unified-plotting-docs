@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Why …? &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Why …?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/rst/questions/why.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="why">
+<h1>Why …?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-is-a-high-level-plotting-api-useful">
+<h2>Why is a high-level plotting API useful?<a class="headerlink" href="#why-is-a-high-level-plotting-api-useful" title="Permalink to this headline">¶</a></h2>
+<p>A dilemma with plotting libraries is that they try to provide</p>
+<ul class="simple">
+<li>much flexibility, so a user can express almost any idea of a visualization in intricate code.</li>
+<li>ease of use, so a user can generate common plot types with simple code.</li>
+</ul>
+<p>For this reason, many libraries already provide simplified, high-level APIs, which sit on top of all their detailed plotting capabilities in order to ease the creation of frequently-used plots:</p>
+<ul class="simple">
+<li>Matplotlib provides <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html">pyplot</a>, which originated from the no longer recommended <a class="reference external" href="https://matplotlib.org/faq/usage_faq.html#matplotlib-pyplot-and-pylab-how-are-they-related">pylab</a>.</li>
+<li>Plotly added <a class="reference external" href="https://plot.ly/python-api-reference/plotly.express.html">plotly.express</a> with <a class="reference external" href="https://community.plotly.com/t/introducing-plotly-py-4-0-0/25639">version 4</a>.</li>
+<li>D3.js has an ecosystem of <a class="reference external" href="https://github.com/wbkd/awesome-d3">third-party libraries</a> building on top of it (Plotly is one of them). They provide simpler access to its quite low-level functionality, often focusing on a specific niche. Unified plotting is currently using D3.js and other JavaScript libraries for graph visualization, adding a lot of interactive control elements.</li>
+</ul>
+<p>A second dilemma with plotting libraries is that</p>
+<ul class="simple">
+<li>Most programming languages already have established visualization libraries. To provide a new one, a certain degree of novelty and uniqueness is needed in order to stick out, which naturally includes the architecture of the package and how a user can interact with it.</li>
+<li>Most users probably do not like to remember multiple ways of achieving comparable outcomes with different libraries, so they stick with what they got used to. Therefore to make a new library more attractive, an alternative strategy can be to design it highly compatible with an already popular package but add novel plot types. An example for that is <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a>, which provides great statistical plots by tightly integrating with Matplotlib.</li>
+</ul>
+<p>In summary, there is evidently an incentive for plotting libraries to build their own high-level API, yet none to extend it beyond their own affairs. Assuming that users of a language may benefit from the same idea taken to a broader scope, from intra to inter library, this package makes a unification attempt to create a simple, consistent API for using multiple plotting libraries for common plot types. Ideally this should result in exaclty one way of access to all those libraries, and while this is largely achieved, it is hard to fully compensate for all non-overlapping functionality. This can result in some ignored arguments, limited subsets of accepted values for an argument, or skipped plotting capabilities. Where this package has such shortcomings, notes can be found in the API documentation and warnings are emitted in the case an ignored argument or an invalid value is passed to a function.</p>
+</div>
+<div class="section" id="why-has-it-not-been-done-yet">
+<h2>Why has it not been done yet?<a class="headerlink" href="#why-has-it-not-been-done-yet" title="Permalink to this headline">¶</a></h2>
+<p>The idea to unify some plotting capabilities available in the Python ecosystem has already been realized a few times, yet not in a way that was suitable for the requirements of my other packages (e.g. interactive 3D and graph visualizations, simple text representations for web-serving). Here are some examples you may want to take a look at:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/autonomio/astetik">astetik</a></li>
+<li><a class="reference external" href="https://github.com/cuemacro/chartpy">chartpy</a></li>
+<li><a class="reference external" href="https://github.com/HamsterHuey/easyplot">easyplot</a></li>
+<li><a class="reference external" href="https://hplgit.github.io/scitools/doc/api/html/easyviz.html">easyviz</a></li>
+<li><a class="reference external" href="http://sean1708.github.io/uniplot">uniplot</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

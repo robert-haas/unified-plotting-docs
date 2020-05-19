@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>What …? &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>What …?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/rst/questions/what.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="what">
+<h1>What …?<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-aim-of-this-package">
+<h2>What is the aim of this package?<a class="headerlink" href="#what-is-the-aim-of-this-package" title="Permalink to this headline">¶</a></h2>
+<p>The general aim is to minimize the gap between the idea of a plot in a human mind and its expression in code for a machine. In practice this requires simplification and unification of the user interfaces provided by different plotting libraries. There is also an additional desire to preserve as much freedom of expression as possible. Together these two conflicting aims are attempted to be solved by providing 1) an API consisting mainly of simple function calls and 2) a lot of optional arguments for styling almost any visual element if needed. A consistent naming scheme across plot types and libraries adds to achieving both goals.</p>
+</div>
+<div class="section" id="what-features-does-it-provide">
+<h2>What features does it provide?<a class="headerlink" href="#what-features-does-it-provide" title="Permalink to this headline">¶</a></h2>
+<p>This package delivers a unified, high-level API that allows you to easily access several data visualization libraries by simple function calls. More than 20 different plot types are currently supported. All functions come with a range of optional arguments to fine-tune the plot style if desired.</p>
+<p>Once a plot is created, it may be used for different purposes. To reflect this idea, the result of a function call is always a figure object which comes with methods that have unified names and arguments. They allow to 1) display the plot as static or interactive visualization, 2) export it in various file formats and 3) represent it in web-servable text formats such as SVG or HTML. For a quick example, see <a class="reference external" href="code/examples/quickstart/figure_object.ipynb">using figure objects</a>.</p>
+<p>For further convenience, there is a central configuration system to globally define styles that act on each plot and can be exported and imported for later reuse and sharing. More information can be found in the <a class="reference internal" href="../examples/config_overview.html"><span class="doc">configuration overview examples</span></a>.</p>
+</div>
+<div class="section" id="what-tasks-does-it-solve">
+<h2>What tasks does it solve?<a class="headerlink" href="#what-tasks-does-it-solve" title="Permalink to this headline">¶</a></h2>
+<p>The basic task solved by this package is to quickly transform data into many different plots in Python 3 with as little code and cognitive overhead as possible. It can be used interactively in a <a class="reference external" href="https://docs.python.org/3/tutorial/interpreter.html#interactive-mode">Python shell</a> (with plot display in a browser) or <a class="reference external" href="https://jupyter.org">Jupyter notebook</a> (with plot display inline in the notebook), or non-interactively in Python scripts, modules or packages (with file exports). Therefore it can be of value in different settings, ranging from quick interactive data exploration to incorporating plotting features into other codebases without polluting them with verbose low-level constructs.</p>
+</div>
+<div class="section" id="what-types-of-output-can-be-generated">
+<h2>What types of output can be generated?<a class="headerlink" href="#what-types-of-output-can-be-generated" title="Permalink to this headline">¶</a></h2>
+<p>The input of tabular data (e.g. collection of lists, DataFrame, CSV file) or linked data (e.g. dict in JSON graph format, graph object) can first be translated into a figure object and then either be displayed (browser, Jupyter Notebook) or exported as static images (raster formats like PNG and JPG, vector formats like SVG) and dynamic web documents (HTML/CSS/JavaScript).</p>
+</div>
+<div class="section" id="what-exactly-is-it-built-upon">
+<h2>What exactly is it built upon?<a class="headerlink" href="#what-exactly-is-it-built-upon" title="Permalink to this headline">¶</a></h2>
+<p>Each plot in this package relies on a third party visualization library and eases the access to it or sometimes extends it by novel features (most notably in graph visualization with JavaScript libraries):</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Python 3 libraries</dt>
+<dd><ul class="first last">
+<li><a class="reference external" href="https://matplotlib.org">Matplotlib</a></li>
+<li><a class="reference external" href="https://plot.ly">Plotly</a> (uses d3.js)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>JavaScript libraries – used in Python 3, generating HTML output viewed offline in a browser</dt>
+<dd><ul class="first last">
+<li><a class="reference external" href="https://d3js.org">d3.js</a></li>
+<li><a class="reference external" href="https://visjs.org">vis.js</a></li>
+<li><a class="reference external" href="https://github.com/vasturiano/3d-force-graph">3d-force-graph</a> (uses d3.js)</li>
+<li><a class="reference external" href="https://slickgrid.net">SlickGrid</a></li>
+<li><a class="reference external" href="https://github.com/BigFatDog/parcoords-es">parcoords-es</a> (uses d3.js)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

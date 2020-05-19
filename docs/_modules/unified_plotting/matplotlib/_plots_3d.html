@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.matplotlib._plots_3d &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.matplotlib._plots_3d</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.matplotlib._plots_3d</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Matplotlib plots for 3-dimensional vector data.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span> <span class="k">as</span> <span class="n">_Iterable</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
+
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">arguments</span> <span class="k">as</span> <span class="n">_args</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_preprocessing</span> <span class="k">as</span> <span class="n">_shared_preprocessing</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_processing</span> <span class="k">as</span> <span class="n">_shared_processing</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments.injection</span> <span class="kn">import</span> <span class="n">inject_functions</span> <span class="k">as</span> <span class="n">_inject_functions</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_matplotlib_processing</span>
+<span class="kn">from</span> <span class="nn">._data_structures</span> <span class="kn">import</span> <span class="n">Figure</span> <span class="k">as</span> <span class="n">_Figure</span>
+
+
+<div class="viewcode-block" id="contour"><a class="viewcode-back" href="../../../rst/api/matplotlib/plots_3d/contour.html#unified_plotting.matplotlib._plots_3d.contour">[docs]</a><span class="nd">@_inject_functions</span><span class="p">(</span><span class="n">_args</span><span class="o">.</span><span class="n">external_fig_and_ax</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_size_and_resolution</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_color</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">plot_title</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_grid</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">colormap</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">interpolation_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interpolation_selection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">interpolation_num_x_gridpoints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interpolation_num_y_gridpoints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a contour plot.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list</span>
+<span class="sd">        A list of numbers or if ``x_axis_scale=&quot;categorical&quot;`` a list of strings.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+<span class="sd">        The meaning of the ``n`` items in this list depends on the shape of ``z``.</span>
+<span class="sd">    y : list</span>
+<span class="sd">        A list of numbers or if ``y_axis_scale=&quot;categorical&quot;`` a list of strings.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+<span class="sd">        The meaning of the ``m`` items in this list depends on the shape of ``z``.</span>
+<span class="sd">    z : list or list of lists</span>
+<span class="sd">        A list of numbers or if ``z_axis_scale=&quot;categorical&quot;`` a list of strings or a list of</span>
+<span class="sd">        multiple such lists.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+
+<span class="sd">        There are two possible shapes for ``z``:</span>
+
+<span class="sd">        1. A list of ``n`` items. In this case, ``x`` and ``y`` need to have the same number</span>
+<span class="sd">           of items as ``z``. Each entry represents a point at an arbitrary position in 3D space.</span>
+<span class="sd">           In order to get a valid description of a surface, a regular grid of points is created</span>
+<span class="sd">           automatcially based on the ranges of ``x`` and ``y`` and then interpolation is</span>
+<span class="sd">           performed to get a height for each point that fits to the closest ``z`` values.</span>
+
+<span class="sd">        2. A list of ``m`` lists, each containing ``n`` items. In this case, ``x`` needs to</span>
+<span class="sd">           have ``n`` items and ``y`` needs to have ``m`` items. ``x`` and ``y``</span>
+<span class="sd">           form the basis of a rectilinear ``n x m`` grid of points and ``z`` provides the</span>
+<span class="sd">           height of each. No interpolation is performed because the input is already a valid</span>
+<span class="sd">           description of a surface.</span>
+<span class="sd">    opacity : float</span>
+<span class="sd">        Opacity of the plot elements, in this case the contour areas.</span>
+<span class="sd">        Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</span>
+<span class="sd">    interpolation_method : str</span>
+<span class="sd">        Method for calculating the unknown values at regular grid points that sit between</span>
+<span class="sd">        the given points with known values.</span>
+<span class="sd">        Caution: Currently this becomes only active if the given data points are not already on</span>
+<span class="sd">        a regular grid.</span>
+<span class="sd">        Possible values: &quot;allrounder_linear&quot;, &quot;allrounder_nearest&quot;, &quot;allrounder_cubic&quot;,</span>
+<span class="sd">        &quot;rbf_cubic&quot;, &quot;rbf_gaussian&quot;, &quot;rbf_inverse&quot;, &quot;rbf_linear&quot;, &quot;rbf_multiquadric&quot;,</span>
+<span class="sd">        &quot;rbf_quintic&quot;, &quot;rbf_thin_plate&quot;, &quot;spline_linear&quot;, &quot;spline_cubic&quot;, &quot;spline_quintic&quot;.</span>
+<span class="sd">    interpolation_selection : str</span>
+<span class="sd">        If at the same x, y point there are multiple known z-values, which one shall be used,</span>
+<span class="sd">        i.e. through which one shall the surface go.</span>
+<span class="sd">        Possible values: &quot;min&quot;, &quot;max&quot;.</span>
+<span class="sd">    interpolation_num_x_gridpoints : int</span>
+<span class="sd">        Number of grid points along the x-Axis.</span>
+<span class="sd">    interpolation_num_y_gridpoints : int</span>
+<span class="sd">        Number of grid points along the y-Axis.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;mpl-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://matplotlib.org/api/_as_gen/matplotlib.pyplot.contour.html</span>
+<span class="sd">    - https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.contour.html</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    - https://matplotlib.org/examples/pylab_examples/tricontour_vs_griddata.html</span>
+<span class="sd">    - https://jakevdp.github.io/PythonDataScienceHandbook/04.04-density-and-contour-plots.html</span>
+
+<span class="sd">    **Further parameters that are unified across plots and libraries**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">check_and_filter_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_3d_grid</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">interpolation_method</span><span class="p">,</span> <span class="n">interpolation_selection</span><span class="p">,</span>
+        <span class="n">interpolation_num_x_gridpoints</span><span class="p">,</span> <span class="n">interpolation_num_y_gridpoints</span><span class="p">)</span>
+
+    <span class="c1"># Layout</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>  <span class="c1"># Required to prevent multiple outputs, not sure why it needs to be exactly here</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_fig_and_ax</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">size_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_plot_size</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_plot_color</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_x_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_y_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_grid</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+    <span class="c1"># Data</span>
+    <span class="n">colormap_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_colormap_spec</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">mpl_colormap_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">convert_colormap_spec</span><span class="p">(</span><span class="n">colormap_spec</span><span class="p">)</span>
+
+    <span class="n">opacity_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_opacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Figure</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">mpl_colormap_spec</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="n">opacity_i</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mpl_colormap_spec</span><span class="p">[</span><span class="s1">&#39;show_colormap&#39;</span><span class="p">]:</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_colormap_properties</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">mpl_colormap_spec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">size_spec</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="scatter_3d"><a class="viewcode-back" href="../../../rst/api/matplotlib/plots_3d/scatter_3d.html#unified_plotting.matplotlib._plots_3d.scatter_3d">[docs]</a><span class="nd">@_inject_functions</span><span class="p">(</span><span class="n">_args</span><span class="o">.</span><span class="n">external_fig_and_ax_3d</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_size_and_resolution</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_color</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">plot_title</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">z_axis</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_grid</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">z_grid</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">legend</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">markers</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">colormap</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">scatter_3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">camera_angle_vertical</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">camera_angle_horizontal</span><span class="o">=-</span><span class="mf">60.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a 3D scatter plot.</span>
+
+<span class="sd">    Note: Currently there seems to be no straightforward way to specify an axis ratio in 3D plots.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list or list of lists</span>
+<span class="sd">        A list of numbers or if ``x_axis_scale=&quot;categorical&quot;`` a list of strings or a</span>
+<span class="sd">        list of multiple such lists. It needs to have the same number of items as ``y`` and ``z``.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+<span class="sd">    y : list or list of lists</span>
+<span class="sd">        A list of numbers or if ``y_axis_scale=&quot;categorical&quot;`` a list of strings or a</span>
+<span class="sd">        list of multiple such lists. It needs to have the same number of items as ``x`` and ``z``.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+<span class="sd">    z : list or list of lists</span>
+<span class="sd">        A list of numbers or if ``z_axis_scale=&quot;categorical&quot;`` a list of strings or a</span>
+<span class="sd">        list of multiple such lists. It needs to have the same number of items as ``x`` and ``y``.</span>
+<span class="sd">        If the values are numerical, all non-finite entries (NaN, +Inf, -Inf) will</span>
+<span class="sd">        be removed automatically and a warning will be shown.</span>
+<span class="sd">    name : list</span>
+<span class="sd">        Name(s) of the visualized data series. Used in the legend.</span>
+<span class="sd">    color : str, tuple or list</span>
+<span class="sd">        Color(s) of the plot elements, in this case the markers and lines.</span>
+<span class="sd">        Can be overruled by **marker_color** and **line_color**.</span>
+<span class="sd">        Possible values: See :ref:`colors`.</span>
+<span class="sd">    opacity : float</span>
+<span class="sd">        Opacity of the plot elements, in this case the markers and lines.</span>
+<span class="sd">        Can be overruled by **marker_opacity** and **line_opacity**.</span>
+<span class="sd">        Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</span>
+<span class="sd">    camera_angle_vertical : float</span>
+<span class="sd">        Vertical camera angle in degree.</span>
+<span class="sd">    camera_angle_horizontal : float</span>
+<span class="sd">        Horizontal camera angle in degree.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;mpl-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://matplotlib.org/mpl_toolkits/index.html#mplot3d</span>
+<span class="sd">    - https://matplotlib.org/api/toolkits/mplot3d.html#toolkit-mplot3d-api</span>
+<span class="sd">    - https://matplotlib.org/mpl_toolkits/mplot3d/api.html#mpl_toolkits.mplot3d.axes3d.Axes3D.view_init</span>
+<span class="sd">    - https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D.scatter</span>
+<span class="sd">    - https://matplotlib.org/gallery/mplot3d/scatter3d.html</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    - https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/surface3d_demo.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/custom_shaded_3d_surface.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/contour3d_demo.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/contour3d_demo2.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/contour3d_demo3.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/contourf3d_demo.html</span>
+<span class="sd">    - https://matplotlib.org/examples/mplot3d/contourf3d_demo2.html</span>
+<span class="sd">    - http://scipy-cookbook.readthedocs.io/items/Matplotlib_mplot3D.html</span>
+
+<span class="sd">    **Further parameters that are unified across plots and libraries**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">check_and_filter_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span><span class="p">,</span> <span class="n">multiple_series</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_3d_multiple</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Layout</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>  <span class="c1"># Required to prevent multiple outputs, not sure why it needs to be exactly here.</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_fig_and_ax_3d</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">size_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_plot_size</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_plot_color</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_x_axis_3d</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_y_axis_3d</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_z_axis_3d</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_grid_3d</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+    <span class="c1"># Data</span>
+    <span class="n">marker_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_marker_spec</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">line_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_line_spec</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">colormap_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_colormap_spec</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">legend_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">extract_legend</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">count_colormaps</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">z_i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span><span class="p">)):</span>
+        <span class="c1"># Preparation</span>
+        <span class="n">name_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">color_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_color</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">color_i</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">convert_color</span><span class="p">(</span><span class="n">color_i</span><span class="p">)</span>
+        <span class="n">opacity_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_opacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="n">colormap_spec_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_colormap_spec</span><span class="p">(</span><span class="n">colormap_spec</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">mpl_colormap_spec</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">convert_colormap_spec</span><span class="p">(</span><span class="n">colormap_spec_i</span><span class="p">)</span>
+
+        <span class="n">marker_spec_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_marker_spec</span><span class="p">(</span>
+            <span class="n">marker_spec</span><span class="p">,</span> <span class="n">color_i</span><span class="p">,</span> <span class="n">opacity_i</span><span class="p">,</span> <span class="n">mpl_colormap_spec</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">mpl_marker_spec</span><span class="p">,</span> <span class="n">show_marker</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">convert_marker_spec</span><span class="p">(</span>
+            <span class="n">marker_spec_i</span><span class="p">)</span>
+
+        <span class="n">line_spec_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_line_spec</span><span class="p">(</span>
+            <span class="n">line_spec</span><span class="p">,</span> <span class="n">color_i</span><span class="p">,</span> <span class="n">opacity_i</span><span class="p">,</span> <span class="n">mpl_colormap_spec</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">mpl_line_spec</span><span class="p">,</span> <span class="n">show_line</span> <span class="o">=</span> <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">convert_line_spec</span><span class="p">(</span><span class="n">line_spec_i</span><span class="p">)</span>
+
+        <span class="c1"># Points and lines</span>
+        <span class="k">if</span> <span class="n">show_line</span> <span class="ow">and</span> <span class="n">show_marker</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_line_spec</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name_i</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_marker_spec</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">show_marker</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name_i</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_marker_spec</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">show_line</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name_i</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_line_spec</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># Colorbar</span>
+        <span class="k">if</span> <span class="n">mpl_colormap_spec</span><span class="p">[</span><span class="s1">&#39;show_colormap&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">count_colormaps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="n">mpl_marker_spec</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+            <span class="n">colors_represent_values</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">_Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_i</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">colors_represent_values</span> <span class="ow">and</span> <span class="n">show_marker</span><span class="p">:</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_colormap_properties</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">mpl_colormap_spec</span><span class="p">)</span>
+                <span class="c1"># Current design decision: Allow a maximum of one colormap to keep it tidy</span>
+                <span class="n">count_colormaps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Legend</span>
+    <span class="n">show_legend</span> <span class="o">=</span> <span class="n">legend_spec</span><span class="p">[</span><span class="s1">&#39;show_legend&#39;</span><span class="p">]</span>
+    <span class="n">legend_spec</span><span class="p">[</span><span class="s1">&#39;show_legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">show_legend</span> <span class="ow">or</span> <span class="p">(</span><span class="n">show_legend</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">multiple_series</span><span class="p">)</span>
+    <span class="n">_matplotlib_processing</span><span class="o">.</span><span class="n">set_legend</span><span class="p">(</span><span class="n">legend_spec</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+    <span class="c1"># View angles</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="n">camera_angle_vertical</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="n">camera_angle_horizontal</span><span class="p">)</span>
+
+    <span class="c1"># Figure</span>
+    <span class="k">return</span> <span class="n">_Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">size_spec</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

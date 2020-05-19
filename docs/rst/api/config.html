@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unified argument values" href="unified_arguments.html" />
+    <link rel="prev" title="Figure" href="javascript/figure.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="package.html">Unified Plotting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plotly/index.html">Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matplotlib/index.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="javascript/index.html">JavaScript</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#change-the-settings">Change the settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#report-the-current-settings">Report the current settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-and-restore-settings">Save and restore settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="unified_arguments.html">Unified argument values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API documentation</a> &raquo;</li>
+        
+          <li><a href="package.html">Unified Plotting</a> &raquo;</li>
+        
+      <li>Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/rst/api/config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-unified_plotting._config.config">
+<span id="configuration"></span><h1>Configuration<a class="headerlink" href="#module-unified_plotting._config.config" title="Permalink to this headline">¶</a></h1>
+<p>This is the module <a class="reference internal" href="#module-unified_plotting._config.config" title="unified_plotting._config.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.config</span></code></a>.</p>
+<p>It provides a central configuration system for the
+package <a class="reference internal" href="package.html#module-unified_plotting" title="unified_plotting"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting</span></code></a>.</p>
+<p>Its main purpose is to provide <strong>global package settings</strong> that
+determine the <strong>basic style used in every plot</strong>.
+Each individual setting comes with a sensible default value that is
+loaded during import of the package but can be altered by the user
+during runtime. Once some settings were modified, they can also be
+exported as JSON file and loaded again whenever desired.
+In this way, user-defined styles can be created and reused.</p>
+<div class="section" id="change-the-settings">
+<h2>Change the settings<a class="headerlink" href="#change-the-settings" title="Permalink to this headline">¶</a></h2>
+<p>The current settings are stored in the object
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">unified_plotting.config.settings</span></code>.</p>
+<ul>
+<li><p class="first">Its members can be accessed and modified via dot notation,
+for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unified_plotting</span> <span class="k">as</span> <span class="nn">up</span>
+<span class="n">up</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">x_labels_color</span> <span class="o">=</span> <span class="s2">&quot;#008800&quot;</span>
+<span class="n">up</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">x_labels_fontname</span> <span class="o">=</span> <span class="s2">&quot;Arial&quot;</span>
+<span class="n">up</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">y_labels_color</span> <span class="o">=</span> <span class="s2">&quot;#008800&quot;</span>
+<span class="n">up</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">y_labels_fontname</span> <span class="o">=</span> <span class="s2">&quot;Arial&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="report-the-current-settings">
+<h2>Report the current settings<a class="headerlink" href="#report-the-current-settings" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The function <code class="xref py py-func docutils literal notranslate"><span class="pre">unified_plotting.config.report()</span></code>
+can be used to get a list of available options as well as their
+currently assigned values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unified_plotting</span> <span class="k">as</span> <span class="nn">up</span>
+<span class="n">up</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="save-and-restore-settings">
+<h2>Save and restore settings<a class="headerlink" href="#save-and-restore-settings" title="Permalink to this headline">¶</a></h2>
+<p>The module <code class="xref py py-mod docutils literal notranslate"><span class="pre">unified_plotting.config</span></code> contains following
+functions that interact with the global package settings.</p>
+<dl class="function">
+<dt id="unified_plotting._config.config.load_defaults">
+<code class="descname">load_defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/unified_plotting/_config/config.html#load_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting._config.config.load_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load default settings of this package.</p>
+<p>This function is called automatically when the package is loaded.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unified_plotting._config.config.save_defaults_to_json">
+<code class="descname">save_defaults_to_json</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/unified_plotting/_config/config.html#save_defaults_to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting._config.config.save_defaults_to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the default settings of this package to a JSON file.</p>
+<p>It may be used as starting point to create a file with user-defined settings.
+Only the contained keys will be recognized and the values have to be valid JSON
+(e.g. true instead of Python’s True, null instead of Python’s None).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created JSON file.
+If the file exists it will be overwritten without warning.
+If the path does not end with ‘.json’ it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the generated JSON file, guaranteed to end with “.json”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unified_plotting._config.config.load_from_json">
+<code class="descname">load_from_json</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/unified_plotting/_config/config.html#load_from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting._config.config.load_from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load settings from a JSON file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the JSON file that contains the settings.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unified_plotting._config.config.save_to_json">
+<code class="descname">save_to_json</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/unified_plotting/_config/config.html#save_to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting._config.config.save_to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current settings to a JSON file.</p>
+<p>It can be used to load the same settings in another session.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created JSON file.
+If the file exists it will be overwritten without warning.
+If the path does not end with ‘.json’ it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the generated JSON file, guaranteed to end with “.json”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unified_plotting._config.config.report">
+<code class="descname">report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/unified_plotting/_config/config.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting._config.config.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a report of the current settings.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unified_arguments.html" class="btn btn-neutral float-right" title="Unified argument values" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="javascript/figure.html" class="btn btn-neutral float-left" title="Figure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>unified_plotting.plotly._plots_financial &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rst/api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>unified_plotting.plotly._plots_financial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for unified_plotting.plotly._plots_financial</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Plotly plots for financial (OHLCV) data.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">_go</span>
+
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">arguments</span> <span class="k">as</span> <span class="n">_args</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_preprocessing</span> <span class="k">as</span> <span class="n">_shared_preprocessing</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments</span> <span class="kn">import</span> <span class="n">shared_processing</span> <span class="k">as</span> <span class="n">_shared_processing</span>
+<span class="kn">from</span> <span class="nn">.._unified_arguments.injection</span> <span class="kn">import</span> <span class="n">inject_functions</span> <span class="k">as</span> <span class="n">_inject_functions</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_plotly_processing</span>
+<span class="kn">from</span> <span class="nn">._data_structures</span> <span class="kn">import</span> <span class="n">Figure</span> <span class="k">as</span> <span class="n">_Figure</span>
+
+
+<div class="viewcode-block" id="candlestick"><a class="viewcode-back" href="../../../rst/api/plotly/plots_financial/candlestick.html#unified_plotting.plotly._plots_financial.candlestick">[docs]</a><span class="nd">@_inject_functions</span><span class="p">(</span><span class="n">_args</span><span class="o">.</span><span class="n">plot_size_and_resolution</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_color</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_title</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_grid</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">candlestick</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a candlestick plot for financial data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list</span>
+<span class="sd">        Numerical data represented by the x-Axis.</span>
+<span class="sd">    open : list</span>
+<span class="sd">        Numerical data represented by the y-Axis as top of a green or bottom of a red candle.</span>
+<span class="sd">    high : list</span>
+<span class="sd">        Numerical data represented by the y-Axis as top of the stick.</span>
+<span class="sd">    low : list</span>
+<span class="sd">        Numerical data represented by the y-Axis as bottom of the stick.</span>
+<span class="sd">    close : list</span>
+<span class="sd">        Numerical data represented by the y-Axis as bottom of a green or top of a red candle.</span>
+<span class="sd">    opacity : float</span>
+<span class="sd">        Opacity of the plot elements, in this case the contour areas.</span>
+<span class="sd">        Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;plotly-figure&gt;` object that can be used for displaying or exporting</span>
+<span class="sd">    the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://en.wikipedia.org/wiki/Candlestick_chart</span>
+<span class="sd">    - https://plot.ly/python/reference/#candlestick</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    - https://plot.ly/python/candlestick-charts</span>
+
+<span class="sd">    **Further parameters that are unified across plots and libraries**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">check_and_filter_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_nd</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">remove_non_numerical_vectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="c1"># Layout</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Layout</span><span class="p">()</span>
+    <span class="n">size_spec</span> <span class="o">=</span> <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_plot_size</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_plot_color</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_x_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_y_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_grid</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+
+    <span class="c1"># Data</span>
+    <span class="n">opacity_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_opacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Candlestick</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="nb">open</span><span class="o">=</span><span class="nb">open</span><span class="p">,</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span>
+        <span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span>
+        <span class="n">close</span><span class="o">=</span><span class="n">close</span><span class="p">,</span>
+        <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_i</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="p">]</span>
+
+    <span class="c1"># Figure</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">size_spec</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ohlc"><a class="viewcode-back" href="../../../rst/api/plotly/plots_financial/ohlc.html#unified_plotting.plotly._plots_financial.ohlc">[docs]</a><span class="nd">@_inject_functions</span><span class="p">(</span><span class="n">_args</span><span class="o">.</span><span class="n">plot_size_and_resolution</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_color</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">plot_title</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">_args</span><span class="o">.</span><span class="n">y_grid</span><span class="p">,</span>
+                   <span class="n">_args</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ohlc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an OHLC plot for financial data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list</span>
+<span class="sd">        A list of numbers or if ``x_axis_scale=&quot;categorical&quot;`` a list of strings.</span>
+<span class="sd">    open : list</span>
+<span class="sd">        A list of numbers represented by the y-Axis as left tick of the line.</span>
+<span class="sd">    high : list</span>
+<span class="sd">        A list of numbers represented by the y-Axis as top of the line.</span>
+<span class="sd">    low : list</span>
+<span class="sd">        A list of numbers represented by the y-Axis as bottom of the line.</span>
+<span class="sd">    close : list</span>
+<span class="sd">        A list of numbers represented by the y-Axis as right tick of the line.</span>
+<span class="sd">    opacity : float</span>
+<span class="sd">        Opacity of the plot elements, in this case the contour areas.</span>
+<span class="sd">        Possible values: Between 0.0 (=completely transparent) and 1.0 (=completely opaque).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A :ref:`Figure &lt;plotly-figure&gt;` object that can be used for displaying or exporting the plot.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - https://en.wikipedia.org/wiki/Open-high-low-close_chart</span>
+<span class="sd">    - https://plot.ly/python/reference/#ohlc</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    - https://plot.ly/python/ohlc-charts</span>
+
+<span class="sd">    **Further parameters that are unified across plots and libraries**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Shared argument processing</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">check_and_filter_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_shared_preprocessing</span><span class="o">.</span><span class="n">prepare_vector_data_nd</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">remove_non_numerical_vectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">close</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="c1"># Layout</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Layout</span><span class="p">()</span>
+    <span class="n">size_spec</span> <span class="o">=</span> <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_plot_size</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_plot_color</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_x_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_y_axis</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_grid</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+
+    <span class="c1"># Data</span>
+    <span class="n">opacity_i</span> <span class="o">=</span> <span class="n">_shared_processing</span><span class="o">.</span><span class="n">get_next_opacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">_plotly_processing</span><span class="o">.</span><span class="n">set_legend</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Ohlc</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="nb">open</span><span class="o">=</span><span class="nb">open</span><span class="p">,</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span>
+        <span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span>
+        <span class="n">close</span><span class="o">=</span><span class="n">close</span><span class="p">,</span>
+        <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_i</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="p">]</span>
+
+    <span class="c1"># Figure</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">size_spec</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

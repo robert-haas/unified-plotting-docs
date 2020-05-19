@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Unified argument values &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Configuration" href="config.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="package.html">Unified Plotting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plotly/index.html">Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matplotlib/index.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="javascript/index.html">JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unified argument values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#marker-style">marker_style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#line-style">line_style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colormap">colormap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#color">color</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API documentation</a> &raquo;</li>
+        
+          <li><a href="package.html">Unified Plotting</a> &raquo;</li>
+        
+      <li>Unified argument values</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/rst/api/unified_arguments.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="unified-argument-values">
+<h1>Unified argument values<a class="headerlink" href="#unified-argument-values" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="marker-style">
+<span id="marker-styles"></span><h2>marker_style<a class="headerlink" href="#marker-style" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal notranslate"><span class="pre">marker_style</span></code> argument is currently unified across
+all plots with Matplotlib and Plotly
+that use markers to represent data values.</p>
+<div class="section" id="list-of-accepted-formats">
+<h3>List of accepted formats<a class="headerlink" href="#list-of-accepted-formats" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Explicit name</strong><ul>
+<li>Example: <code class="code docutils literal notranslate"><span class="pre">&quot;circle&quot;</span></code></li>
+</ul>
+</li>
+<li><strong>Shortcut symbol</strong><ul>
+<li>Example: <code class="code docutils literal notranslate"><span class="pre">&quot;o&quot;</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="list-of-accepted-values">
+<h3>List of accepted values<a class="headerlink" href="#list-of-accepted-values" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;o&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;circle&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;point&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;dot&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;t&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;3&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;triangle&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;4&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;square&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;p&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;5&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;pentagon&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;h&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;6&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;hexagon&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;8&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;octagon&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;star&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;+&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;plus&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;x&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;cross&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;diamond&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;-&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;horizontal_line&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;vertical_line&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;^&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;triangle_up&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;v&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;triangle_down&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;&lt;&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;triangle_left&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;&gt;&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;triangle_right&quot;</span></code></li>
+</ul>
+<p>Exception: 3D plots in Plotly accept only a reduced list of values:</p>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;o&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;circle&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;4&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;square&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;+&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;plus&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;x&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;cross&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;diamond&quot;</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="line-style">
+<span id="line-styles"></span><h2>line_style<a class="headerlink" href="#line-style" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal notranslate"><span class="pre">line_style</span></code> argument is currently unified across
+all plots with Matplotlib and Plotly
+that use lines to represent data values.</p>
+<div class="section" id="id1">
+<h3>List of accepted formats<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Explicit name</strong><ul>
+<li>Example: <code class="code docutils literal notranslate"><span class="pre">&quot;solid&quot;</span></code></li>
+</ul>
+</li>
+<li><strong>Shortcut symbol</strong><ul>
+<li>Example: <code class="code docutils literal notranslate"><span class="pre">&quot;-&quot;</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>List of accepted values<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;solid&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;-&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;dash&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;--&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;dashdot&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;-.&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;.-&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&quot;dot&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;:&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;..&quot;</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="colormap">
+<span id="colormaps"></span><h2>colormap<a class="headerlink" href="#colormap" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal notranslate"><span class="pre">colormap</span></code> argument is currently unified across
+all plots with Matplotlib and Plotly
+that use a color spectrum to represent numerical data values.</p>
+<div class="section" id="id3">
+<h3>List of accepted values<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="colormaps.html#colormap-list"><span class="std std-ref">Colormaps</span></a></p>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Built-in colormaps<ul>
+<li><a class="reference external" href="https://matplotlib.org/tutorials/colors/colormaps.html">Matplotlib</a></li>
+<li><a class="reference external" href="https://plot.ly/python/builtin-colorscales">Plotly</a></li>
+</ul>
+</li>
+<li>External colormaps that are provided in this package<ul>
+<li><a class="reference external" href="https://colorcet.holoviz.org">Colorcet</a>,
+<a class="reference external" href="https://peterkovesi.com/projects/colourmaps">Peter Kovesi: CET Perceptually Uniform Colour Maps</a>,
+<a class="reference external" href="herehttps://github.com/holoviz/colorcet">GitHub: colorcet</a></li>
+<li><a class="reference external" href="https://cmasher.readthedocs.io">CMasher</a></li>
+<li><a class="reference external" href="https://matplotlib.org/cmocean">cmocean</a></li>
+<li><a class="reference external" href="https://sciviscolor.org/home/colormaps">SciVisColor</a></li>
+</ul>
+</li>
+<li>Other resources, with some focus on color vision deficiencies<ul>
+<li>Containing at least one concrete colormap suggestion<ul>
+<li>Journal articles<ul>
+<li><a class="reference external" href="https://doi.org/10.1371/journal.pone.0199239">Nuñez et al.: Optimizing colormaps with consideration for color vision deficiency to enable accurate interpretation of scientific data</a> where “Cividis” was derived from “Viridis”, accompanying Python library <a class="reference external" href="https://github.com/pnnl/cmaputil">cmaputil</a>.<ul>
+<li><a class="reference external" href="https://www.scientificamerican.com/article/end-of-the-rainbow-new-map-scale-is-more-readable-by-people-who-are-color-blind/">Scientific American: End of the Rainbow? New Map Scale Is More Readable by People Who Are Color Blind</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="https://doi.org/10.1038/nmeth.1618">Wong: Points of view: Color blindness</a> (see CUD below)</li>
+</ul>
+</li>
+<li>Blog articles<ul>
+<li><a class="reference external" href="https://personal.sron.nl/~pault/">Tol: Colour schemes and templates</a></li>
+<li><a class="reference external" href="https://jfly.uni-koeln.de/color/">Okabe, Ito: Color Universal Design (CUD)</a></li>
+<li><a class="reference external" href="http://mkweb.bcgsc.ca/colorblind/">Krzywinski: Color Palettes for Color Blindness</a></li>
+<li><a class="reference external" href="https://davidmathlogic.com/colorblind">Nichols: Coloring for Colorblindness</a></li>
+<li><a class="reference external" href="https://www.somersault1824.com/tips-for-designing-scientific-figures-for-color-blind-readers/">Luk: Tips for designing scientific figures for color blind readers</a></li>
+<li><a class="reference external" href="https://colorbrewer2.org">Brewer et al.: Colorbrewer 2.0</a></li>
+<li><a class="reference external" href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">Google AI blog: Turbo, An Improved Rainbow Colormap for Visualization</a></li>
+<li><a class="reference external" href="http://www.kennethmoreland.com/color-advice">Kenneth Moreland: Color advice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Guidance on designing new colormaps<ul>
+<li>Journal articles
+- <a class="reference external" href="https://doi.org/10.1175/BAMS-D-13-00155.1">Stauffer et al.: Somewhere Over the Rainbow: How to Make Effective Use of Colors in Meteorological Visualizations</a> and the online tool <a class="reference external" href="http://www.hclwizard.org/">hclwizard</a></li>
+<li>Other<ul>
+<li><a class="reference external" href="https://doi.org/10.2172/1363736">Kulesza et al.: Standardization of Color Palettes for Scientific Visualization</a></li>
+<li><a class="reference external" href="https://www.tableau.com/about/blog/2016/4/examining-data-viz-rules-dont-use-red-green-together-53463">tableau: 5 tips on designing colorblind-friendly visualizations</a></li>
+<li><a class="reference external" href="https://mpetroff.net/2019/08/discernibility-of-rainbow-colormaps/">Petroff: Discernibility of (Rainbow) Colormaps</a></li>
+<li><a class="reference external" href="https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/">VanderPlas: How Bad Is Your Colormap?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Simulation of color vision deficiencies<ul>
+<li><a class="reference external" href="https://www.color-blindness.com/">Colblindor</a></li>
+<li><a class="reference external" href="https://www.color-blindness.com/coblis-color-blindness-simulator/">Coblis (Color Blindness Simulator)</a></li>
+<li><a class="reference external" href="https://colororacle.org/">Color Oracle</a></li>
+<li><a class="reference external" href="http://www.vischeck.com/">Vischeck and Daltonize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="color">
+<span id="colors"></span><h2>color<a class="headerlink" href="#color" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal notranslate"><span class="pre">color</span></code> argument is currently unified across
+all plots with Matplotlib and Plotly
+that use discrete colors to represent data values or entire vectors.</p>
+<div class="section" id="id4">
+<h3>List of accepted formats<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Named color</strong><ul>
+<li>List of accepted values: <a class="reference internal" href="colors.html#named-color-list"><span class="std std-ref">Named colors</span></a></li>
+<li>Examples: <code class="code docutils literal notranslate"><span class="pre">&quot;g&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;darkseagreen&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;tab.green&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;xkcd.algae_green&quot;</span></code></li>
+</ul>
+</li>
+<li><strong>Hexadecimal triplet</strong><ul>
+<li>Needs to start with <code class="code docutils literal notranslate"><span class="pre">#</span></code> being followed by 6 hexadecimal digits (<code class="code docutils literal notranslate"><span class="pre">0-9</span></code> and <code class="code docutils literal notranslate"><span class="pre">A-F</span></code>). Letters can be given in lower or upper case.</li>
+<li>Examples: <code class="code docutils literal notranslate"><span class="pre">&quot;#CC7030&quot;</span></code>, <code class="code docutils literal notranslate"><span class="pre">&quot;#00ff00&quot;</span></code></li>
+</ul>
+</li>
+<li><strong>Shorthand hexadecimal triplet</strong><ul>
+<li>Needs to start with <code class="code docutils literal notranslate"><span class="pre">#</span></code> being followed by 3 hexadecimal digits (<code class="code docutils literal notranslate"><span class="pre">0-9</span></code> and <code class="code docutils literal notranslate"><span class="pre">A-F</span></code>). Each digits is doubled automatically, thereby expanding to the 6 digits form. Letters can be given in lower or upper case.</li>
+<li>Example: <code class="code docutils literal notranslate"><span class="pre">&quot;#0f0&quot;</span></code> which is equivalent to <code class="code docutils literal notranslate"><span class="pre">&quot;#00ff00&quot;</span></code></li>
+</ul>
+</li>
+<li><strong>RGB</strong><ul>
+<li>Can be either a string of the form <code class="code docutils literal notranslate"><span class="pre">&quot;rgb(number,</span> <span class="pre">number,</span> <span class="pre">number)&quot;</span></code> or a tuple of the form <code class="code docutils literal notranslate"><span class="pre">(number,</span> <span class="pre">number,</span> <span class="pre">number)</span></code> where number is either an integer from <code class="code docutils literal notranslate"><span class="pre">0</span> <span class="pre">to</span> <span class="pre">255</span></code> or a float from <code class="code docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">to</span> <span class="pre">1.0</span></code> (gets internally multiplied by 255 and casted to integer).</li>
+<li>Examples: String <code class="code docutils literal notranslate"><span class="pre">&quot;rgb(51,</span> <span class="pre">51,</span> <span class="pre">255)&quot;</span></code>, tuple <code class="code docutils literal notranslate"><span class="pre">(51,</span> <span class="pre">51,</span> <span class="pre">255)</span></code> or equivalently string <code class="code docutils literal notranslate"><span class="pre">&quot;rgb(0.2,</span> <span class="pre">0.2,</span> <span class="pre">1.0)&quot;</span></code> and tuple <code class="code docutils literal notranslate"><span class="pre">(0.2,</span> <span class="pre">0.2,</span> <span class="pre">1.0)</span></code></li>
+</ul>
+</li>
+<li><strong>RGBA</strong><ul>
+<li>Can be either a string of the form <code class="code docutils literal notranslate"><span class="pre">&quot;rgba(number,</span> <span class="pre">number,</span> <span class="pre">number,</span> <span class="pre">number)&quot;</span></code> or a tuple of the form <code class="code docutils literal notranslate"><span class="pre">(number,</span> <span class="pre">number,</span> <span class="pre">number,</span> <span class="pre">number)</span></code>. The first three numbers can be either an integer from <code class="code docutils literal notranslate"><span class="pre">0</span> <span class="pre">to</span> <span class="pre">255</span></code> or a float from <code class="code docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">to</span> <span class="pre">1.0</span></code>. The fourth number needs to be a float from <code class="code docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">to</span> <span class="pre">1.0</span></code>.</li>
+<li>Examples: String <code class="code docutils literal notranslate"><span class="pre">&quot;rgba(0,</span> <span class="pre">255,</span> <span class="pre">0,</span> <span class="pre">0.3)&quot;</span></code> or the equivalent tuple <code class="code docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">0,</span> <span class="pre">0.3)</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="list-of-default-colors">
+<h3>List of default colors<a class="headerlink" href="#list-of-default-colors" title="Permalink to this headline">¶</a></h3>
+<p>The default colors were chosen in order to be distinguishable by people with different
+color vision deficiencies (CVD) and also to work when plots are converted into grayscale
+as it may happen in print:</p>
+<ol class="arabic simple">
+<li>“#6059a0”</li>
+<li>“#df4828”</li>
+<li>“#69b190”</li>
+<li>“#ddaa3c”</li>
+<li>“#d1c1e1”</li>
+<li>“#4e96bc”</li>
+<li>“#95211b”</li>
+<li>“#a6be54”</li>
+<li>“#e67932”</li>
+<li>“#9b62a7”</li>
+<li>“#4e79c5”</li>
+<li>“#521a13”</li>
+<li>“#8cbc68”</li>
+<li>“#e4632d”</li>
+<li>“#b58fc2”</li>
+</ol>
+<p>These colors were selected from Figure 19 of
+Paul Tol’s <a class="reference external" href="https://personal.sron.nl/~pault/">colour schemes and templates</a>
+by checking that the first 6-7 colors are easily distinguishable
+with different color vision deficiencies as simulated with
+<a class="reference external" href="https://www.color-blindness.com/coblis-color-blindness-simulator/">Coblis</a>.</p>
+<a class="reference internal image-reference" href="../../_images/default_colors.png"><img alt="../../_images/default_colors.png" src="../../_images/default_colors.png" style="width: 700px;" /></a>
+<p>Example: A scatter plot that uses colors 1 to 6 to demonstrate their approximate
+appearance for people with different CVD.
+Regarding the content of the plot, it uses a logarithmic y scale to visualize the
+exponential growth of confirmed COVID-19 cases in countries of central europe
+during February and March 2020.</p>
+<ul>
+<li><p class="first">Original</p>
+<a class="reference internal image-reference" href="../../_images/covid_original.png"><img alt="../../_images/covid_original.png" src="../../_images/covid_original.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Grayscale (converted with <a class="reference external" href="https://www.gimp.org">GIMP</a>)</p>
+<a class="reference internal image-reference" href="../../_images/covid_grayscale.png"><img alt="../../_images/covid_grayscale.png" src="../../_images/covid_grayscale.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Dichromatic: Protanopia</p>
+<a class="reference internal image-reference" href="../../_images/covid_dichromatic_protanopia.png"><img alt="../../_images/covid_dichromatic_protanopia.png" src="../../_images/covid_dichromatic_protanopia.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Dichromatic: Deuteranopia</p>
+<a class="reference internal image-reference" href="../../_images/covid_dichromatic_deuteranopia.png"><img alt="../../_images/covid_dichromatic_deuteranopia.png" src="../../_images/covid_dichromatic_deuteranopia.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Dichromatic: Tritanopia</p>
+<a class="reference internal image-reference" href="../../_images/covid_dichromatic_tritanopia.png"><img alt="../../_images/covid_dichromatic_tritanopia.png" src="../../_images/covid_dichromatic_tritanopia.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Monochromatic: Blue cone monochromacy</p>
+<a class="reference internal image-reference" href="../../_images/covid_monochromatic_blue_cone.png"><img alt="../../_images/covid_monochromatic_blue_cone.png" src="../../_images/covid_monochromatic_blue_cone.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Monochromatic: Achromatopsia</p>
+<a class="reference internal image-reference" href="../../_images/covid_monochromatic_achromatopsia.png"><img alt="../../_images/covid_monochromatic_achromatopsia.png" src="../../_images/covid_monochromatic_achromatopsia.png" style="width: 350px;" /></a>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>References<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Wikipedia<ul>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet">Hex triplet</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/RGB_color_space">RGB color space</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/RGBA_color_space">RGBA color space</a></li>
+</ul>
+</li>
+<li>Matplotlib<ul>
+<li><a class="reference external" href="https://matplotlib.org/users/colors.html">Specifying colors</a></li>
+<li><a class="reference external" href="https://matplotlib.org/api/colors_api.html">Colors API</a></li>
+</ul>
+</li>
+<li>xkcd<ul>
+<li><a class="reference external" href="https://xkcd.com/color/rgb/">Color survey</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="config.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Figure &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Matplotlib" href="../matplotlib/index.html" />
+    <link rel="prev" title="ohlc" href="plots_financial/ohlc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../package_references.html">Package references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../package.html">Unified Plotting</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Plotly</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="plots_2d/index.html">2D plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plots_3d/index.html">3D plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plots_nd/index.html">n-D plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plots_financial/index.html">Financial plots</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Figure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/index.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../javascript/index.html">JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unified_arguments.html">Unified argument values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API documentation</a> &raquo;</li>
+        
+          <li><a href="../package.html">Unified Plotting</a> &raquo;</li>
+        
+          <li><a href="index.html">Plotly</a> &raquo;</li>
+        
+      <li>Figure</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/rst/api/plotly/figure.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="figure">
+<span id="plotly-figure"></span><h1>Figure<a class="headerlink" href="#figure" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="unified_plotting.plotly._data_structures.Figure">
+<em class="property">class </em><code class="descname">Figure</code><span class="sig-paren">(</span><em>fig</em>, <em>width_mm=None</em>, <em>width_in=None</em>, <em>width_pt=None</em>, <em>height_mm=None</em>, <em>height_in=None</em>, <em>height_pt=None</em>, <em>dpi=None</em>, <em>margin_auto=None</em>, <em>margin_left_mm=None</em>, <em>margin_left_in=None</em>, <em>margin_left_pt=None</em>, <em>margin_left_rel=None</em>, <em>margin_right_mm=None</em>, <em>margin_right_in=None</em>, <em>margin_right_pt=None</em>, <em>margin_right_rel=None</em>, <em>margin_top_mm=None</em>, <em>margin_top_in=None</em>, <em>margin_top_pt=None</em>, <em>margin_top_rel=None</em>, <em>margin_bottom_mm=None</em>, <em>margin_bottom_in=None</em>, <em>margin_bottom_pt=None</em>, <em>margin_bottom_rel=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure for wrapping, representing, displaying and exporting a Plotly figure.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/creating-and-updating-figures">https://plot.ly/python/creating-and-updating-figures</a></li>
+<li><a class="reference external" href="https://plot.ly/python/renderers">https://plot.ly/python/renderers</a></li>
+<li><a class="reference external" href="https://plot.ly/python-api-reference">https://plot.ly/python-api-reference</a></li>
+</ul>
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.set_size">
+<code class="descname">set_size</code><span class="sig-paren">(</span><em>width_mm=None</em>, <em>width_in=None</em>, <em>width_pt=None</em>, <em>height_mm=None</em>, <em>height_in=None</em>, <em>height_pt=None</em>, <em>dpi=None</em>, <em>margin_auto=None</em>, <em>margin_left_mm=None</em>, <em>margin_left_in=None</em>, <em>margin_left_pt=None</em>, <em>margin_left_rel=None</em>, <em>margin_right_mm=None</em>, <em>margin_right_in=None</em>, <em>margin_right_pt=None</em>, <em>margin_right_rel=None</em>, <em>margin_top_mm=None</em>, <em>margin_top_in=None</em>, <em>margin_top_pt=None</em>, <em>margin_top_rel=None</em>, <em>margin_bottom_mm=None</em>, <em>margin_bottom_in=None</em>, <em>margin_bottom_pt=None</em>, <em>margin_bottom_rel=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.set_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.set_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set size, resolution and margins of the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>width_mm</strong> (<em>float</em>) – Plot width in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">width_in</span></code> and <code class="docutils literal notranslate"><span class="pre">width_pt</span></code>.</li>
+<li><strong>width_in</strong> (<em>float</em>) – Plot width in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">width_pt</span></code>.</li>
+<li><strong>width_pt</strong> (<em>float</em>) – Plot width in points (1 in = 72 pt).</li>
+<li><strong>height_mm</strong> (<em>float</em>) – Plot height in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">height_in</span></code> and <code class="docutils literal notranslate"><span class="pre">height_pt</span></code>.</li>
+<li><strong>height_in</strong> (<em>float</em>) – Plot height in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">height_pt</span></code>.</li>
+<li><strong>height_pt</strong> (<em>float</em>) – Plot height in points (1 in = 72 pt).</li>
+<li><strong>dpi</strong> (<em>int</em>) – Dots per inch, used synonymously with pixels per inch (ppi).
+Example: Using width_in=2 and dpi=300 results in an image that is 600 pixels wide .
+Note that font size is specified in pt (=1/72 in). Therefore, using width_in=1
+and dpi=600 also results in an image that is 600 pixels wide but texts are twice as large.</li>
+<li><strong>margin_auto</strong> (<em>bool</em>) – If True, all margins are set automatically by layout calculations of
+the plotting library.
+Caution: Other margin arguments are ignored in this case!</li>
+<li><strong>margin_left_mm</strong> (<em>float</em>) – Left margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_left_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.</li>
+<li><strong>margin_left_in</strong> (<em>float</em>) – Left margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.</li>
+<li><strong>margin_left_pt</strong> (<em>float</em>) – Left margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_left_rel</span></code>.</li>
+<li><strong>margin_left_rel</strong> (<em>float</em>) – Left margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_right_mm</strong> (<em>float</em>) – right margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_right_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_in</strong> (<em>float</em>) – right margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_pt</strong> (<em>float</em>) – right margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_right_rel</span></code>.</li>
+<li><strong>margin_right_rel</strong> (<em>float</em>) – right margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_top_mm</strong> (<em>float</em>) – top margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_top_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_in</strong> (<em>float</em>) – top margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_pt</strong> (<em>float</em>) – top margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_top_rel</span></code>.</li>
+<li><strong>margin_top_rel</strong> (<em>float</em>) – top margin in percent, i.e. a relative measure.</li>
+<li><strong>margin_bottom_mm</strong> (<em>float</em>) – bottom margin in millimeters.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_in</span></code>, <code class="docutils literal notranslate"><span class="pre">margin_bottom_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_in</strong> (<em>float</em>) – bottom margin in inches.
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_pt</strong> (<em>float</em>) – bottom margin in points (1 in = 72 pt).
+Overrules <code class="docutils literal notranslate"><span class="pre">margin_bottom_rel</span></code>.</li>
+<li><strong>margin_bottom_rel</strong> (<em>float</em>) – bottom margin in percent, i.e. a relative measure.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/setting-graph-size">https://plot.ly/python/setting-graph-size</a></li>
+<li><a class="reference external" href="https://plot.ly/python/reference/#layout-width">https://plot.ly/python/reference/#layout-width</a></li>
+<li><a class="reference external" href="https://plot.ly/python/reference/#layout-height">https://plot.ly/python/reference/#layout-height</a></li>
+<li><a class="reference external" href="https://plot.ly/python/reference/#layout-margin">https://plot.ly/python/reference/#layout-margin</a></li>
+<li><a class="reference external" href="https://github.com/plotly/orca/issues/205#issuecomment-485387841">https://github.com/plotly/orca/issues/205#issuecomment-485387841</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.set_display_format">
+<code class="descname">set_display_format</code><span class="sig-paren">(</span><em>data_format</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.set_display_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.set_display_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set data format of the image shown by display() or automatically in notebooks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data_format</strong> (<em>str</em>) – Possible values: “html”, “eps”, “jpg”, “pdf”, “png”, “svg”,  “webp”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.display">
+<code class="descname">display</code><span class="sig-paren">(</span><em>inline=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the plot in a webbrowser or as IPython rich display representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inline</strong> (<em>bool</em>) – If True, the plot will be shown inline in a Jupyter notebook or QT console.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/renderers">https://plot.ly/python/renderers</a></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.html_text">
+<code class="descname">html_text</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.html_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML text representation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.html_text_standalone">
+<code class="descname">html_text_standalone</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.html_text_standalone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a standalone HTML text representation that has all plotly.js code embedded.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.to_html.html">https://plot.ly/python-api-reference/generated/plotly.io.to_html.html</a></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.html_text_cdn">
+<code class="descname">html_text_cdn</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.html_text_cdn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dependent HTML text representation that loads plotly.js from a CDN on the web.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.to_html.html">https://plot.ly/python-api-reference/generated/plotly.io.to_html.html</a></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.html_text_partial">
+<code class="descname">html_text_partial</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.html_text_partial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dependent HTML text representation that loads plotly.js with require.js.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.to_html.html">https://plot.ly/python-api-reference/generated/plotly.io.to_html.html</a></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.json_text">
+<code class="descname">json_text</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.json_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSON representation of the Plotly figure.</p>
+<p>It can also be used by Plotly’s JavaScript graphing library
+<a class="reference external" href="https://plot.ly/javascript">plotly.js</a>.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.to_json.html">https://plot.ly/python-api-reference/generated/plotly.io.to_json.html</a></li>
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.write_json.html">https://plot.ly/python-api-reference/generated/plotly.io.write_json.html</a></li>
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.from_json.html">https://plot.ly/python-api-reference/generated/plotly.io.from_json.html</a></li>
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.read_json.html">https://plot.ly/python-api-reference/generated/plotly.io.read_json.html</a></li>
+<li><a class="reference external" href="https://help.plot.ly/json-chart-schema">https://help.plot.ly/json-chart-schema</a></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.svg_text">
+<code class="descname">svg_text</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.svg_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an SVG text representation of the plot, usable in HTML context or SVG file.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.eps_data_url">
+<code class="descname">eps_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.eps_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with EPS image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.jpg_data_url">
+<code class="descname">jpg_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.jpg_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with JPG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.pdf_data_url">
+<code class="descname">pdf_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.pdf_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with PDF image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.png_data_url">
+<code class="descname">png_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.png_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with PNG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.svg_data_url">
+<code class="descname">svg_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.svg_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with SVG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.webp_data_url">
+<code class="descname">webp_data_url</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.webp_data_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data URL representation with WebP image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.eps_object_element">
+<code class="descname">eps_object_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.eps_object_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML object element with EPS image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.jpg_img_element">
+<code class="descname">jpg_img_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.jpg_img_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML image element with JPG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.pdf_object_element">
+<code class="descname">pdf_object_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.pdf_object_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML image element with PDF image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.png_img_element">
+<code class="descname">png_img_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.png_img_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML image element with PNG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.svg_img_element">
+<code class="descname">svg_img_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.svg_img_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML image element with SVG image format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="unified_plotting.plotly._data_structures.Figure.webp_img_element">
+<code class="descname">webp_img_element</code><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.webp_img_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a HTML image element with WebP image format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_html">
+<code class="descname">export_html</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as HTML file that contains an interactive vector graphic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created HTML file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.html” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated HTML file, guaranteed to end with “.html”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python-api-reference/generated/plotly.io.write_html.html">https://plot.ly/python-api-reference/generated/plotly.io.write_html.html</a></li>
+<li><a class="reference external" href="https://plot.ly/python/getting-started">https://plot.ly/python/getting-started</a></li>
+<li><a class="reference external" href="https://plot.ly/python/v4-migration">https://plot.ly/python/v4-migration</a></li>
+<li><a class="reference external" href="https://plot.ly/javascript/configuration-options">https://plot.ly/javascript/configuration-options</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_eps">
+<code class="descname">export_eps</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_eps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_eps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as vector graphic in EPS format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires the poppler library to be installed</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created EPS file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.eps” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated EPS file, guaranteed to end with “.eps”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_jpg">
+<code class="descname">export_jpg</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_jpg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_jpg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as raster graphic in JPG format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created JPG file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.jpg” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated JPG file, guaranteed to end with “.jpg”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_png">
+<code class="descname">export_png</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_png"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_png" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as raster graphic in PNG format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created PNG file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.png” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated PNG file, guaranteed to end with “.png”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_webp">
+<code class="descname">export_webp</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_webp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_webp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as raster graphic in WebP format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created WebP file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.webp” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated WebP file, guaranteed to end with “.webp”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_pdf">
+<code class="descname">export_pdf</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as vector graphic in PDF format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Figures which contain WebGL traces (e.g. 3D surface or scatter plots) will
+include encapsulated rasters instead of vectors for parts of the image.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created PDF file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.pdf” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated PDF file, guaranteed to end with “.pdf”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="unified_plotting.plotly._data_structures.Figure.export_svg">
+<code class="descname">export_svg</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/unified_plotting/plotly/_data_structures.html#Figure.export_svg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unified_plotting.plotly._data_structures.Figure.export_svg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the plot as vector graphic in SVG format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Figures which contain WebGL traces (e.g. 3D surface or scatter plots) will
+include encapsulated rasters instead of vectors for parts of the image.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<em>str</em>) – Filepath of the created SVG file.
+If the file exists it will be overwritten without warning.
+If the path does not end with “.svg” it will be changed to do so.
+If the parent directory does not exist it will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filepath_used</strong> (<em>str</em>) – Filepath of the generated SVG file, guaranteed to end with “.svg”.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://plot.ly/python/static-image-export">https://plot.ly/python/static-image-export</a></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../matplotlib/index.html" class="btn btn-neutral float-right" title="Matplotlib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plots_financial/ohlc.html" class="btn btn-neutral float-left" title="ohlc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

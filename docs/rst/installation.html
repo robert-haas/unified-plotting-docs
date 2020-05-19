@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; unified-plotting 0.5.0rc4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/js/require.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="examples/index.html" />
+    <link rel="prev" title="Package references" href="package_references.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/up.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_references.html">Package references</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#required">1. Required</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional">2. Optional</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#orca">Orca</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jupyter-notebook">Jupyter notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graph-libraries">Graph libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#full-installation-with-all-optional-dependencies">3. Full installation with all optional dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Graphical user interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="format_specifications.html">Format specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">unified-plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rst/installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>This section explains 1) how the package can be installed, 2) how optional dependencies can add further functionality and 3) how a full installation with all optional dependencies can be performed.</p>
+<div class="section" id="required">
+<h2>1. Required<a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h2>
+<p>The package is available on the <a class="reference external" href="https://pypi.org">Python Package Index (PyPI)</a> under the name <a class="reference external" href="https://pypi.org/project/unified-plotting">unified-plotting</a>.</p>
+<ul class="simple">
+<li>It is compatible with <a class="reference external" href="https://www.python.org/downloads">Python 3.6 to 3.8</a>.</li>
+<li>It can be downloaded and installed with Python’s default package manager <a class="reference external" href="https://pypi.org/project/pip">pip</a>.</li>
+<li>You may also want to consider using an environment manager like <a class="reference external" href="https://virtualenv.pypa.io">virtualenv</a> or <a class="reference external" href="https://docs.conda.io">conda</a>. Such tools allow to create a <a class="reference external" href="https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments">virtual environment</a> into which pip can install the package in an isolated fashion instead of globally on your system. Thereby it does not interfere with the installation of other projects, which may in an unlucky case require a different version of some shared dependency.</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install unified-plotting
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional">
+<h2>2. Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h2>
+<p>The following are optional dependencies, i.e. they are not required to use the package but provide additional functionality you might also like to use.</p>
+<div class="section" id="orca">
+<h3>Orca<a class="headerlink" href="#orca" title="Permalink to this headline">¶</a></h3>
+<p>The package contains the subpackage <code class="docutils literal notranslate"><span class="pre">unified_plotting.plotly</span></code> which uses <a class="reference external" href="https://plotly.com/python">Plotly</a> to generate figures. Plotly requires <a class="reference external" href="https://github.com/plotly/orca">Orca</a> to enable <a class="reference external" href="https://plotly.com/python/static-image-export">static image export</a>. This means, if you use a function from <code class="docutils literal notranslate"><span class="pre">unified_plotting.plotly</span></code> to generate a figure, then the plot can only be exported as an image file when Orca is installed. For example, the method <code class="docutils literal notranslate"><span class="pre">fig.export_svg(...)</span></code> can export an SVG file when Orca is installed but will raise an error if Orca can not be found on your system.</p>
+<p><a class="reference external" href="https://github.com/plotly/orca#installation">Recommended installation</a> with package manager <a class="reference external" href="https://docs.conda.io">conda</a> from channel <a class="reference external" href="https://anaconda.org/plotly/plotly-orca">plotly</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c plotly plotly-orca
+</pre></div>
+</div>
+</div>
+<div class="section" id="jupyter-notebook">
+<h3>Jupyter notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">¶</a></h3>
+<p>The package provides support for displaying plots in <a class="reference external" href="https://jupyter.org">Jupyter notebooks</a>. They provide a nice browser-based user interface for interactive development of Python code, which is very popular in data science and machine learning communities, partly because of their support for inline plots.</p>
+<p><a class="reference external" href="https://jupyter.org/install">Recommended installation</a> with package manager <a class="reference external" href="https://docs.conda.io">conda</a> from channel <a class="reference external" href="https://anaconda.org/conda-forge/notebook">conda-forge</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c conda-forge notebook
+</pre></div>
+</div>
+<p>Caution: Some plots may not show up in the notebook with default settings. Instead a blank area is shown. The reason is a parameter called <code class="docutils literal notranslate"><span class="pre">iopub_data_rate_limit</span></code> in Jupyter’s <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/config.html">config system</a>. Its value <a class="reference external" href="https://github.com/jupyter/notebook/issues/2287">is chosen rather low by default</a>. Plots that contain much data can therefore be blocked. This problem can be solved by increasing the parameter, which can be done in two ways: 1) permanently change it with a config file in the directory <code class="docutils literal notranslate"><span class="pre">~/.jupyter</span></code> or 2) temporarily change it when opening a notebook by adding an optional argument to the start-up command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> jupyter notebook --NotebookApp.iopub_data_rate_limit<span class="o">=</span><span class="m">1</span>.0e12
+</pre></div>
+</div>
+</div>
+<div class="section" id="graph-libraries">
+<h3>Graph libraries<a class="headerlink" href="#graph-libraries" title="Permalink to this headline">¶</a></h3>
+<p>This package supports the visualization of graph objects from several graph libraries in Python. If you want to use one of these, here is how you can install them:</p>
+<ul>
+<li><p class="first"><a class="reference external" href="https://graph-tool.skewed.de/">graph-tool</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c conda-forge graph-tool
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="https://igraph.org/">igraph</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c conda-forge igraph
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="https://networkit.github.io/">NetworKit</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c conda-forge networkit
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="https://networkx.github.io/">NetworkX</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c conda-forge networkx
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="http://pyntacle.css-mendel.it/">Pyntacle</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> conda install -y -c bfxcss -c conda-forge pyntacle
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="http://snap.stanford.edu/">SNAP</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install snap-stanford
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="full-installation-with-all-optional-dependencies">
+<h2>3. Full installation with all optional dependencies<a class="headerlink" href="#full-installation-with-all-optional-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>This guide was tested on Ubuntu 18.04 LTS. It may need minor modifications on other operating systems, e.g. installing missing system libraries with the system’s package manager.</p>
+<p>What happens? First a new <a class="reference external" href="https://docs.conda.io">conda</a> environment is created with Python 3.6 in it (needed only for Pyntacle, otherwise you can use <code class="docutils literal notranslate"><span class="pre">python=3.8</span></code>). Then this environment is activated. Finally, the required and all optional dependencies are installed into the active environment.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Create a new environment
+<span class="go">conda create -y --name myEnvForPlotting python=3.6</span>
+
+<span class="gp">#</span> Activate it
+<span class="go">conda activate myEnvForPlotting</span>
+
+<span class="gp">#</span> Install the package, including its required dependencies
+<span class="go">pip install unified-plotting</span>
+
+<span class="gp">#</span> Install optional dependencies
+<span class="go">conda install -y -c bfxcss -c conda-forge pyntacle</span>
+<span class="go">conda install -y -c plotly plotly-orca</span>
+<span class="go">conda install -y -c conda-forge graph-tool igraph networkit networkx notebook</span>
+<span class="go">pip install snap-stanford</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="package_references.html" class="btn btn-neutral float-left" title="Package references" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, Robert Haas (Vienna, Austria)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
